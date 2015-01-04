@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import org.discobots.recyclerush.commands.ExampleCommand;
+import org.discobots.recyclerush.commands.AutonomousCommand;
 import org.discobots.recyclerush.subsystems.ExampleSubsystem;
 
 /**
@@ -20,7 +20,7 @@ public class Robot extends IterativeRobot {
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 
-    Command autonomousCommand;
+    AutonomousCommand autonomousCommand;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -29,7 +29,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
         // instantiate the command used for the autonomous period
-        autonomousCommand = new ExampleCommand();
+        autonomousCommand = new AutonomousCommand();
     }
 	
 	public void disabledPeriodic() {

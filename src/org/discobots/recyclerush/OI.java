@@ -1,7 +1,7 @@
 package org.discobots.recyclerush;
 
 import edu.wpi.first.wpilibj.buttons.Button;
-import org.discobots.recyclerush.commands.ExampleCommand;
+import org.discobots.recyclerush.commands.AutonomousCommand;
 
 /**
  * This class is the glue that binds the controls on the physical operator
