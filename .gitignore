@@ -1,1 +1,5 @@
 *.class
+*.jar
+/bin/
+/build/
+/dist/

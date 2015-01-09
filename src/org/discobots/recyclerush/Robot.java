@@ -5,8 +5,10 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+
 import org.discobots.recyclerush.commands.AutonomousCommand;
-import org.discobots.recyclerush.subsystems.ExampleSubsystem;
+import org.discobots.recyclerush.subsystems.PowerInfoSubsystem;
+import org.discobots.recyclerush.utils.Dashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -16,8 +18,8 @@ import org.discobots.recyclerush.subsystems.ExampleSubsystem;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
+ 
+	public static PowerInfoSubsystem powerInfoSub;
 	public static OI oi;
 
     AutonomousCommand autonomousCommand;
@@ -27,18 +29,25 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-		oi = new OI();
-        // instantiate the command used for the autonomous period
+		// global oi & subsystem code
+    	oi = new OI();
+		powerInfoSub = new PowerInfoSubsystem();
+		
+		// autonomous command
         autonomousCommand = new AutonomousCommand();
+        
+        // dashboard init
+        Dashboard.init();
     }
 	
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		Dashboard.update();
 	}
 
     public void autonomousInit() {
-        // schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
+        if (autonomousCommand != null) 
+        	autonomousCommand.start();
     }
 
     /**
@@ -46,6 +55,7 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+		Dashboard.update();
     }
 
     public void teleopInit() {
@@ -53,7 +63,8 @@ public class Robot extends IterativeRobot {
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        if (autonomousCommand != null) autonomousCommand.cancel();
+        if (autonomousCommand != null) 
+        	autonomousCommand.cancel();
     }
 
     /**
@@ -69,6 +80,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+		Dashboard.update();
     }
     
     /**
@@ -76,5 +88,6 @@ public class Robot extends IterativeRobot {
      */
     public void testPeriodic() {
         LiveWindow.run();
+		Dashboard.update();
     }
 }
