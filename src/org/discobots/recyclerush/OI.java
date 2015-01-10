@@ -3,8 +3,10 @@ package org.discobots.recyclerush;
 import edu.wpi.first.wpilibj.buttons.Button;
 
 import org.discobots.recyclerush.commands.AutonomousCommand;
+import org.discobots.recyclerush.commands.SetTestMotor;
 import org.discobots.recyclerush.utils.GamePad;
 import org.discobots.recyclerush.utils.GamePad.AxisButton;
+
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
@@ -55,6 +57,12 @@ public class OI {
 	}
 
 	private void mapButtons() {
+		b_btnA.whenPressed(new SetTestMotor(4, 1.0));
+		b_btnA.whenReleased(new SetTestMotor(4, 1.0));
+		b_btnB.whenPressed(new SetTestMotor(5, 1.0));
+		b_btnB.whenReleased(new SetTestMotor(5, 1.0));
+		b_btnX.whenPressed(new SetTestMotor(6, 1.0));
+		b_btnX.whenReleased(new SetTestMotor(6, 1.0));
 
 	}
 

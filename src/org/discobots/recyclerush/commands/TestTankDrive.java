@@ -7,10 +7,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class TankDrive extends Command {
+public class TestTankDrive extends Command {
 
 	
-	public TankDrive() {
+	public TestTankDrive() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drivetrainSubsystem);
