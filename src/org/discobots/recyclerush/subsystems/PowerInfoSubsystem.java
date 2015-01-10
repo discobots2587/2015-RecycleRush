@@ -32,7 +32,7 @@ public class PowerInfoSubsystem extends Subsystem {
 		return pdp.getTemperature();
 	}
 
-    public void initDefaultCommand() {
-    }
+	public void initDefaultCommand() {
+	}
 }
 
