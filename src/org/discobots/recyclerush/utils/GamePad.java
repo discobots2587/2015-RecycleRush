@@ -150,23 +150,23 @@ public class GamePad extends Joystick {
 	}
 
 	public double getLX() {
-		return getRawAxis(AXIS_LX) * reversedAxes[AXIS_LX - 1];
+		return getRawAxis(AXIS_LX) * reversedAxes[AXIS_LX];
 	}
 
 	public double getLY() {
-		return getRawAxis(AXIS_LY) * reversedAxes[AXIS_LY - 1];
+		return getRawAxis(AXIS_LY) * reversedAxes[AXIS_LY];
 	}
 
 	public double getRX() {
-		return getRawAxis(AXIS_RX) * reversedAxes[AXIS_RX - 1];
+		return getRawAxis(AXIS_RX) * reversedAxes[AXIS_RX];
 	}
 
 	public double getRY() {
-		return getRawAxis(AXIS_RY) * reversedAxes[AXIS_RY - 1];
+		return getRawAxis(AXIS_RY) * reversedAxes[AXIS_RY];
 	}
 
 	public double getDpadX() {
-		return getRawAxis(DPAD_X) * reversedAxes[DPAD_X - 1];
+		return getRawAxis(DPAD_X) * reversedAxes[DPAD_X];
 	}
 
 	/**
@@ -177,7 +177,7 @@ public class GamePad extends Joystick {
 		if (DPAD_Y == 0) {
 			return 0;// axis does not exist
 		} else {
-			return getRawAxis(DPAD_Y) * reversedAxes[DPAD_Y - 1];
+			return getRawAxis(DPAD_Y) * reversedAxes[DPAD_Y];
 		}
 	}
 
@@ -189,7 +189,7 @@ public class GamePad extends Joystick {
 		if (TRIGGER == 0) {
 			return getRawAxis(TRIGGER_R) - getRawAxis(TRIGGER_L);
 		} else {
-			return getRawAxis(TRIGGER) * reversedAxes[TRIGGER - 1];
+			return getRawAxis(TRIGGER) * reversedAxes[TRIGGER];
 		}
 	}
 

@@ -7,7 +7,7 @@ package org.discobots.recyclerush;
  */
 public class HW {
     /* Motors */
-	
+
 	
 	/* Solenoids */ 
 	

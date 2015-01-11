@@ -11,7 +11,6 @@ public class PowerInfoSubsystem extends Subsystem {
     
 	PowerDistributionPanel pdp;
 	
-	
 	public PowerInfoSubsystem() {
 		pdp = new PowerDistributionPanel();
 	}
@@ -19,13 +18,19 @@ public class PowerInfoSubsystem extends Subsystem {
 	public double getVoltage() {
 		return pdp.getVoltage();
 	}
-	
+	double curr;
 	public double getCurrentFromChannel(int channel) {
-		return pdp.getCurrent(channel);
+		double chCurr = pdp.getCurrent(channel);
+		if (channel == 0) {
+			curr = chCurr;
+		} else {
+			curr += chCurr;
+		}
+		return chCurr;
 	}
 	
 	public double getTotalCurrent() {
-		return pdp.getTotalCurrent();
+		return curr;
 	}
 	
 	public double getTemperature() {

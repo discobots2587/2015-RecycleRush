@@ -16,6 +16,7 @@ public class Dashboard {
 		}
 		SmartDashboard.putNumber("PDP Current Total", Robot.powerInfoSub.getTotalCurrent());
 		SmartDashboard.putNumber("PDP Temperature", Robot.powerInfoSub.getTemperature());
+		SmartDashboard.putNumber("PDP Voltage", Robot.powerInfoSub.getVoltage());
 	}
 
 }
