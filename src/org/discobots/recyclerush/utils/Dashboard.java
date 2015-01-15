@@ -2,6 +2,7 @@ package org.discobots.recyclerush.utils;
 
 import org.discobots.recyclerush.Robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -17,6 +18,7 @@ public class Dashboard {
 		}
 		SmartDashboard.putNumber("PDP Current, Total", Robot.powerInfoSub.getTotalCurrent());
 		SmartDashboard.putNumber("PDP Temperature", Robot.powerInfoSub.getTemperature());
+		SmartDashboard.putNumber("PDP Voltage", Robot.powerInfoSub.getVoltage());
 		
 		
 		String robotMode = "Unknown";
@@ -34,6 +36,9 @@ public class Dashboard {
 		else if (RobotState.isEnabled())
 			robotState = "Enabled";
 		SmartDashboard.putString("Robot State", robotState);
+		
+		SmartDashboard.putNumber("Robot Match Time", DriverStation.getInstance().getMatchTime());
+		SmartDashboard.putNumber("Robot Battery Voltage", DriverStation.getInstance().getBatteryVoltage());
 	}
 
 }
