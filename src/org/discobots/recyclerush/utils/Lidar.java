@@ -46,20 +46,20 @@ public class Lidar {
 		};
 	}
 	
-	public void start() {
+	public synchronized void start() {
 		running = true;
 		this.lidarThread.start();
 	}
 	
-	public void stop() {
+	public synchronized void stop() {
 		running = false;
 	}
 	
-	public volatile double getDistanceCm() {
+	public synchronized double getDistanceCm() {
 		return this.distance;
 	}
 	
-	public volatile double getDistanceIn() {
+	public synchronized double getDistanceIn() {
 		return this.distance / 2.54;
 	}
 
