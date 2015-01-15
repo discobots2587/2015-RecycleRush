@@ -1,0 +1,8 @@
+API: 0.1
+Name: Console
+Description: NetConsole for SmartDashboard SFX
+Version: 1.0.0
+Plugin ID: 5cd6fb78-b410-4e97-a6b8-1d69f905d1ff
+Controls:
+-
+  Class: org.discobots.smartdashboard.console.Main

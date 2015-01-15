@@ -3,6 +3,12 @@ package org.discobots.recyclerush.utils;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 
+/*
+ * This is not the one in the prototype branch,
+ * this was taken from the 2015 oryon code's
+ * directdrive branch.
+ */
+
 public class GamePad extends Joystick {
 	/**
 	 * Select the mode with the switch on the back of the joystick. X uses the
@@ -72,13 +78,13 @@ public class GamePad extends Joystick {
 	 *
 	 */
 	private void XmodeInit() {
-		AXIS_LX = 0;
-		AXIS_LY = 1;
-		AXIS_RX = 3;
-		AXIS_RY = 4;
-		DPAD_X = 5;
-		DPAD_Y = 0; // derp
-		TRIGGER = 2;
+		AXIS_LX = 1;
+		AXIS_LY = 2;
+		AXIS_RX = 4;
+		AXIS_RY = 5;
+		DPAD_X = 6;
+		DPAD_Y = 0;
+		TRIGGER = 3;
 
 		BTN_X = 3;
 		BTN_Y = 4;
@@ -109,7 +115,7 @@ public class GamePad extends Joystick {
 		AXIS_RY = 3;
 		DPAD_X = 4;
 		DPAD_Y = 5;
-		TRIGGER = 0; // derp
+		TRIGGER = 0;
 
 		BTN_X = 1;
 		BTN_Y = 4;
@@ -124,7 +130,7 @@ public class GamePad extends Joystick {
 		BTN_BACK = 9;
 		BTN_START = 10;
 
-		setAxisReversed(AXIS_LY, true);
+		setAxisReversed(AXIS_LY, false);
 		setAxisReversed(AXIS_RY, true);
 		setAxisReversed(DPAD_Y, true);
 	}
@@ -150,23 +156,23 @@ public class GamePad extends Joystick {
 	}
 
 	public double getLX() {
-		return getRawAxis(AXIS_LX) * reversedAxes[AXIS_LX];
+		return getRawAxis(AXIS_LX) * reversedAxes[AXIS_LX - 1];
 	}
 
 	public double getLY() {
-		return getRawAxis(AXIS_LY) * reversedAxes[AXIS_LY];
+		return getRawAxis(AXIS_LY) * reversedAxes[AXIS_LY - 1];
 	}
 
 	public double getRX() {
-		return getRawAxis(AXIS_RX) * reversedAxes[AXIS_RX];
+		return getRawAxis(AXIS_RX) * reversedAxes[AXIS_RX - 1];
 	}
 
 	public double getRY() {
-		return getRawAxis(AXIS_RY) * reversedAxes[AXIS_RY];
+		return getRawAxis(AXIS_RY) * reversedAxes[AXIS_RY - 1];
 	}
 
 	public double getDpadX() {
-		return getRawAxis(DPAD_X) * reversedAxes[DPAD_X];
+		return getRawAxis(DPAD_X) * reversedAxes[DPAD_X - 1];
 	}
 
 	/**
@@ -177,7 +183,7 @@ public class GamePad extends Joystick {
 		if (DPAD_Y == 0) {
 			return 0;// axis does not exist
 		} else {
-			return getRawAxis(DPAD_Y) * reversedAxes[DPAD_Y];
+			return getRawAxis(DPAD_Y) * reversedAxes[DPAD_Y - 1];
 		}
 	}
 
@@ -189,7 +195,7 @@ public class GamePad extends Joystick {
 		if (TRIGGER == 0) {
 			return getRawAxis(TRIGGER_R) - getRawAxis(TRIGGER_L);
 		} else {
-			return getRawAxis(TRIGGER) * reversedAxes[TRIGGER];
+			return getRawAxis(TRIGGER) * reversedAxes[TRIGGER - 1];
 		}
 	}
 

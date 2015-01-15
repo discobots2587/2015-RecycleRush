@@ -6,7 +6,6 @@ import org.discobots.recyclerush.commands.AutonomousCommand;
 import org.discobots.recyclerush.commands.SetTestMotor;
 import org.discobots.recyclerush.utils.GamePad;
 import org.discobots.recyclerush.utils.GamePad.AxisButton;
-
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
@@ -63,7 +62,6 @@ public class OI {
 		b_btnB.whenReleased(new SetTestMotor(5, 1.0));
 		b_btnX.whenPressed(new SetTestMotor(6, 1.0));
 		b_btnX.whenReleased(new SetTestMotor(6, 1.0));
-
 	}
 
 	public double getRawAnalogStickALX() {
