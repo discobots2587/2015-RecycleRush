@@ -8,7 +8,11 @@ package org.discobots.recyclerush;
  */
 public class HW {
 	/* Motors */
-
+	public static int frontRightTalon = 0;
+	public static int backRightTalon = 1;
+	public static int frontLeftTalon = 2;
+	public static int backLeftTalon = 3;
+	public static int centerDropDownTalon = 4;
 	/* Solenoids */
 
 	/* Relays */
