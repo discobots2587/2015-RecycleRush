@@ -1,9 +1,11 @@
 package org.discobots.recyclerush;
 
 import edu.wpi.first.wpilibj.buttons.Button;
-import org.discobots.recyclerush.commands.AutonomousCommand;
+
+import org.discobots.recyclerush.commands.drive.CycleDriveCommand;
 import org.discobots.recyclerush.utils.GamePad;
 import org.discobots.recyclerush.utils.GamePad.AxisButton;
+
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
@@ -49,11 +51,8 @@ public class OI {
 	private Button b2_clicL = new JoystickButton(gp2, gp2.CLICK_L);
 
 	public OI() {
-		mapButtons();
-	}
-
-	private void mapButtons() {
-		// put button mapping here
+		// register commands to buttons here
+		b_btnY.whenPressed(new CycleDriveCommand());
 	}
 
 	public double getRawAnalogStickALX() {

@@ -1,8 +1,6 @@
-
 package org.discobots.recyclerush;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
@@ -19,7 +17,7 @@ import org.discobots.recyclerush.utils.Dashboard;
  * directory.
  */
 public class Robot extends IterativeRobot {
- 
+
 	public static PowerInfoSubsystem powerInfoSub;
 	public static OI oi;
 	public static DriveTrainSubsystem driveTrainSub;
@@ -27,9 +25,9 @@ public class Robot extends IterativeRobot {
 	AutonomousCommand autonomousCommand;
 
 	/**
-	* This function is run when the robot is first started up and should be
-	* used for any initialization code.
-	*/
+	 * This function is run when the robot is first started up and should be
+	 * used for any initialization code.
+	 */
 	public void robotInit() {
 		// global oi & subsystem code
 		oi = new OI();
@@ -37,59 +35,59 @@ public class Robot extends IterativeRobot {
 		driveTrainSub = new DriveTrainSubsystem();
 		// autonomous command
 		autonomousCommand = new AutonomousCommand();
-        
+
 		// dashboard init
 		Dashboard.init();
 	}
-	
+
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-		Dashboard.update();
+		Dashboard.updateDebug();
 	}
 
 	public void autonomousInit() {
-		if (autonomousCommand != null) 
+		if (autonomousCommand != null)
 			autonomousCommand.start();
 	}
 
 	/**
-	* This function is called periodically during autonomous
-	*/
+	 * This function is called periodically during autonomous
+	 */
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
-		Dashboard.update();
+		Dashboard.updateDebug();
 	}
 
 	public void teleopInit() {
 		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to 
+		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		if (autonomousCommand != null) 
+		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 	}
 
 	/**
-	* This function is called when the disabled button is hit.
-	* You can use it to reset subsystems before shutting down.
-	*/
-	public void disabledInit(){
+	 * This function is called when the disabled button is hit. You can use it
+	 * to reset subsystems before shutting down.
+	 */
+	public void disabledInit() {
 
 	}
 
 	/**
-	* This function is called periodically during operator control
-	*/
+	 * This function is called periodically during operator control
+	 */
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		Dashboard.update();
-    }
-    
+		Dashboard.updateDriver();
+	}
+
 	/**
-	* This function is called periodically during test mode
-	*/
+	 * This function is called periodically during test mode
+	 */
 	public void testPeriodic() {
-	LiveWindow.run();
-		Dashboard.update();
+		Scheduler.getInstance().run();
+		Dashboard.updateDebug();
 	}
 }

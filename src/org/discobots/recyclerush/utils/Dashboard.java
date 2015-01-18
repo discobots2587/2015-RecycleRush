@@ -12,7 +12,14 @@ public class Dashboard {
 		
 	}
 	
-	public static void update() {
+	public static void updateDriver() {
+		SmartDashboard.putString("Data Mode", "driver");
+		
+	}
+	
+	public static void updateDebug() {
+		SmartDashboard.putString("Data Mode", "debug");
+		
 		for (int index = 0; index < 16; index++) {
 			SmartDashboard.putNumber("PDP Current, Module " + index, Robot.powerInfoSub.getCurrentFromChannel(index));
 		}
@@ -21,21 +28,21 @@ public class Dashboard {
 		SmartDashboard.putNumber("PDP Voltage", Robot.powerInfoSub.getVoltage());
 		
 		
-		String robotMode = "Unknown";
+		int robotMode = 0;
 		if (RobotState.isAutonomous())
-			robotMode = "Autonomous";
+			robotMode = 1;
 		else if (RobotState.isOperatorControl())
-			robotMode = "Teleop";
+			robotMode = 2;
 		else if (RobotState.isTest())
-			robotMode = "Test";
-		SmartDashboard.putString("Robot Mode", robotMode);
+			robotMode = 3;
+		SmartDashboard.putNumber("Robot Mode", robotMode);
 		
-		String robotState = "Unknown";
+		int robotState = 0;
 		if (RobotState.isDisabled())
-			robotState = "Disabled";
+			robotState = -1;
 		else if (RobotState.isEnabled())
-			robotState = "Enabled";
-		SmartDashboard.putString("Robot State", robotState);
+			robotState = 1;
+		SmartDashboard.putNumber("Robot State", robotState);
 		
 		SmartDashboard.putNumber("Robot Match Time", DriverStation.getInstance().getMatchTime());
 		SmartDashboard.putNumber("Robot Battery Voltage", DriverStation.getInstance().getBatteryVoltage());
