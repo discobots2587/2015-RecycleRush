@@ -12,14 +12,14 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.tables.ITable;
 import edu.wpi.first.wpilibj.tables.ITableListener;
 
-public class Logger implements Runnable {
+public class MainTableLogger implements Runnable {
 	public static void main(String[] args) {
 		System.out.println("RobotLogger, (c) Discobots 2587");
 		System.out.println("Authors: Thomas McDonald, Nolan Shah");
 		System.out.println("Source Code is available on GitHub");
 		System.out.println("https://github.com/discobots2587/");
 		
-		Logger logger = new Logger();
+		MainTableLogger logger = new MainTableLogger();
 		logger.run();
 	}
 
@@ -30,7 +30,7 @@ public class Logger implements Runnable {
 	boolean newData;
 	long dataWriteIndex = 0;
 
-	public Logger() {
+	public MainTableLogger() {
 		System.out.println("[D] Loading date & time for file.");
 		
 		LocalDateTime currentDateTime = LocalDateTime.now();
@@ -72,7 +72,7 @@ public class Logger implements Runnable {
 			public void valueChanged(ITable source, String key, Object value,
 					boolean isNew) {
 				if (isNew) {
-					Logger.this.newData = true;
+					MainTableLogger.this.newData = true;
 				}
 				synchronized (sema) {
 					dataMap.put(key, value);
