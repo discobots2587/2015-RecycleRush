@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.discobots.recyclerush.commands.AutonomousCommand;
 import org.discobots.recyclerush.subsystems.DriveTrainSubsystem;
-import org.discobots.recyclerush.subsystems.PowerInfoSubsystem;
+import org.discobots.recyclerush.subsystems.ElectricalSubsystem;
 import org.discobots.recyclerush.utils.Dashboard;
 
 /**
@@ -18,9 +18,11 @@ import org.discobots.recyclerush.utils.Dashboard;
  */
 public class Robot extends IterativeRobot {
 
-	public static PowerInfoSubsystem powerInfoSub;
-	public static OI oi;
+	public static ElectricalSubsystem electricalSub;
 	public static DriveTrainSubsystem driveTrainSub;
+	public static OI oi;
+	
+	public static long loopExecutionTime = 0;
 
 	AutonomousCommand autonomousCommand;
 
@@ -31,7 +33,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		// global oi & subsystem code
 		oi = new OI();
-		powerInfoSub = new PowerInfoSubsystem();
+		electricalSub = new ElectricalSubsystem();
 		driveTrainSub = new DriveTrainSubsystem();
 		// autonomous command
 		autonomousCommand = new AutonomousCommand();
@@ -41,8 +43,10 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void disabledPeriodic() {
+		long start = System.currentTimeMillis();
 		Scheduler.getInstance().run();
-		Dashboard.updateDebug();
+		long end = System.currentTimeMillis();
+		loopExecutionTime = end - start;
 	}
 
 	public void autonomousInit() {
@@ -54,8 +58,11 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during autonomous
 	 */
 	public void autonomousPeriodic() {
+		long start = System.currentTimeMillis();
 		Scheduler.getInstance().run();
-		Dashboard.updateDebug();
+		Dashboard.updateDriver();
+		long end = System.currentTimeMillis();
+		loopExecutionTime = end - start;
 	}
 
 	public void teleopInit() {
@@ -79,15 +86,22 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during operator control
 	 */
 	public void teleopPeriodic() {
+		long start = System.currentTimeMillis();
 		Scheduler.getInstance().run();
 		Dashboard.updateDriver();
+		long end = System.currentTimeMillis();
+		loopExecutionTime = end - start;
 	}
 
 	/**
 	 * This function is called periodically during test mode
 	 */
 	public void testPeriodic() {
+		long start = System.currentTimeMillis();
+		LiveWindow.run();
 		Scheduler.getInstance().run();
-		Dashboard.updateDebug();
+		Dashboard.updateDriver();
+		long end = System.currentTimeMillis();
+		loopExecutionTime = end - start;
 	}
 }

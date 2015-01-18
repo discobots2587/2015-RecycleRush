@@ -9,7 +9,7 @@ public class CycleDriveCommand extends Command {
 	public static final int MODE_HOLONOMIC = 2;
 	public static final int MODE_TANK = 3;
 
-	int mode = 0;
+	public static int mode = 0;
 
 	public CycleDriveCommand() {
 		if (mode < 3)
@@ -19,9 +19,9 @@ public class CycleDriveCommand extends Command {
 	}
 
 	public CycleDriveCommand(int mode) {
-		this.mode = mode;
+		mode = mode;
 	}
-
+	
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		switch (mode) {
@@ -56,5 +56,9 @@ public class CycleDriveCommand extends Command {
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
+	}
+
+	public static void setModeCounter(int a) {
+		mode = a;
 	}
 }

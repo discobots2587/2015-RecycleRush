@@ -1,7 +1,5 @@
 package org.discobots.recyclerush.utils;
 
-import org.discobots.recyclerush.Robot;
-
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.I2C.Port;
 
