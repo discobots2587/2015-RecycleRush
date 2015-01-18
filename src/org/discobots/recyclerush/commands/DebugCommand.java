@@ -9,23 +9,25 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DebugCommand extends Command {
 
-    public DebugCommand() {
-    }
+	public DebugCommand() {
+	}
 
-    protected void initialize() {
-    }
+	protected void initialize() {
+	}
 
-    protected void execute() {
-    	Dashboard.updateDebug();
-    }
+	protected void execute() {
+		Dashboard.updateDebug();
+		// to have this run forever and always, 
+		// place in periodic functions of robot
+	}
 
-    protected boolean isFinished() {
-        return false;
-    }
+	protected boolean isFinished() {
+		return false;
+	}
 
-    protected void end() {
-    }
+	protected void end() {
+	}
 
-    protected void interrupted() {
-    }
+	protected void interrupted() {
+	}
 }

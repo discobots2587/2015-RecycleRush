@@ -12,14 +12,14 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.tables.ITable;
 import edu.wpi.first.wpilibj.tables.ITableListener;
 
-public class MainTableLogger implements Runnable {
+public class Logger implements Runnable {
 	public static void main(String[] args) {
 		System.out.println("RobotLogger, (c) Discobots 2587");
 		System.out.println("Authors: Thomas McDonald, Nolan Shah");
 		System.out.println("Source Code is available on GitHub");
 		System.out.println("https://github.com/discobots2587/");
 		
-		MainTableLogger logger = new MainTableLogger();
+		Logger logger = new Logger();
 		logger.run();
 	}
 
@@ -30,7 +30,7 @@ public class MainTableLogger implements Runnable {
 	boolean newData;
 	long dataWriteIndex = 0;
 
-	public MainTableLogger() {
+	public Logger() {
 		System.out.println("[D] Loading date & time for file.");
 		
 		LocalDateTime currentDateTime = LocalDateTime.now();
@@ -65,14 +65,14 @@ public class MainTableLogger implements Runnable {
 		System.out.println("[D] Configuring network tables connection");
 		NetworkTable.setClientMode();
 		NetworkTable.setTeam(2587);
-		smartTable = NetworkTable.getTable("SmartDashboard");
+		smartTable = NetworkTable.getTable("Debug");
 		smartTable.addTableListener(new ITableListener() {
 
 			@Override
 			public void valueChanged(ITable source, String key, Object value,
 					boolean isNew) {
 				if (isNew) {
-					MainTableLogger.this.newData = true;
+					Logger.this.newData = true;
 				}
 				synchronized (sema) {
 					dataMap.put(key, value);
