@@ -56,34 +56,34 @@ public class OI {
 	}
 
 	public double getRawAnalogStickALX() {
-		return -gp1.getLX();
+		return gp1.getLX();
 	}
 
 	public double getRawAnalogStickALY() {
-		return -gp1.getLY();
+		return gp1.getLY();
 	}
 
 	public double getRawAnalogStickARX() {
-		return -gp1.getRX();
+		return gp1.getRX();
 	}
 
 	public double getRawAnalogStickARY() {
-		return -gp1.getRY();
+		return gp1.getRY();
 	}
 
 	public double getRawAnalogStickBLX() {
-		return -gp2.getLX();
+		return gp2.getLX();
 	}
 
 	public double getRawAnalogStickBLY() {
-		return -gp2.getLY();
+		return gp2.getLY();
 	}
 
 	public double getRawAnalogStickBRX() {
-		return -gp2.getRX();
+		return gp2.getRX();
 	}
 
 	public double getRawAnalogStickBRY() {
-		return -gp2.getRY();
+		return gp2.getRY();
 	}
 }

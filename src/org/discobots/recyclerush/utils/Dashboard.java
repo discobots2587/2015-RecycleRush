@@ -20,6 +20,8 @@ public class Dashboard {
 	}
 	
 	public static void updateDriver() {
+		SmartDashboard.putNumber("Robot Loop Execution Time", Robot.loopExecutionTime);
+
 		SmartDashboard.putNumber("Battery Voltage", DriverStation.getInstance().getBatteryVoltage());
 
 		SmartDashboard.putNumber("Motor FrontLeft Current", Robot.driveTrainSub.getMotorCurrent(Motor.FRONTLEFT));
@@ -52,10 +54,10 @@ public class Dashboard {
 		debug.putBoolean("Compressor Control Loop State", Robot.electricalSub.getCompressorControlLoopState());
 		debug.putNumber("Compressor Current", Robot.electricalSub.getCompressorCurrent());
 
-		debug.putNumber("Motor FrontLeft Current", Robot.driveTrainSub.getMotorCurrent(Motor.FRONTLEFT));
-		debug.putNumber("Motor BackLeft Current", Robot.driveTrainSub.getMotorCurrent(Motor.BACKLEFT));
-		debug.putNumber("Motor FrontRight Current", Robot.driveTrainSub.getMotorCurrent(Motor.FRONTRIGHT));
-		debug.putNumber("Motor BackRight Current", Robot.driveTrainSub.getMotorCurrent(Motor.BACKRIGHT));
+		//debug.putNumber("Motor FrontLeft Current", Robot.driveTrainSub.getMotorCurrent(Motor.FRONTLEFT));
+		//debug.putNumber("Motor BackLeft Current", Robot.driveTrainSub.getMotorCurrent(Motor.BACKLEFT));
+		//debug.putNumber("Motor FrontRight Current", Robot.driveTrainSub.getMotorCurrent(Motor.FRONTRIGHT));
+		//debug.putNumber("Motor BackRight Current", Robot.driveTrainSub.getMotorCurrent(Motor.BACKRIGHT));
 		
 		debug.putNumber("Motor FrontLeft Setpoint", Robot.driveTrainSub.getMotorSetpoint(Motor.FRONTLEFT));
 		debug.putNumber("Motor BackLeft Setpoint", Robot.driveTrainSub.getMotorSetpoint(Motor.BACKLEFT));

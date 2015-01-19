@@ -19,26 +19,26 @@ public class GamePad extends Joystick {
 	// Axis
 	public static final int AXIS_LX = 0;
 	public static final int AXIS_LY = 1;
-	public static final int AXIS_RX = 3;
-	public static final int AXIS_RY = 2;
+	public static final int AXIS_RX = 2;
+	public static final int AXIS_RY = 3;
 	public static final int DPAD_X = 4;
 	public static final int DPAD_Y = 5;
 	// Buttons
-	public static final int BTN_X = 0;
-	public static final int BTN_A = 1;
-	public static final int BTN_B = 2;
-	public static final int BTN_Y = 3;
+	public static final int BTN_X = 1;
+	public static final int BTN_A = 2;
+	public static final int BTN_B = 3;
+	public static final int BTN_Y = 4;
 
-	public static final int BTN_LB = 4;
-	public static final int BTN_LT = 6;
-	public static final int BTN_RB = 5;
-	public static final int BTN_RT = 7;
+	public static final int BTN_LB = 5;
+	public static final int BTN_LT = 7;
+	public static final int BTN_RB = 6;
+	public static final int BTN_RT = 8;
 
-	public static final int BTN_BACK = 8;
-	public static final int BTN_START = 9;
+	public static final int BTN_BACK = 9;
+	public static final int BTN_START = 10;
 	
-	public static final int AXISBTN_L = 10;
-	public static final int AXISBTN_R = 11;
+	public static final int AXISBTN_L = 11;
+	public static final int AXISBTN_R = 12;
 	
 	public double getLX() {
 		return this.getRawAxis(AXIS_LX);
@@ -61,7 +61,7 @@ public class GamePad extends Joystick {
 	}
 
 	public double getDY() {
-		return this.getRawAxis(DPAD_Y);
+		return this.getRawAxis(DPAD_Y) * -1;
 	}
 	
 	public static class DPadButton extends Button {

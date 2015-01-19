@@ -47,15 +47,15 @@ public class DriveTrainSubsystem extends Subsystem {
 	}
 
 	public void tankDrive(double leftStick, double rightStick) {
-		robotDrive.tankDrive(leftStick, rightStick);
+		robotDrive.tankDrive(leftStick, -rightStick);
 	}
 
 	public void arcadeDrive(double y, double x) {
-		robotDrive.arcadeDrive(y, x);
+		robotDrive.arcadeDrive(x, -y); // robotdrive is dumb so params are switched
 	}
 
 	public void holonomicDrive(double y, double x, double r) { // h-drive
-		robotDrive.arcadeDrive(y, r);
+		robotDrive.arcadeDrive(r, -y); // robotdrive is dumb so params are switched
 		//centerDropDown.set(x);
 	}
 
