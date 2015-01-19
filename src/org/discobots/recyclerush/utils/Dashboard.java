@@ -10,15 +10,31 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Dashboard {
-
+	
+	private static DebugCommand debugCmd;
+	
 	private static NetworkTable debug;
 	public static void init() {
+		debugCmd = new DebugCommand();
 		debug = NetworkTable.getTable("Debug");
 	}
 	
 	public static void updateDriver() {
 		SmartDashboard.putNumber("Battery Voltage", DriverStation.getInstance().getBatteryVoltage());
-		SmartDashboard.putData(new DebugCommand());
+
+		SmartDashboard.putNumber("Motor FrontLeft Current", Robot.driveTrainSub.getMotorCurrent(Motor.FRONTLEFT));
+		SmartDashboard.putNumber("Motor BackLeft Current", Robot.driveTrainSub.getMotorCurrent(Motor.BACKLEFT));
+		SmartDashboard.putNumber("Motor FrontRight Current", Robot.driveTrainSub.getMotorCurrent(Motor.FRONTRIGHT));
+		SmartDashboard.putNumber("Motor BackRight Current", Robot.driveTrainSub.getMotorCurrent(Motor.BACKRIGHT));
+		
+		SmartDashboard.putNumber("Motor FrontLeft Setpoint", Robot.driveTrainSub.getMotorSetpoint(Motor.FRONTLEFT));
+		SmartDashboard.putNumber("Motor BackLeft Setpoint", Robot.driveTrainSub.getMotorSetpoint(Motor.BACKLEFT));
+		SmartDashboard.putNumber("Motor FrontRight Setpoint", Robot.driveTrainSub.getMotorSetpoint(Motor.FRONTRIGHT));
+		SmartDashboard.putNumber("Motor BackRight Setpoint", Robot.driveTrainSub.getMotorSetpoint(Motor.BACKRIGHT));
+		
+		SmartDashboard.putData(Robot.driveTrainSub);
+	
+		SmartDashboard.putData(debugCmd);
 	}
 	
 	

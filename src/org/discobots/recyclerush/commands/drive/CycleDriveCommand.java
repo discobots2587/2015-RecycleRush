@@ -1,42 +1,25 @@
 package org.discobots.recyclerush.commands.drive;
 
+import org.discobots.recyclerush.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 public class CycleDriveCommand extends Command {
-
-	public static final int MODE_ARCADE = 0;
-	public static final int MODE_STICK = 1;
-	public static final int MODE_HOLONOMIC = 2;
-	public static final int MODE_TANK = 3;
-
-	public static int mode = 0;
-
-	public CycleDriveCommand() {
-		if (mode < 3)
-			mode++;
-		else
-			mode = 0;
-	}
-
-	public CycleDriveCommand(int mode) {
-		mode = mode;
-	}
 	
+	public CycleDriveCommand() {
+	}
+
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		switch (mode) {
-		case MODE_ARCADE:
+		Command driveCmd = Robot.driveTrainSub.getCurrentCommand();
+		if (driveCmd instanceof TankDriveCommand) {
 			new ArcadeDriveCommand().start();
-			break;
-		case MODE_STICK:
+		} else if (driveCmd instanceof ArcadeDriveCommand) {
 			new StickDriveCommand().start();
-			break;
-		case MODE_HOLONOMIC:
+		} else if (driveCmd instanceof StickDriveCommand) {
 			new HolonomicDriveCommand().start();
-			break;
-		case MODE_TANK:
+		} else {
 			new TankDriveCommand().start();
-			break;
 		}
 	}
 
@@ -56,9 +39,5 @@ public class CycleDriveCommand extends Command {
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
-	}
-
-	public static void setModeCounter(int a) {
-		mode = a;
 	}
 }

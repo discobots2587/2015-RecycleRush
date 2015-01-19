@@ -45,6 +45,7 @@ public class Robot extends IterativeRobot {
 	public void disabledPeriodic() {
 		long start = System.currentTimeMillis();
 		Scheduler.getInstance().run();
+		Dashboard.updateDriver();
 		long end = System.currentTimeMillis();
 		loopExecutionTime = end - start;
 	}
