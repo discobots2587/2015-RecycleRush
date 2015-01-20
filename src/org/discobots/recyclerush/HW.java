@@ -13,6 +13,9 @@ public class HW {
 	public static int motorBackRight = 12;
 	public static int motorFrontRight = 13;
 	public static int motorCenterDropDown = 14;
+										//Plow//
+	public static int motorPlowRight = 15;
+	public static int motorPlowLeft = 16;
 	
 	/* PWM  */
 	
@@ -23,6 +26,7 @@ public class HW {
 	/* DIO */
 
 	/* Analog In */
+	public static int gyroscope = 1;
 
 	/* I2C */
 	public static final int i2cLidarAddress = 0x62;

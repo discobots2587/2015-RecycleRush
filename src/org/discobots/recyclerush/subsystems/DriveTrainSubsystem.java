@@ -37,6 +37,8 @@ public class DriveTrainSubsystem extends Subsystem {
 		frontRight = new CANTalon(HW.motorFrontRight);
 		backRight = new CANTalon(HW.motorBackRight);
 		//centerDropDown = new CANTalon(HW.motorCenterDropDown);
+		
+		gyroscope = new Gyro(HW.gyroscope);
 
 		robotDrive = new RobotDrive(frontLeft, backLeft, frontRight, backRight);
 		robotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
@@ -89,6 +91,10 @@ public class DriveTrainSubsystem extends Subsystem {
 		} else {
 			return -9001;
 		}
+	}
+	
+	public double getGyroAngle(){
+		return gyroscope.getAngle();
 	}
 
 	public void initDefaultCommand() {
