@@ -1,7 +1,6 @@
 package org.discobots.recyclerush.utils;
 
 import org.discobots.recyclerush.Robot;
-import org.discobots.recyclerush.commands.DebugCommand;
 import org.discobots.recyclerush.subsystems.DriveTrainSubsystem.Motor;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -11,11 +10,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Dashboard {
 	
-	private static DebugCommand debugCmd;
 	
 	private static NetworkTable debug;
 	public static void init() {
-		debugCmd = new DebugCommand();
 		debug = NetworkTable.getTable("Debug");
 	}
 	
@@ -28,22 +25,23 @@ public class Dashboard {
 		SmartDashboard.putNumber("Motor BackLeft Current", Robot.driveTrainSub.getMotorCurrent(Motor.BACKLEFT));
 		SmartDashboard.putNumber("Motor FrontRight Current", Robot.driveTrainSub.getMotorCurrent(Motor.FRONTRIGHT));
 		SmartDashboard.putNumber("Motor BackRight Current", Robot.driveTrainSub.getMotorCurrent(Motor.BACKRIGHT));
+		SmartDashboard.putNumber("Motor DropDown Current", Robot.driveTrainSub.getMotorCurrent(Motor.CENTERDROPDOWN));
 		
 		SmartDashboard.putNumber("Motor FrontLeft Setpoint", Robot.driveTrainSub.getMotorSetpoint(Motor.FRONTLEFT));
 		SmartDashboard.putNumber("Motor BackLeft Setpoint", Robot.driveTrainSub.getMotorSetpoint(Motor.BACKLEFT));
 		SmartDashboard.putNumber("Motor FrontRight Setpoint", Robot.driveTrainSub.getMotorSetpoint(Motor.FRONTRIGHT));
 		SmartDashboard.putNumber("Motor BackRight Setpoint", Robot.driveTrainSub.getMotorSetpoint(Motor.BACKRIGHT));
+		SmartDashboard.putNumber("Motor DropDown Setpoint", Robot.driveTrainSub.getMotorSetpoint(Motor.CENTERDROPDOWN));
 		
 		SmartDashboard.putData(Robot.driveTrainSub);
 	
-		SmartDashboard.putData(debugCmd);
 	}
 	
 	
 	public static void updateDebug() {
-		for (int index = 0; index < 16; index++) {
-			debug.putNumber("PDP Current, Module " + index, Robot.electricalSub.getCurrentFromPDPChannel(index));
-		}
+		//for (int index = 0; index < 16; index++) {
+		//	debug.putNumber("PDP Current, Module " + index, Robot.electricalSub.getCurrentFromPDPChannel(index));
+		//}
 		
 		debug.putNumber("PDP Total Current", Robot.electricalSub.getPDPTotalCurrent());
 		debug.putNumber("PDP Temperature", Robot.electricalSub.getPDPTemperature());
@@ -54,10 +52,10 @@ public class Dashboard {
 		debug.putBoolean("Compressor Control Loop State", Robot.electricalSub.getCompressorControlLoopState());
 		debug.putNumber("Compressor Current", Robot.electricalSub.getCompressorCurrent());
 
-		//debug.putNumber("Motor FrontLeft Current", Robot.driveTrainSub.getMotorCurrent(Motor.FRONTLEFT));
-		//debug.putNumber("Motor BackLeft Current", Robot.driveTrainSub.getMotorCurrent(Motor.BACKLEFT));
-		//debug.putNumber("Motor FrontRight Current", Robot.driveTrainSub.getMotorCurrent(Motor.FRONTRIGHT));
-		//debug.putNumber("Motor BackRight Current", Robot.driveTrainSub.getMotorCurrent(Motor.BACKRIGHT));
+		debug.putNumber("Motor FrontLeft Current", Robot.driveTrainSub.getMotorCurrent(Motor.FRONTLEFT));
+		debug.putNumber("Motor BackLeft Current", Robot.driveTrainSub.getMotorCurrent(Motor.BACKLEFT));
+		debug.putNumber("Motor FrontRight Current", Robot.driveTrainSub.getMotorCurrent(Motor.FRONTRIGHT));
+		debug.putNumber("Motor BackRight Current", Robot.driveTrainSub.getMotorCurrent(Motor.BACKRIGHT));
 		
 		debug.putNumber("Motor FrontLeft Setpoint", Robot.driveTrainSub.getMotorSetpoint(Motor.FRONTLEFT));
 		debug.putNumber("Motor BackLeft Setpoint", Robot.driveTrainSub.getMotorSetpoint(Motor.BACKLEFT));

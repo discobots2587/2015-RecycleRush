@@ -19,7 +19,15 @@ public class HolonomicDriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrainSub.holonomicDrive(Robot.oi.getRawAnalogStickALY(), Robot.oi.getRawAnalogStickALX(), Robot.oi.getRawAnalogStickARX());
+    	double y = Robot.oi.getRawAnalogStickALY();
+    	double x = Robot.oi.getRawAnalogStickALX();
+    	double r = Robot.oi.getRawAnalogStickARX();
+    			
+    	if (Math.abs(x) < 0.1) {
+    		y = 0.0;
+    	}
+    	
+    	Robot.driveTrainSub.holonomicDrive(y, x, r);
     }
 
     // Make this return true when this Command no longer needs to run execute()

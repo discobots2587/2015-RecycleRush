@@ -6,6 +6,7 @@ import org.discobots.recyclerush.commands.drive.StickDriveCommand;
 import org.discobots.recyclerush.commands.drive.TankDriveCommand;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -25,6 +26,8 @@ public class DriveTrainSubsystem extends Subsystem {
 
 	RobotDrive robotDrive;
 
+	DoubleSolenoid centerDropSolenoid;
+	
 	Encoder encoderForward;
 	Encoder encoderSideway;
 
@@ -36,7 +39,9 @@ public class DriveTrainSubsystem extends Subsystem {
 		backLeft = new CANTalon(HW.motorBackLeft);
 		frontRight = new CANTalon(HW.motorFrontRight);
 		backRight = new CANTalon(HW.motorBackRight);
-		//centerDropDown = new CANTalon(HW.motorCenterDropDown);
+		centerDropDown = new CANTalon(HW.motorCenterDropDown);
+		
+		centerDropSolenoid = new DoubleSolenoid(HW.dsolCenterDropdownA, HW.dsolCenterDropdownB);
 		
 		gyroscope = new Gyro(HW.gyroscope);
 
@@ -58,7 +63,7 @@ public class DriveTrainSubsystem extends Subsystem {
 
 	public void holonomicDrive(double y, double x, double r) { // h-drive
 		robotDrive.arcadeDrive(r, -y); // robotdrive is dumb so params are switched
-		//centerDropDown.set(x);
+		centerDropDown.set(x);
 	}
 
 	public double getMotorSetpoint(Motor motor) {
