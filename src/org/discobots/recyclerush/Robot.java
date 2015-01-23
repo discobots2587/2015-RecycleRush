@@ -21,6 +21,7 @@ public class Robot extends IterativeRobot {
 	public static ElectricalSubsystem electricalSub;
 	public static DriveTrainSubsystem driveTrainSub;
 	public static OI oi;
+	public static LiftSubsystem liftSub;
 	
 	public static long loopExecutionTime = 0;
 
@@ -35,6 +36,7 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		electricalSub = new ElectricalSubsystem();
 		driveTrainSub = new DriveTrainSubsystem();
+		liftSub	= new LiftSubsystem();
 		// autonomous command
 		autonomousCommand = new AutonomousCommand();
 
