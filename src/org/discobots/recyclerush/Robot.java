@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.discobots.recyclerush.commands.AutonomousCommand;
 import org.discobots.recyclerush.subsystems.DriveTrainSubsystem;
 import org.discobots.recyclerush.subsystems.ElectricalSubsystem;
+import org.discobots.recyclerush.subsystems.LiftSubsystem;
 import org.discobots.recyclerush.utils.Dashboard;
 
 /**
