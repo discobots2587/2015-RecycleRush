@@ -15,7 +15,8 @@ public class HW {
 	public static int motorCenterDropDown = 14;
 	public static int motorPlowRight = 15;
 	public static int motorPlowLeft = 16;
-
+	public static int motorLift1 = 17;//minisim
+	public static int motorLift2 = 18;//minisim
 	/* PWM */
 
 	/* Pneumatics */
