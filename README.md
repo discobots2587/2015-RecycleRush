@@ -4,4 +4,4 @@ This is the DiscoBots 2587's 2015 code for the student built robot. The main pro
 Students, please add your name to the contributors list when you commit code.
   
 Contributors:  
-Nolan Shah, Thomas McDonald, Mason Cole
+Nolan Shah, Thomas McDonald, Mason Cole, Felicia Oentoro
