@@ -3,12 +3,6 @@ package org.discobots.recyclerush.utils;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 
-/*
- * This is not the one in the prototype branch,
- * this was taken from the 2015 oryon code's
- * directdrive branch.
- */
-
 public class GamePad extends Joystick {
 	
 	public GamePad(int port) {

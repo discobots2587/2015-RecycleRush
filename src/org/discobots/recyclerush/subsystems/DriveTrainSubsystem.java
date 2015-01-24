@@ -29,7 +29,8 @@ public class DriveTrainSubsystem extends Subsystem {
 
 	DoubleSolenoid centerDropSolenoid;
 	
-	Encoder encoderForward;
+	Encoder encoderForwardL;
+	Encoder encoderForwardR;
 	Encoder encoderSideway;
 
 	Gyro gyroscope;
@@ -41,9 +42,11 @@ public class DriveTrainSubsystem extends Subsystem {
 		backRight = new CANTalon(HW.motorBackRight);
 		centerDropDown = new CANTalon(HW.motorCenterDropDown);
 		
-		encoderForward = new Encoder(HW.encoderForwardA, HW.encoderForwardB, false, EncodingType.k4X);
+		encoderForwardL = new Encoder(HW.encoderForwardLA, HW.encoderForwardLB, false, EncodingType.k4X);
+		encoderForwardR = new Encoder(HW.encoderForwardRA, HW.encoderForwardRB, false, EncodingType.k4X);
 		encoderSideway = new Encoder(HW.encoderSidewayA, HW.encoderSidewayB, false, EncodingType.k4X);
-		resetEncoders();
+		resetEncodersForward();
+		resetEncoderSideway();
 		
 		centerDropSolenoid = new DoubleSolenoid(HW.dsolCenterDropdownA, HW.dsolCenterDropdownB);
 		
@@ -102,14 +105,24 @@ public class DriveTrainSubsystem extends Subsystem {
 		}
 	}
 	
-	public void resetEncoders() {
-		encoderForward.reset();
+	public void resetEncodersForward() {
+		encoderForwardL.reset();
+		encoderForwardR.reset();
+	}
+	
+	public void resetEncoderSideway() {
 		encoderSideway.reset();
 	}
 	
-	public double getEncoderForwardDistance() {
+	public double getEncoderForwardRDistance() {
 		double encoderDistancePerCount = HW.wheelForwardCircumference / HW.encoderCountsPerRevolution;
-		double output = encoderForward.getRaw() * encoderDistancePerCount;
+		double output = encoderForwardR.getRaw() * encoderDistancePerCount;
+		return output;
+	}
+	
+	public double getEncoderForwardLDistance() {
+		double encoderDistancePerCount = HW.wheelForwardCircumference / HW.encoderCountsPerRevolution;
+		double output = encoderForwardL.getRaw() * encoderDistancePerCount;
 		return output;
 	}
 	

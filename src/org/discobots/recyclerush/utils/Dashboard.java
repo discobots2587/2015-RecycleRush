@@ -10,12 +10,19 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Dashboard {
 	
+	private static Thread debuggingDataThread;
 	
 	private static NetworkTable debug;
 	public static void init() {
+		debuggingDataThread = new Thread() {
+			public void run() {
+				
+			}
+		};
 		debug = NetworkTable.getTable("Debug");
 	}
 	
+	// Handle this in the main loop from Robot
 	public static void updateDriver() {
 		SmartDashboard.putNumber("Robot Loop Execution Time", Robot.loopExecutionTime);
 
@@ -37,7 +44,8 @@ public class Dashboard {
 	
 	}
 	
-	
+	// Handle this from the debugging thread.
+	int loopCounter;
 	public static void updateDebug() {
 		//for (int index = 0; index < 16; index++) {
 		//	debug.putNumber("PDP Current, Module " + index, Robot.electricalSub.getCurrentFromPDPChannel(index));

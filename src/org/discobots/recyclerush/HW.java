@@ -26,8 +26,10 @@ public class HW {
 	/* Relay */
 
 	/* DIO */
-	public static int encoderForwardA = -1;
-	public static int encoderForwardB = -1;
+	public static int encoderForwardLA = -1;
+	public static int encoderForwardLB = -1;
+	public static int encoderForwardRA = -1;
+	public static int encoderForwardRB = -1;
 	public static int encoderSidewayA = -1;
 	public static int encoderSidewayB = -1;
 	public final static double wheelForwardCircumference = 6*Math.PI; //inches
