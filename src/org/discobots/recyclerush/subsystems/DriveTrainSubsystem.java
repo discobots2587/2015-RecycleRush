@@ -6,6 +6,7 @@ import org.discobots.recyclerush.commands.drive.StickDriveCommand;
 import org.discobots.recyclerush.commands.drive.TankDriveCommand;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -32,11 +33,16 @@ public class DriveTrainSubsystem extends Subsystem {
 
 	public DriveTrainSubsystem() {
 		frontLeft = new CANTalon(HW.motorFrontLeft);
-		
 		backLeft = new CANTalon(HW.motorBackLeft);
 		frontRight = new CANTalon(HW.motorFrontRight);
 		backRight = new CANTalon(HW.motorBackRight);
 		//centerDropDown = new CANTalon(HW.motorCenterDropDown);
+		
+		encoderForward = new Encoder(HW.encoderForwardA, HW.encoderForwardB, false, EncodingType.k4X);
+		encoderSideway = new Encoder(HW.encoderSidewayA, HW.encoderSidewayB, false, EncodingType.k4X);
+		resetEncoders();
+		
+		gyroscope = new Gyro(HW.gyroscope);
 
 		robotDrive = new RobotDrive(frontLeft, backLeft, frontRight, backRight);
 		robotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
@@ -89,6 +95,27 @@ public class DriveTrainSubsystem extends Subsystem {
 		} else {
 			return -9001;
 		}
+	}
+	
+	public void resetEncoders() {
+		encoderForward.reset();
+		encoderSideway.reset();
+	}
+	
+	public double getEncoderForwardDistance() {
+		double encoderDistancePerCount = HW.wheelForwardCircumference / HW.encoderCountsPerRevolution;
+		double output = encoderForward.getRaw() * encoderDistancePerCount;
+		return output;
+	}
+	
+	public double getEncoderSidewayDistance() {
+		double encoderDistancePerCount = HW.wheelSidewayCircumference / HW.encoderCountsPerRevolution;
+		double output = encoderSideway.getRaw() * encoderDistancePerCount;
+		return output;
+	}
+	
+	public double getGyroscopeAngle() {
+		return gyroscope.getAngle();
 	}
 
 	public void initDefaultCommand() {
