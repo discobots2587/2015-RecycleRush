@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.discobots.recyclerush.commands.AutonomousCommand;
 import org.discobots.recyclerush.subsystems.DriveTrainSubsystem;
 import org.discobots.recyclerush.subsystems.ElectricalSubsystem;
+import org.discobots.recyclerush.subsystems.LiftSubsystem;
 import org.discobots.recyclerush.utils.Dashboard;
 
 /**
@@ -21,6 +22,7 @@ public class Robot extends IterativeRobot {
 	public static ElectricalSubsystem electricalSub;
 	public static DriveTrainSubsystem driveTrainSub;
 	public static OI oi;
+	public static LiftSubsystem liftSub;
 	
 	public static long loopExecutionTime = 0;
 
@@ -35,6 +37,7 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		electricalSub = new ElectricalSubsystem();
 		driveTrainSub = new DriveTrainSubsystem();
+		liftSub	= new LiftSubsystem();
 		// autonomous command
 		autonomousCommand = new AutonomousCommand();
 

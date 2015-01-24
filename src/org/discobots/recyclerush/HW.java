@@ -7,16 +7,21 @@ package org.discobots.recyclerush;
  * around.
  */
 public class HW {
-	/* CAN */ // Check roboRio web interface for these values
+	/* CAN */// Check roboRio web interface for these values
 	public static int motorBackLeft = 10;
-	public static int motorFrontLeft= 11;
+	public static int motorFrontLeft = 11;
 	public static int motorBackRight = 12;
 	public static int motorFrontRight = 13;
 	public static int motorCenterDropDown = 14;
-	
-	/* PWM  */
-	
+	public static int motorPlowRight = 15;
+	public static int motorPlowLeft = 16;
+	public static int motorLift1 = 17;//minisim
+	public static int motorLift2 = 18;//minisim
+	/* PWM */
+
 	/* Pneumatics */
+	public static int dsolCenterDropdownA = 0; // dsol is double solenoid
+	public static int dsolCenterDropdownB = 1;
 
 	/* Relay */
 
@@ -32,7 +37,8 @@ public class HW {
 	/* Analog In */
 	public final static int gyroscope = -1;
 
+
 	/* I2C */
 	public static final int i2cLidarAddress = 0x62;
-	
+
 }
