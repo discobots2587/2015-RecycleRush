@@ -9,7 +9,7 @@ import org.discobots.recyclerush.subsystems.DriveTrainSubsystem;
 import org.discobots.recyclerush.subsystems.ElectricalSubsystem;
 import org.discobots.recyclerush.subsystems.LiftSubsystem;
 import org.discobots.recyclerush.utils.Dashboard;
-
+import org.discobots.recyclerush.subsystems.IntakeSubsystem;
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -23,7 +23,7 @@ public class Robot extends IterativeRobot {
 	public static DriveTrainSubsystem driveTrainSub;
 	public static OI oi;
 	public static LiftSubsystem liftSub;
-	
+	public static IntakeSubsystem intakeSub;
 	public static long loopExecutionTime = 0;
 
 	AutonomousCommand autonomousCommand;
@@ -38,6 +38,7 @@ public class Robot extends IterativeRobot {
 		electricalSub = new ElectricalSubsystem();
 		driveTrainSub = new DriveTrainSubsystem();
 		liftSub	= new LiftSubsystem();
+		intakeSub = new IntakeSubsystem();
 		// autonomous command
 		autonomousCommand = new AutonomousCommand();
 
