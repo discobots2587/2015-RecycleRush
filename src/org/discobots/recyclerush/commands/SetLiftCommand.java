@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class LiftCommand extends Command {
+public class SetLiftCommand extends Command {
 	float liftSPD;
-    public LiftCommand(float liftSPD) {
+    public SetLiftCommand(float liftSPD) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.liftSub);

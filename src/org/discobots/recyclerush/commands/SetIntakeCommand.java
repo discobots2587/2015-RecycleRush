@@ -7,10 +7,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class IntakeCommand extends Command {
-	float intakeSPD;
+public class SetIntakeCommand extends Command {
+	boolean intakeSPD;
 
-	public IntakeCommand(float intakeSPD) {
+	public SetIntakeCommand(boolean intakeSPD) {
 		requires(Robot.intakeSub);
 		this.intakeSPD = intakeSPD;
 
@@ -18,7 +18,7 @@ public class IntakeCommand extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		Robot.intakeSub.setIntakeSpeed(intakeSPD);
+		Robot.intakeSub.setIntake(intakeSPD);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -27,7 +27,7 @@ public class IntakeCommand extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return false;
+		return true;
 	}
 
 	// Called once after isFinished returns true
