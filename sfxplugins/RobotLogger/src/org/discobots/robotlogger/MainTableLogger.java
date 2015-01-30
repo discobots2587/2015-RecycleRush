@@ -18,7 +18,7 @@ public class MainTableLogger implements Runnable {
 		System.out.println("Authors: Thomas McDonald, Nolan Shah");
 		System.out.println("Source Code is available on GitHub");
 		System.out.println("https://github.com/discobots2587/");
-		
+
 		MainTableLogger logger = new MainTableLogger();
 		logger.run();
 	}
@@ -32,40 +32,43 @@ public class MainTableLogger implements Runnable {
 
 	public MainTableLogger() {
 		System.out.println("[D] Loading date & time for file.");
-		
+
 		LocalDateTime currentDateTime = LocalDateTime.now();
-		String outputFileName = System.getProperty("user.home") + "\\Robot Logs\\log-" + currentDateTime.getYear() + "."
+		String outputFileName = System.getProperty("user.home")
+				+ "\\Robot Logs\\log-" + currentDateTime.getYear() + "."
 				+ currentDateTime.getMonth().getValue() + "."
 				+ currentDateTime.getDayOfMonth() + "."
 				+ currentDateTime.getHour() + "." + currentDateTime.getMinute()
 				+ "." + currentDateTime.getSecond() + ".log";
-		
+
 		try {
 			System.out.println("[D] Creating and Loading file.");
 			File file = new File(outputFileName);
 			System.out.println("[D] File URL: " + file.getPath());
-			
-			Path path = Paths.get(System.getProperty("user.home") + "\\Robot Logs\\");
+
+			Path path = Paths.get(System.getProperty("user.home")
+					+ "\\Robot Logs\\");
 			Files.createDirectories(path);
 
 			file.createNewFile();
 			fileWriter = new PrintWriter(file, "UTF-8");
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(32);
 		}
-		
+
 		System.out.println("[D] Configuring application memory storage");
 		dataMap = new LinkedHashMap<String, Object>();
 		newData = true;
 
 		sema = new Object();
-		
+
 		System.out.println("[D] Configuring network tables connection");
 		NetworkTable.setClientMode();
 		NetworkTable.setTeam(2587);
-		smartTable = NetworkTable.getTable("Debug");
+		NetworkTable.setIPAddress("roborio-2587.local");
+		smartTable = NetworkTable.getTable("SmartDashboard");
 		smartTable.addTableListener(new ITableListener() {
 
 			@Override
