@@ -28,6 +28,10 @@ public class IntakeSubsystem extends Subsystem {
 		intakeA.set(intakeSPD);
 	}
 
+	public boolean getIntakeValue() {
+		return intakeA.get() && intakeB.get();
+	}
+
 	public void initDefaultCommand() {
 	}
 }
