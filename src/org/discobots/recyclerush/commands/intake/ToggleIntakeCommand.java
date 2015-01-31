@@ -1,27 +1,26 @@
-package org.discobots.recyclerush.commands;
+package org.discobots.recyclerush.commands.intake;
 
 import org.discobots.recyclerush.Robot;
-import org.discobots.recyclerush.subsystems.PlowSubsystem.Motor;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class SetPlowCommand extends Command {
-	double plowSpeed;
-	
-    public SetPlowCommand(double plowSpeed) {
+public class ToggleIntakeCommand extends Command {
+
+    public ToggleIntakeCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.plowSub);
-    	this.plowSpeed = plowSpeed;
+    	requires(Robot.intakeSub);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.plowSub.setSpeed(plowSpeed, Motor.RIGHT);
-    	Robot.plowSub.setSpeed(plowSpeed, Motor.LEFT);
+    	if(Robot.intakeSub.getIntakeValue())
+    		Robot.intakeSub.setIntake(false);
+    	else
+    		Robot.intakeSub.setIntake(true);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -40,6 +39,5 @@ public class SetPlowCommand extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }

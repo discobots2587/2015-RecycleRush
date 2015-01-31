@@ -26,6 +26,7 @@ public class Robot extends IterativeRobot {
 	public static LiftSubsystem liftSub;
 	public static IntakeSubsystem intakeSub;
 	public static PlowSubsystem plowSub;
+	
 	public static long loopExecutionTime = 0;
 
 	AutonomousCommand autonomousCommand;
@@ -35,24 +36,26 @@ public class Robot extends IterativeRobot {
 	 * used for any initialization code.
 	 */
 	public void robotInit() {
-		// global oi & subsystem code
+		// subsystem code
 		electricalSub = new ElectricalSubsystem();
 		driveTrainSub = new DriveTrainSubsystem();
 		liftSub	= new LiftSubsystem();
 		intakeSub = new IntakeSubsystem();
 		plowSub = new PlowSubsystem();
+		// gamepad code
 		oi = new OI();
 		// autonomous command
 		autonomousCommand = new AutonomousCommand();
 
 		// dashboard init
 		Dashboard.init();
+		Dashboard.update();
 	}
 
 	public void disabledPeriodic() {
 		long start = System.currentTimeMillis();
 		Scheduler.getInstance().run();
-		Dashboard.updateDriver();
+		Dashboard.update();
 		long end = System.currentTimeMillis();
 		loopExecutionTime = end - start;
 	}
@@ -68,7 +71,7 @@ public class Robot extends IterativeRobot {
 	public void autonomousPeriodic() {
 		long start = System.currentTimeMillis();
 		Scheduler.getInstance().run();
-		Dashboard.updateDriver();
+		Dashboard.update();
 		long end = System.currentTimeMillis();
 		loopExecutionTime = end - start;
 	}
@@ -96,7 +99,7 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		long start = System.currentTimeMillis();
 		Scheduler.getInstance().run();
-		Dashboard.updateDriver();
+		Dashboard.update();
 		long end = System.currentTimeMillis();
 		loopExecutionTime = end - start;
 	}
@@ -108,7 +111,7 @@ public class Robot extends IterativeRobot {
 		long start = System.currentTimeMillis();
 		LiveWindow.run();
 		Scheduler.getInstance().run();
-		Dashboard.updateDriver();
+		Dashboard.update();
 		long end = System.currentTimeMillis();
 		loopExecutionTime = end - start;
 	}

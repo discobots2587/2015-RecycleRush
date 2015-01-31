@@ -2,10 +2,10 @@ package org.discobots.recyclerush;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 
-import org.discobots.recyclerush.commands.SetLiftCommand;
-import org.discobots.recyclerush.commands.SetPlowCommand;
-import org.discobots.recyclerush.commands.ToggleIntakeCommand;
 import org.discobots.recyclerush.commands.drive.CycleDriveCommand;
+import org.discobots.recyclerush.commands.drive.lift.SetLiftCommand;
+import org.discobots.recyclerush.commands.intake.ToggleIntakeCommand;
+import org.discobots.recyclerush.commands.plow.SetPlowCommand;
 import org.discobots.recyclerush.utils.GamePad;
 import org.discobots.recyclerush.utils.GamePad.DPadButton;
 
@@ -71,8 +71,6 @@ public class OI {
 
 		b_btnA.whenPressed(new ToggleIntakeCommand());*/
 		
-		new SetLiftCommand(getRawAnalogStickBLY());
-		new SetPlowCommand(getRawAnalogStickBRY());
 	}
 
 	public double getRawAnalogStickALX() {

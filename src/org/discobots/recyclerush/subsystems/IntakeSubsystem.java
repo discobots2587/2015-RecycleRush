@@ -1,8 +1,8 @@
 package org.discobots.recyclerush.subsystems;
 
 import org.discobots.recyclerush.HW;
-import org.discobots.recyclerush.commands.SetIntakeCommand;
 import org.discobots.recyclerush.commands.drive.TankDriveCommand;
+import org.discobots.recyclerush.commands.intake.SetIntakeCommand;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Solenoid;

@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import org.discobots.recyclerush.HW;
+import org.discobots.recyclerush.commands.plow.VariablePlowCommand;
 /**
  *
  */
@@ -33,7 +34,7 @@ public class PlowSubsystem extends Subsystem {
     
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new VariablePlowCommand());
     }
 }
 

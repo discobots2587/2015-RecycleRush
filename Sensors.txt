@@ -1,0 +1,16 @@
+Autonomous Closed Loop Drive:
+At least one encoder on the drive train, one gyroscope.
+note: If we use mecanum this is going to be nearly impossible because of slip.
+
+Automatic (not autonomous) Robot Wall/Feeding Station Placement:
+Two lidars on front corners facing front OR two sonars
+
+Automatic (not autonomous) Stacking:
+one lidar for lift facing front or one sonar, one encoder OR stringpot for lift, several buttons (intake, both plows, top of the lift, bottom of the lift)
+
+Alternative viewport for driver:
+One Camera, potentially lidars/sonars
+
+Corrected sideways driving:
+one gyroscope
+

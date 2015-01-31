@@ -31,21 +31,22 @@ public class HW {
 	/* Relay */
 
 	/* DIO */
-	public static int encoderForwardLA = -1;
-	public static int encoderForwardLB = -1;
-	public static int encoderForwardRA = -1;
-	public static int encoderForwardRB = -1;
-	public static int encoderSidewayA = -1;
-	public static int encoderSidewayB = -1;
-	public final static double wheelForwardCircumference = 6*Math.PI; //inches
-	public final static double wheelSidewayCircumference = 4*Math.PI;
-	public final static double encoderCountsPerRevolution = 200*4; //x4 for k4x
+	public static int encoderForwardLA = 0;
+	public static int encoderForwardLB = 1;
+	public static int encoderForwardRA = 2;
+	public static int encoderForwardRB = 3;
+	public static int encoderSidewayA = 4;
+	public static int encoderSidewayB = 5;
 	
 	/* Analog In */
-	public final static int gyroscope = -1;
+	public final static int gyroscope = 0;
 
 
 	/* I2C */
 	public static final int i2cLidarAddress = 0x62;
-
+	
+	/* Constants */
+	public final static double wheelForwardCircumference = 6*Math.PI; //inches
+	public final static double wheelSidewayCircumference = 4*Math.PI;
+	public final static double encoderCountsPerRevolution = 200*4; //x4 for k4x
 }

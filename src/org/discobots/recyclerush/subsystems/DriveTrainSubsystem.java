@@ -42,15 +42,15 @@ public class DriveTrainSubsystem extends Subsystem {
 		backRight = new CANTalon(HW.motorBackRight);
 		centerDropDown = new CANTalon(HW.motorCenterDropDown);
 		
-		encoderForwardL = new Encoder(HW.encoderForwardLA, HW.encoderForwardLB, false, EncodingType.k4X);
-		encoderForwardR = new Encoder(HW.encoderForwardRA, HW.encoderForwardRB, false, EncodingType.k4X);
-		encoderSideway = new Encoder(HW.encoderSidewayA, HW.encoderSidewayB, false, EncodingType.k4X);
-		resetEncodersForward();
-		resetEncoderSideway();
+		//encoderForwardL = new Encoder(HW.encoderForwardLA, HW.encoderForwardLB, false, EncodingType.k4X);
+		//encoderForwardR = new Encoder(HW.encoderForwardRA, HW.encoderForwardRB, false, EncodingType.k4X);
+		//encoderSideway = new Encoder(HW.encoderSidewayA, HW.encoderSidewayB, false, EncodingType.k4X);
+		//resetEncodersForward();
+		//resetEncoderSideway();
 		
 		centerDropSolenoid = new DoubleSolenoid(HW.dsolCenterDropdownA, HW.dsolCenterDropdownB);
 		
-		gyroscope = new Gyro(HW.gyroscope);
+		//gyroscope = new Gyro(HW.gyroscope);
 
 		robotDrive = new RobotDrive(frontLeft, backLeft, frontRight, backRight);
 		robotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
