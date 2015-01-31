@@ -1,7 +1,9 @@
 package org.discobots.recyclerush.subsystems;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
+
 import org.discobots.recyclerush.HW;
 /**
  *
@@ -12,12 +14,12 @@ public class PlowSubsystem extends Subsystem {
     	RIGHT, LEFT;
     }
 	
-    CANTalon right, left;
+    Talon right, left;
     
 
     public PlowSubsystem() {
-    	right = new CANTalon(HW.motorPlowRight);
-    	left = new CANTalon(HW.motorPlowLeft);
+    	right = new Talon(HW.motorPlowRight);
+    	left = new Talon(HW.motorPlowLeft);
     }
     
     public void setSpeed(double speed, Motor motor) {

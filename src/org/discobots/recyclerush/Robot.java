@@ -8,6 +8,7 @@ import org.discobots.recyclerush.commands.AutonomousCommand;
 import org.discobots.recyclerush.subsystems.DriveTrainSubsystem;
 import org.discobots.recyclerush.subsystems.ElectricalSubsystem;
 import org.discobots.recyclerush.subsystems.LiftSubsystem;
+import org.discobots.recyclerush.subsystems.PlowSubsystem;
 import org.discobots.recyclerush.utils.Dashboard;
 import org.discobots.recyclerush.subsystems.IntakeSubsystem;
 /**
@@ -24,6 +25,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static LiftSubsystem liftSub;
 	public static IntakeSubsystem intakeSub;
+	public static PlowSubsystem plowSub;
 	public static long loopExecutionTime = 0;
 
 	AutonomousCommand autonomousCommand;
@@ -34,11 +36,12 @@ public class Robot extends IterativeRobot {
 	 */
 	public void robotInit() {
 		// global oi & subsystem code
-		oi = new OI();
 		electricalSub = new ElectricalSubsystem();
 		driveTrainSub = new DriveTrainSubsystem();
 		liftSub	= new LiftSubsystem();
 		intakeSub = new IntakeSubsystem();
+		plowSub = new PlowSubsystem();
+		oi = new OI();
 		// autonomous command
 		autonomousCommand = new AutonomousCommand();
 

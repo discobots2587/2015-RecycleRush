@@ -3,6 +3,7 @@ package org.discobots.recyclerush;
 import edu.wpi.first.wpilibj.buttons.Button;
 
 import org.discobots.recyclerush.commands.SetLiftCommand;
+import org.discobots.recyclerush.commands.SetPlowCommand;
 import org.discobots.recyclerush.commands.ToggleIntakeCommand;
 import org.discobots.recyclerush.commands.drive.CycleDriveCommand;
 import org.discobots.recyclerush.utils.GamePad;
@@ -56,7 +57,7 @@ public class OI {
 		// register commands to buttons here
 		b_btnY.whenPressed(new CycleDriveCommand());
 
-		b_trigR.whenPressed(new SetLiftCommand(1));
+		/*b_trigR.whenPressed(new SetLiftCommand(1));
 		b_trigR.whenReleased(new SetLiftCommand(0));
 
 		b_trigL.whenPressed(new SetLiftCommand(-1));
@@ -68,7 +69,10 @@ public class OI {
 		b_bumpL.whenPressed(new SetLiftCommand(-0.3));
 		b_bumpL.whenReleased(new SetLiftCommand(0));
 
-		b_btnA.whenPressed(new ToggleIntakeCommand());
+		b_btnA.whenPressed(new ToggleIntakeCommand());*/
+		
+		new SetLiftCommand(getRawAnalogStickBLY());
+		new SetPlowCommand(getRawAnalogStickBRY());
 	}
 
 	public double getRawAnalogStickALX() {

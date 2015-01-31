@@ -13,11 +13,14 @@ public class HW {
 	public static int motorBackRight = 12;
 	public static int motorFrontRight = 13;
 	public static int motorCenterDropDown = 14;
-	public static int motorPlowRight = 15;
-	public static int motorPlowLeft = 16;
-	public static int motorLift1 = 17;
+	//public static int motorPlowRight = 15;
+	//public static int motorPlowLeft = 16;
+	public static int motorLift1 = 15;
 	public static int motorLift2 = 18;
+	
 	/* PWM */
+	public static int motorPlowRight = 0;
+	public static int motorPlowLeft = 1;
 
 	/* Pneumatics */
 	public static int dsolCenterDropdownA = 0; // dsol is double solenoid
