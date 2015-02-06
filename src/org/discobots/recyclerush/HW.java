@@ -47,4 +47,8 @@ public class HW {
 	public final static double wheelForwardCircumference = 6*Math.PI; //inches
 	public final static double wheelSidewayCircumference = 4*Math.PI;
 	public final static double encoderCountsPerRevolution = 200*4; //x4 for k4x
+	
+	/* Digital Input */
+	public final static int topButton = 8;
+	public final static int bottomButton = 9;
 }
