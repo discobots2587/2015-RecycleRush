@@ -50,7 +50,7 @@ public class LiftSubsystem extends Subsystem {
 		else if (getBottomSwitch() && output <0)
 			output = 0;
 		liftMotor1.set(output);
-		//liftMotor2.set(output);
+		//liftMotor2.set(output);//enable for second lift motor
 	}
 
 }
