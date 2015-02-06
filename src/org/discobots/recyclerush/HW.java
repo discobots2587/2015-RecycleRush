@@ -13,14 +13,12 @@ public class HW {
 	public static int motorBackRight = 12;
 	public static int motorFrontRight = 13;
 	public static int motorCenterDropDown = 14;
-	//public static int motorPlowRight = 15;
-	//public static int motorPlowLeft = 16;
 	public static int motorLift1 = 15;
 	public static int motorLift2 = 18;
 	
 	/* PWM */
-	public static int motorPlowRight = 0;
-	public static int motorPlowLeft = 1;
+	public static int motorPlowRight = 1;
+	public static int motorPlowLeft = 0;
 
 	/* Pneumatics */
 	public static int dsolCenterDropdownA = 0; // dsol is double solenoid
@@ -31,12 +29,12 @@ public class HW {
 	/* Relay */
 
 	/* DIO */
-	public static int encoderForwardLA = 0;
-	public static int encoderForwardLB = 1;
-	public static int encoderForwardRA = 2;
-	public static int encoderForwardRB = 3;
+	public static int encoderForwardA = 0;
+	public static int encoderForwardB = 1;
 	public static int encoderSidewayA = 4;
 	public static int encoderSidewayB = 5;
+	public static int encoderLiftA = 2;
+	public static int encoderLiftB = 3;
 	
 	/* Analog In */
 	public final static int gyroscope = 0;

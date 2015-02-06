@@ -22,8 +22,11 @@ public class MoveForwardCommand extends Command {
 	PIDOutput pidOutputR, pidOutputL, pidOutputA;
 	PIDController pidControllerR, pidControllerL, pidControllerA;
 
-	public MoveForwardCommand(double distance) {
-		pidSourceR = new PIDSource() {
+	public MoveForwardCommand(double distance) throws Exception {
+		
+		throw new Exception("Do not use.");
+		
+		/*pidSourceR = new PIDSource() {
 
 			@Override
 			public double pidGet() {
@@ -86,7 +89,7 @@ public class MoveForwardCommand extends Command {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		requires(Robot.driveTrainSub);
-		this.distance = distance;
+		this.distance = distance;*/
 	}
 
 	// Called just before this Command runs the first time
@@ -98,10 +101,10 @@ public class MoveForwardCommand extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		sourceValR = Robot.driveTrainSub.getEncoderForwardRDistance();
-		sourceValL = Robot.driveTrainSub.getEncoderForwardLDistance();
-		sourceValA = Robot.driveTrainSub.getGyroscopeAngle();
-		Robot.driveTrainSub.tankDrive(outputValL - outputValA, outputValR + outputValA);
+	//	sourceValR = Robot.driveTrainSub.getEncoderLiftDistance();
+	//	sourceValL = Robot.driveTrainSub.getEncoderFowardDistance();
+	//	sourceValA = Robot.driveTrainSub.getGyroscopeAngle();
+	//	Robot.driveTrainSub.tankDrive(outputValL - outputValA, outputValR + outputValA);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

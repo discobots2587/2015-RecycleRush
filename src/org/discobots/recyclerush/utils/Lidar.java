@@ -16,6 +16,7 @@ public class Lidar {
 	public Lidar(int deviceAddress) {
 		i2cDevice = new I2C(Port.kOnboard, deviceAddress);
 		lidarThread = new LidarThread();
+		start();
 	}
 	
 	public synchronized void start() {
@@ -56,7 +57,7 @@ public class Lidar {
 				}
 				distance = (buffer[0] << 8) + buffer[2];
 				try {
-					Thread.sleep(10);
+					Thread.sleep(29);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

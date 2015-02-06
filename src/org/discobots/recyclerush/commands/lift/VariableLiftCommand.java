@@ -1,14 +1,14 @@
-package org.discobots.recyclerush.commands.plow;
+package org.discobots.recyclerush.commands.lift;
 
 import org.discobots.recyclerush.Robot;
 import org.discobots.recyclerush.subsystems.PlowSubsystem.Motor;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class VariablePlowCommand extends Command {
+public class VariableLiftCommand extends Command {
 
-	public VariablePlowCommand() {
-		requires(Robot.plowSub);
+	public VariableLiftCommand() {
+		requires(Robot.liftSub);
 	}
 
 	@Override
@@ -19,9 +19,7 @@ public class VariablePlowCommand extends Command {
 
 	@Override
 	protected void execute() {
-		Robot.plowSub.setSpeed(Robot.oi.getRawAnalogStickBRY(), Motor.LEFT);
-		Robot.plowSub.setSpeed(Robot.oi.getRawAnalogStickBRY(), Motor.RIGHT);
-
+		Robot.liftSub.setLiftSpeed(-Robot.oi.getRawAnalogStickBLY());
 	}
 
 	@Override

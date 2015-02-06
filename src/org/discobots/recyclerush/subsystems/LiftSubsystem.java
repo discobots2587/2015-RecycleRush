@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 import org.discobots.recyclerush.HW;
 import org.discobots.recyclerush.commands.drive.TankDriveCommand;
+import org.discobots.recyclerush.commands.lift.VariableLiftCommand;
 
 /**
  *
@@ -17,15 +18,16 @@ public class LiftSubsystem extends Subsystem {
 
 	public LiftSubsystem() {
 		liftMotor1 = new CANTalon(HW.motorLift1);
-		liftMotor2 = new CANTalon(HW.motorLift2);
+		//liftMotor2 = new CANTalon(HW.motorLift2);
 	}
 
 	public void setLiftSpeed(double liftSPD) {
 		liftMotor1.set(liftSPD);
-		liftMotor2.set(liftSPD);
+		//liftMotor2.set(liftSPD);
 	}
 
 	public void initDefaultCommand() {
+		setDefaultCommand(new VariableLiftCommand());
 	}
 
 }

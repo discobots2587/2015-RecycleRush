@@ -4,6 +4,7 @@ import org.discobots.recyclerush.HW;
 import org.discobots.recyclerush.commands.drive.CycleDriveCommand;
 import org.discobots.recyclerush.commands.drive.StickDriveCommand;
 import org.discobots.recyclerush.commands.drive.TankDriveCommand;
+import org.discobots.recyclerush.utils.Lidar;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
@@ -29,11 +30,13 @@ public class DriveTrainSubsystem extends Subsystem {
 
 	DoubleSolenoid centerDropSolenoid;
 	
-	Encoder encoderForwardL;
-	Encoder encoderForwardR;
+	Encoder encoderForward;
+	Encoder encoderLift;
 	Encoder encoderSideway;
 
 	Gyro gyroscope;
+	
+	public Lidar lidar;
 
 	public DriveTrainSubsystem() {
 		frontLeft = new CANTalon(HW.motorFrontLeft);
@@ -42,8 +45,8 @@ public class DriveTrainSubsystem extends Subsystem {
 		backRight = new CANTalon(HW.motorBackRight);
 		centerDropDown = new CANTalon(HW.motorCenterDropDown);
 		
-		//encoderForwardL = new Encoder(HW.encoderForwardLA, HW.encoderForwardLB, false, EncodingType.k4X);
-		//encoderForwardR = new Encoder(HW.encoderForwardRA, HW.encoderForwardRB, false, EncodingType.k4X);
+		encoderForward = new Encoder(HW.encoderForwardA, HW.encoderForwardB, false, EncodingType.k4X);
+		//encoderLift = new Encoder(HW.encoderLiftA, HW.encoderLiftB, false, EncodingType.k4X);
 		//encoderSideway = new Encoder(HW.encoderSidewayA, HW.encoderSidewayB, false, EncodingType.k4X);
 		//resetEncodersForward();
 		//resetEncoderSideway();
@@ -52,6 +55,8 @@ public class DriveTrainSubsystem extends Subsystem {
 		
 		//gyroscope = new Gyro(HW.gyroscope);
 
+		lidar = new Lidar(HW.i2cLidarAddress);
+		
 		robotDrive = new RobotDrive(frontLeft, backLeft, frontRight, backRight);
 		robotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
 		robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
@@ -105,24 +110,27 @@ public class DriveTrainSubsystem extends Subsystem {
 		}
 	}
 	
-	public void resetEncodersForward() {
-		encoderForwardL.reset();
-		encoderForwardR.reset();
+	public void resetEncoderForward() {
+		encoderForward.reset();
 	}
 	
 	public void resetEncoderSideway() {
 		encoderSideway.reset();
 	}
 	
-	public double getEncoderForwardRDistance() {
+	public void resetEncoderLift() {
+		encoderLift.reset();
+	}
+	
+	public double getEncoderLiftDistance() {
 		double encoderDistancePerCount = HW.wheelForwardCircumference / HW.encoderCountsPerRevolution;
-		double output = encoderForwardR.getRaw() * encoderDistancePerCount;
+		double output = encoderLift.getRaw() * encoderDistancePerCount;
 		return output;
 	}
 	
-	public double getEncoderForwardLDistance() {
+	public double getEncoderForwardDistance() {
 		double encoderDistancePerCount = HW.wheelForwardCircumference / HW.encoderCountsPerRevolution;
-		double output = encoderForwardL.getRaw() * encoderDistancePerCount;
+		double output = encoderForward.getRaw() * encoderDistancePerCount;
 		return output;
 	}
 	

@@ -1,4 +1,4 @@
-package org.discobots.recyclerush.commands.drive.lift;
+package org.discobots.recyclerush.commands.lift;
 
 import org.discobots.recyclerush.Robot;
 
