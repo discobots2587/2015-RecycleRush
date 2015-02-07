@@ -3,6 +3,7 @@ package org.discobots.recyclerush;
 import edu.wpi.first.wpilibj.buttons.Button;
 
 import org.discobots.recyclerush.commands.drive.CycleDriveCommand;
+import org.discobots.recyclerush.commands.drive.pid.MoveForwardCommand;
 import org.discobots.recyclerush.commands.intake.ToggleIntakeCommand;
 import org.discobots.recyclerush.commands.lift.SetLiftCommand;
 import org.discobots.recyclerush.commands.plow.SetPlowCommand;
@@ -69,8 +70,13 @@ public class OI {
 		b_bumpL.whenPressed(new SetLiftCommand(-0.5));
 		b_bumpL.whenReleased(new SetLiftCommand(0));
 
+		// debug
+		b_dpadD.whenPressed(new MoveForwardCommand(12));
+		// end debug
+		
+		
 		// drive commands control analog sticks on joy 1
-		// VariableLiftCommand controls analog sticks on joy 2
+		// VariablePlowCommand controls analog sticks on joy 2
 		
 	}
 

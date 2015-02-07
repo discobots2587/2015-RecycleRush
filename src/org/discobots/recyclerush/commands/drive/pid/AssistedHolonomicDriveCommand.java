@@ -1,26 +1,19 @@
-package org.discobots.recyclerush.commands.plow;
-
-import org.discobots.recyclerush.Robot;
+package org.discobots.recyclerush.commands.drive.pid;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class SetPlowCommand extends Command {
-	double plowSpeed;
-	
-    public SetPlowCommand(double plowSpeed) {
+public class AssistedHolonomicDriveCommand extends Command {
+
+    public AssistedHolonomicDriveCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.plowSub);
-    	this.plowSpeed = plowSpeed;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.plowSub.setSpeedLeft(plowSpeed);
-    	Robot.plowSub.setSpeedRight(plowSpeed);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -29,7 +22,7 @@ public class SetPlowCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true
@@ -39,6 +32,5 @@ public class SetPlowCommand extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }

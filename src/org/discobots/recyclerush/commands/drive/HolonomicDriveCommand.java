@@ -27,7 +27,7 @@ public class HolonomicDriveCommand extends Command {
     		y = 0.0;
     	}
     	
-    	Robot.driveTrainSub.holonomicDrive(y, x, r);
+    	Robot.driveTrainSub.holonomicDriveRamp(y, x, r);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -37,7 +37,7 @@ public class HolonomicDriveCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.driveTrainSub.holonomicDrive(0, 0, 0);
+    	Robot.driveTrainSub.holonomicDriveUnramped(0, 0, 0);
     }
 
     // Called when another command which requires one or more of the same

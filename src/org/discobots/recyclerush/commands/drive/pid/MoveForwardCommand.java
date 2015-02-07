@@ -14,36 +14,31 @@ public class MoveForwardCommand extends Command {
 
 	double distance;
 	double y, x;
-	double kPR, kIR, kDR, kPL, kIL, kDL, kPA, kIA, kDA; // R right, L left, A
-														// angle
-	double sourceValR, sourceValL, sourceValA;
-	double outputValR, outputValL, outputValA;
-	PIDSource pidSourceR, pidSourceL, pidSourceA;
-	PIDOutput pidOutputR, pidOutputL, pidOutputA;
-	PIDController pidControllerR, pidControllerL, pidControllerA;
+	static final double kPF = 1/6, 
+			kIF = 0, 
+			kDF = 0, 
+			kPA = 1/30, 
+			kIA = 0, 
+			kDA = 0; // F forward, A angle
+	double sourceValF, sourceValA;
+	double outputValF, outputValA;
+	PIDSource pidSourceF, pidSourceA;
+	PIDOutput pidOutputF, pidOutputA;
+	PIDController pidControllerF, pidControllerA;
 
-	public MoveForwardCommand(double distance) throws Exception {
-		
-		throw new Exception("Do not use.");
-		
-		/*pidSourceR = new PIDSource() {
+	public MoveForwardCommand(double distance) {
 
-			@Override
-			public double pidGet() {
-				// TODO Auto-generated method stub
-				return sourceValR;
-			}
-		};
+		requires(Robot.driveTrainSub);
 
-		pidSourceL = new PIDSource() {
+		pidSourceF = new PIDSource() {
 
 			@Override
 			public double pidGet() {
 				// TODO Auto-generated method stub
-				return sourceValL;
+				return sourceValF;
 			}
 		};
-		
+
 		pidSourceA = new PIDSource() {
 
 			@Override
@@ -53,26 +48,16 @@ public class MoveForwardCommand extends Command {
 			}
 		};
 
-		pidOutputR = new PIDOutput() {
+		pidOutputF = new PIDOutput() {
 
 			@Override
 			public void pidWrite(double output) {
 				// TODO Auto-generated method stub
-				outputValR = output;
+				outputValF = output;
 			}
 
 		};
 
-		pidOutputL = new PIDOutput() {
-
-			@Override
-			public void pidWrite(double output) {
-				// TODO Auto-generated method stub
-				outputValL = output;
-			}
-
-		};
-		
 		pidOutputA = new PIDOutput() {
 
 			@Override
@@ -83,38 +68,39 @@ public class MoveForwardCommand extends Command {
 
 		};
 
-		pidControllerR = new PIDController(kPR, kIR, kDR, pidSourceR, pidOutputR);
-		pidControllerL = new PIDController(kPL, kIL, kDL, pidSourceL, pidOutputL);
-		pidControllerA = new PIDController(kPA, kIA, kDA, pidSourceA, pidOutputA);
-		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
-		requires(Robot.driveTrainSub);
-		this.distance = distance;*/
+		pidControllerF = new PIDController(kPF, kIF, kDF, pidSourceF,
+				pidOutputF);
+		pidControllerF.setOutputRange(-1, 1);
+		pidControllerA = new PIDController(kPA, kIA, kDA, pidSourceA,
+				pidOutputA);
+		pidControllerA.setOutputRange(-1, 1);
+
+		this.distance = distance;
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		pidControllerR.setSetpoint(distance);
-		pidControllerL.setSetpoint(distance);
+		pidControllerF.setSetpoint(distance);
 		pidControllerA.setSetpoint(Robot.driveTrainSub.getGyroscopeAngle());
+		pidControllerF.enable();
+		pidControllerA.enable();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-	//	sourceValR = Robot.driveTrainSub.getEncoderLiftDistance();
-	//	sourceValL = Robot.driveTrainSub.getEncoderFowardDistance();
-	//	sourceValA = Robot.driveTrainSub.getGyroscopeAngle();
-	//	Robot.driveTrainSub.tankDrive(outputValL - outputValA, outputValR + outputValA);
+		sourceValF = Robot.driveTrainSub.getEncoderForwardDistance();
+		sourceValA = Robot.driveTrainSub.getGyroscopeAngle();
+		Robot.driveTrainSub.arcadeDriveUnramped(sourceValF, sourceValA);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return pidControllerR.onTarget() && pidControllerL.onTarget() && pidControllerA.onTarget();
+		return pidControllerF.onTarget() && pidControllerA.onTarget();
 	}
 
 	// Called once after isFinished returns true
 	protected void end() {
-		Robot.driveTrainSub.tankDrive(0, 0);
+		Robot.driveTrainSub.tankDriveRamp(0, 0);
 	}
 
 	// Called when another command which requires one or more of the same

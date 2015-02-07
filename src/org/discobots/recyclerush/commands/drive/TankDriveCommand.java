@@ -15,7 +15,7 @@ public class TankDriveCommand extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.driveTrainSub.tankDrive(Robot.oi.getRawAnalogStickALY(),
+		Robot.driveTrainSub.tankDriveRamp(Robot.oi.getRawAnalogStickALY(),
 				Robot.oi.getRawAnalogStickARY());
 	}
 
@@ -26,7 +26,7 @@ public class TankDriveCommand extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
-		Robot.driveTrainSub.tankDrive(0, 0);
+		Robot.driveTrainSub.tankDriveUnramped(0, 0);
 	}
 
 	// Called when another command which requires one or more of the same
