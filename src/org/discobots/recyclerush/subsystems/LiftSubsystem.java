@@ -20,37 +20,33 @@ public class LiftSubsystem extends Subsystem {
 
 	public LiftSubsystem() {
 		liftMotor1 = new CANTalon(HW.motorLift1);
-		//liftMotor2 = new CANTalon(HW.motorLift2);
-		limitTop = new DigitalInput(HW.topButton);
-		limitBottom = new DigitalInput(HW.bottomButton);	
+		// liftMotor2 = new CANTalon(HW.motorLift2);
+		limitTop = new DigitalInput(HW.buttonLiftTop);
+		limitBottom = new DigitalInput(HW.buttonLiftBottom);
+		liftMotor1.setSafetyEnabled(false);
 	}
 
-	public boolean getTopSwitch()
-	{
+	public boolean getTopSwitch() {
 		return !limitTop.get();
 	}
-	
-	public boolean getBottomSwitch()
-	{
+
+	public boolean getBottomSwitch() {
 		return !limitBottom.get();
 	}
-	
-	public void setLiftSpeed(double liftSPD) {
-		liftMotor1.set(liftSPD);
-		//liftMotor2.set(liftSPD);
-	}
+
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new VariableLiftCommand());
+		//setDefaultCommand(new VariableLiftCommand());
 	}
-	public void setLift(double input){
+
+	public void setLiftSpeed(double input) {
 		double output = input;
-		if (getTopSwitch () && output>0)
-			output = 0; //sets output to zero if button is pressed
-		else if (getBottomSwitch() && output <0)
+		if (getTopSwitch() && output < 0)
+			output = 0; // sets output to zero if button is pressed
+		else if (getBottomSwitch() && output > 0)
 			output = 0;
 		liftMotor1.set(output);
-		//liftMotor2.set(output);//enable for second lift motor
+		// liftMotor2.set(output);//enable for second lift motor
 	}
 
 }

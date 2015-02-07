@@ -19,7 +19,7 @@ public class VariableLiftCommand extends Command {
 
 	@Override
 	protected void execute() {
-		Robot.liftSub.setLiftSpeed(-Robot.oi.getRawAnalogStickBLY());
+		//Robot.liftSub.setLiftSpeed(-Robot.oi.getRawAnalogStickBLY());
 	}
 
 	@Override

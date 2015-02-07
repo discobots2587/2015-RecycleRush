@@ -9,17 +9,18 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Dashboard {
-	
+
 	private static NetworkTable debug;
+
 	public static void init() {
 		debug = NetworkTable.getTable("Debug");
 	}
-	
+
 	public static void update() {
 		updateDriver();
-		//updateDebug();
+		// updateDebug();
 	}
-	
+
 	private static int driveCounter = 0;
 
 	public static void updateDriver() {
@@ -45,23 +46,33 @@ public class Dashboard {
 			SmartDashboard.putNumber("Motor DropDown Current",
 					Robot.driveTrainSub.getMotorCurrent(Motor.CENTERDROPDOWN));
 
-			/*SmartDashboard.putNumber("Motor FrontLeft Setpoint",
-					Robot.driveTrainSub.getMotorSetpoint(Motor.FRONTLEFT));
-			SmartDashboard.putNumber("Motor BackLeft Setpoint",
-					Robot.driveTrainSub.getMotorSetpoint(Motor.BACKLEFT));
-			SmartDashboard.putNumber("Motor FrontRight Setpoint",
-					Robot.driveTrainSub.getMotorSetpoint(Motor.FRONTRIGHT));
-			SmartDashboard.putNumber("Motor BackRight Setpoint",
-					Robot.driveTrainSub.getMotorSetpoint(Motor.BACKRIGHT));
-			SmartDashboard.putNumber("Motor DropDown Setpoint",
-					Robot.driveTrainSub.getMotorSetpoint(Motor.CENTERDROPDOWN));*/
+			/*
+			 * SmartDashboard.putNumber("Motor FrontLeft Setpoint",
+			 * Robot.driveTrainSub.getMotorSetpoint(Motor.FRONTLEFT));
+			 * SmartDashboard.putNumber("Motor BackLeft Setpoint",
+			 * Robot.driveTrainSub.getMotorSetpoint(Motor.BACKLEFT));
+			 * SmartDashboard.putNumber("Motor FrontRight Setpoint",
+			 * Robot.driveTrainSub.getMotorSetpoint(Motor.FRONTRIGHT));
+			 * SmartDashboard.putNumber("Motor BackRight Setpoint",
+			 * Robot.driveTrainSub.getMotorSetpoint(Motor.BACKRIGHT));
+			 * SmartDashboard.putNumber("Motor DropDown Setpoint",
+			 * Robot.driveTrainSub.getMotorSetpoint(Motor.CENTERDROPDOWN));
+			 */
 
 			SmartDashboard.putNumber("Encoder Forward",
 					Robot.driveTrainSub.getEncoderForwardDistance());
+			SmartDashboard.putNumber("Encoder Sideway ",
+					Robot.driveTrainSub.getEncoderSidewayDistance());
+			SmartDashboard.putNumber("Lidar Distance (cm)",
+					Robot.driveTrainSub.getLidarDistanceCm());
+			SmartDashboard.putNumber("Gyroscope",
+					Robot.driveTrainSub.getGyroscopeAngle());
 
-			SmartDashboard.putData(Robot.driveTrainSub);
+			SmartDashboard.putBoolean("Lift Top", Robot.liftSub.getTopSwitch());
+			SmartDashboard.putBoolean("Lift Bottom", Robot.liftSub.getBottomSwitch());
 			
-			SmartDashboard.putNumber("Lidar Distance in", Robot.driveTrainSub.lidar.getDistanceIn());
+			SmartDashboard.putData(Robot.driveTrainSub);
+
 		}
 	}
 

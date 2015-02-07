@@ -18,18 +18,21 @@ public class IntakeSubsystem extends Subsystem {
 	Solenoid intakeA, intakeB;
 
 	public IntakeSubsystem() {
-
-		intakeA = new Solenoid(HW.intakeA);
-		intakeB = new Solenoid(HW.intakeB);
+		System.out.println("error, intake is passive, active code is disabled, 1");
+		//intakeA = new Solenoid(HW.intakeA);
+		//intakeB = new Solenoid(HW.intakeB);
 	}
 
 	public void setIntake(boolean intakeSPD) {
-		intakeA.set(intakeSPD);
-		intakeA.set(intakeSPD);
+		System.out.println("error, intake is passive, active code is disabled, 2");
+		//intakeA.set(intakeSPD);
+		//intakeA.set(intakeSPD);
 	}
 
 	public boolean getIntakeValue() {
-		return intakeA.get() && intakeB.get();
+		System.out.println("error, intake is passive, active code is disabled, 3");
+		return false;
+		//return intakeA.get() && intakeB.get();
 	}
 
 	public void initDefaultCommand() {

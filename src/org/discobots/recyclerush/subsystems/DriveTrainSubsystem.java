@@ -36,7 +36,7 @@ public class DriveTrainSubsystem extends Subsystem {
 
 	Gyro gyroscope;
 	
-	public Lidar lidar;
+	Lidar lidar;
 
 	public DriveTrainSubsystem() {
 		frontLeft = new CANTalon(HW.motorFrontLeft);
@@ -47,13 +47,13 @@ public class DriveTrainSubsystem extends Subsystem {
 		
 		encoderForward = new Encoder(HW.encoderForwardA, HW.encoderForwardB, false, EncodingType.k4X);
 		//encoderLift = new Encoder(HW.encoderLiftA, HW.encoderLiftB, false, EncodingType.k4X);
-		//encoderSideway = new Encoder(HW.encoderSidewayA, HW.encoderSidewayB, false, EncodingType.k4X);
+		 encoderSideway = new Encoder(HW.encoderSidewayA, HW.encoderSidewayB, false, EncodingType.k4X);
 		//resetEncodersForward();
 		//resetEncoderSideway();
 		
 		centerDropSolenoid = new DoubleSolenoid(HW.dsolCenterDropdownA, HW.dsolCenterDropdownB);
 		
-		//gyroscope = new Gyro(HW.gyroscope);
+		gyroscope = new Gyro(HW.gyroscope);
 
 		lidar = new Lidar(HW.i2cLidarAddress);
 		
@@ -120,6 +120,10 @@ public class DriveTrainSubsystem extends Subsystem {
 	
 	public void resetEncoderLift() {
 		encoderLift.reset();
+	}
+	
+	public double getLidarDistanceCm() {
+		return lidar.getDistanceCm();
 	}
 	
 	public double getEncoderLiftDistance() {

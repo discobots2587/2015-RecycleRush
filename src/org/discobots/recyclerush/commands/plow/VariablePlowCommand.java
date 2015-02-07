@@ -19,8 +19,8 @@ public class VariablePlowCommand extends Command {
 
 	@Override
 	protected void execute() {
-		Robot.plowSub.setSpeed(Robot.oi.getRawAnalogStickBRY(), Motor.LEFT);
-		Robot.plowSub.setSpeed(Robot.oi.getRawAnalogStickBRY(), Motor.RIGHT);
+		Robot.plowSub.setSpeed(-Robot.oi.getRawAnalogStickBLY()/2, Motor.LEFT);
+		Robot.plowSub.setSpeed(-Robot.oi.getRawAnalogStickBRY()/2, Motor.RIGHT);
 
 	}
 

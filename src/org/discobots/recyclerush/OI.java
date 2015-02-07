@@ -57,19 +57,20 @@ public class OI {
 		// register commands to buttons here
 		b_btnY.whenPressed(new CycleDriveCommand());
 
-		/*b_trigR.whenPressed(new SetLiftCommand(1));
+		b_trigR.whenPressed(new SetLiftCommand(1));
 		b_trigR.whenReleased(new SetLiftCommand(0));
 
 		b_trigL.whenPressed(new SetLiftCommand(-1));
 		b_trigL.whenReleased(new SetLiftCommand(0));
 
-		b_bumpR.whenPressed(new SetLiftCommand(0.3));
+		b_bumpR.whenPressed(new SetLiftCommand(0.5));
 		b_bumpR.whenReleased(new SetLiftCommand(0));
 
-		b_bumpL.whenPressed(new SetLiftCommand(-0.3));
+		b_bumpL.whenPressed(new SetLiftCommand(-0.5));
 		b_bumpL.whenReleased(new SetLiftCommand(0));
 
-		b_btnA.whenPressed(new ToggleIntakeCommand());*/
+		// drive commands control analog sticks on joy 1
+		// VariableLiftCommand controls analog sticks on joy 2
 		
 	}
 
