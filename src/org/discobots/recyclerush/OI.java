@@ -70,6 +70,8 @@ public class OI {
 		b_bumpL.whenPressed(new SetLiftCommand(-0.5));
 		b_bumpL.whenReleased(new SetLiftCommand(0));
 
+		b_btnB.whenPressed(new ToggleIntakeCommand());
+		
 		// debug
 		b_dpadD.whenPressed(new MoveForwardCommand(12));
 		// end debug

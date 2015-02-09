@@ -18,7 +18,7 @@ public class SetLiftCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.liftSub.setLiftSpeed(liftSPD);
+    	Robot.liftSub.setSpeed(liftSPD);
     }
 
     // Called repeatedly when this Command is scheduled to run

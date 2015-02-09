@@ -20,8 +20,9 @@ public class HW {
 	public final static int motorPlowLeft = 0;
 
 	/* Pneumatics */
-	public final static int dsolCenterDropdownA = 0; // dsol is double solenoid
-	public final static int dsolCenterDropdownB = 1;
+	public final static int solenoidIntake = 0;
+	public final static int dsolCenterDropdownA = 1; // dsol is double solenoid
+	public final static int dsolCenterDropdownB = 2;
 
 	/* Relay */
 
@@ -38,6 +39,9 @@ public class HW {
 	public final static int buttonPlowRightOut = 9;
 	public final static int buttonLiftTop = 10;
 	public final static int buttonLiftBottom = 11;
+	
+	public final static int lidarControlDrive = 19;
+	public final static int lidarControlLift = 20;
 	
 	/* Analog In */
 	public final static int gyroscope = 0;

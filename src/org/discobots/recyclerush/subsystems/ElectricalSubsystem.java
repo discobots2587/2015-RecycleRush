@@ -13,6 +13,7 @@ public class ElectricalSubsystem extends Subsystem {
 	public ElectricalSubsystem() {
 		pdp = new PowerDistributionPanel();
 		cmp = new Compressor();
+		
 	}
 
 	public double getPDPVoltage() {

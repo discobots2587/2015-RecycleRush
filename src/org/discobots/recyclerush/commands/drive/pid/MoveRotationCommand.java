@@ -55,7 +55,7 @@ public class MoveRotationCommand extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		sourceVal = Robot.driveTrainSub.getGyroscopeAngle();
+		sourceVal = Robot.driveTrainSub.getAngle();
 		Robot.driveTrainSub.arcadeDriveRamp(0, outputVal);
 	}
 

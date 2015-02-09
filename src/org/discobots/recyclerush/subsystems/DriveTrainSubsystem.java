@@ -53,16 +53,15 @@ public class DriveTrainSubsystem extends Subsystem {
 				false, EncodingType.k4X);
 		encoderSideway = new Encoder(HW.encoderSidewayA, HW.encoderSidewayB,
 				false, EncodingType.k4X);
-		resetEncoderForward();
-		resetEncoderSideway();
+		resetForwardDistance();
+		resetSidewayDistance();
 
 		centerDropSolenoid = new DoubleSolenoid(HW.dsolCenterDropdownA,
 				HW.dsolCenterDropdownB);
 
 		gyroscope = new Gyro(HW.gyroscope);
 
-		lidar = new Lidar(HW.i2cLidarAddress);
-		lidar.start();
+		lidar = new Lidar(HW.lidarControlDrive);
 
 		robotDrive = new RobotDrive(frontLeft, backLeft, frontRight, backRight) {
 			
@@ -78,6 +77,10 @@ public class DriveTrainSubsystem extends Subsystem {
 	
 	public void setRamped(boolean a) {
 		this.allowRamped = a;
+	}
+	
+	public boolean getRamped() {
+		return this.allowRamped;
 	}
 	
 	public void tankDriveRamp(double leftStick, double rightStick) {
@@ -100,7 +103,7 @@ public class DriveTrainSubsystem extends Subsystem {
 			right = prevRight - CONSTANT_RAMP_LIMIT;
 		}
 
-		robotDrive.tankDrive(leftStick, -rightStick);
+		robotDrive.tankDrive(left, -right);
 	}
 
 	public void arcadeDriveRamp(double iy, double ix) {
@@ -150,9 +153,9 @@ public class DriveTrainSubsystem extends Subsystem {
 			or = prevR - CONSTANT_RAMP_LIMIT;
 		}
 		
-		robotDrive.arcadeDrive(r, -y); 
+		robotDrive.arcadeDrive(or, -oy); 
 		// robotdrive is dumb arcadeDrive so params are switched
-		centerDropDown.set(x);
+		centerDropDown.set(ox);
 	}
 
 	public void tankDriveUnramped(double leftStick, double rightStick) {
@@ -202,34 +205,38 @@ public class DriveTrainSubsystem extends Subsystem {
 		}
 	}
 
-	public void resetEncoderForward() {
+	public void resetForwardDistance() {
 		encoderForward.reset();
 	}
 
-	public void resetEncoderSideway() {
+	public void resetSidewayDistance() {
 		encoderSideway.reset();
 	}
 
-	public double getEncoderForwardDistance() {
+	public double getForwardDistance() {
 		double encoderDistancePerCount = HW.encoderForwardConstant
 				/ HW.encoderCountsPerRevolution;
 		double output = encoderForward.getRaw() * encoderDistancePerCount;
 		return output;
 	}
 
-	public double getEncoderSidewayDistance() {
+	public double getSidewayDistance() {
 		double encoderDistancePerCount = HW.encoderSidewaysConstant
 				/ HW.encoderCountsPerRevolution;
 		double output = encoderSideway.getRaw() * encoderDistancePerCount;
 		return output;
 	}
 
-	public double getLidarDistanceCm() {
-		return lidar.getDistanceCm();
+	public double getFrontObjectDistanceIn() {
+		return lidar.getDistanceIn();
 	}
 
-	public double getGyroscopeAngle() {
+	public double getAngle() {
 		return gyroscope.getAngle();
+	}
+	
+	public void resetAngle() {
+		gyroscope.reset();
 	}
 
 	public void initDefaultCommand() {

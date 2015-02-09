@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -81,16 +82,18 @@ public class MoveForwardCommand extends Command {
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		pidControllerF.setSetpoint(distance);
-		pidControllerA.setSetpoint(Robot.driveTrainSub.getGyroscopeAngle());
+		pidControllerA.setSetpoint(Robot.driveTrainSub.getAngle());
 		pidControllerF.enable();
 		pidControllerA.enable();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		sourceValF = Robot.driveTrainSub.getEncoderForwardDistance();
-		sourceValA = Robot.driveTrainSub.getGyroscopeAngle();
-		Robot.driveTrainSub.arcadeDriveUnramped(sourceValF, sourceValA);
+		sourceValF = Robot.driveTrainSub.getForwardDistance();
+		sourceValA = Robot.driveTrainSub.getAngle();
+		SmartDashboard.putNumber("TMP MoveFoward Output Foward", outputValF);
+		SmartDashboard.putNumber("TMP MoveFoward Output Rotational", outputValA);
+		Robot.driveTrainSub.arcadeDriveUnramped(outputValF, outputValA);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

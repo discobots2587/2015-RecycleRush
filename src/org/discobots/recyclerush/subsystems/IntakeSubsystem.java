@@ -15,24 +15,19 @@ public class IntakeSubsystem extends Subsystem {
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	Solenoid intakeA, intakeB;
+	Solenoid intake;
 
 	public IntakeSubsystem() {
-		System.out.println("error, intake is passive, active code is disabled, 1");
-		//intakeA = new Solenoid(HW.intakeA);
-		//intakeB = new Solenoid(HW.intakeB);
+		intake = new Solenoid(HW.solenoidIntake);
+		intake.set(false);
 	}
 
 	public void setIntake(boolean intakeSPD) {
-		System.out.println("error, intake is passive, active code is disabled, 2");
-		//intakeA.set(intakeSPD);
-		//intakeA.set(intakeSPD);
+		intake.set(intakeSPD);
 	}
 
 	public boolean getIntakeValue() {
-		System.out.println("error, intake is passive, active code is disabled, 3");
-		return false;
-		//return intakeA.get() && intakeB.get();
+		return intake.get();
 	}
 
 	public void initDefaultCommand() {
