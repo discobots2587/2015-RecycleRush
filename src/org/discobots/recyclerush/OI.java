@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import org.discobots.recyclerush.commands.drive.CycleDriveCommand;
 import org.discobots.recyclerush.commands.drive.pid.MoveForwardCommand;
 import org.discobots.recyclerush.commands.intake.ToggleIntakeCommand;
+import org.discobots.recyclerush.commands.lift.LiftControllerCommand;
 import org.discobots.recyclerush.commands.lift.SetLiftCommand;
 import org.discobots.recyclerush.commands.plow.SetPlowCommand;
 import org.discobots.recyclerush.utils.GamePad;
@@ -70,10 +71,11 @@ public class OI {
 		b_bumpL.whenPressed(new SetLiftCommand(-0.5));
 		b_bumpL.whenReleased(new SetLiftCommand(0));
 
-		b_btnB.whenPressed(new ToggleIntakeCommand());
+		b_btnA.whenPressed(new ToggleIntakeCommand());
 		
 		// debug
-		b_dpadD.whenPressed(new MoveForwardCommand(12));
+		b_btnX.whenPressed(new MoveForwardCommand(12));
+		b_btnB.whenPressed(new LiftControllerCommand(30));
 		// end debug
 		
 		

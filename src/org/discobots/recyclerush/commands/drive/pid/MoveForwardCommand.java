@@ -15,10 +15,10 @@ public class MoveForwardCommand extends Command {
 
 	double distance;
 	double y, x;
-	static final double kPF = 1/6, 
+	static final double kPF = 1, 
 			kIF = 0, 
 			kDF = 0, 
-			kPA = 1/30, 
+			kPA = 0.5, 
 			kIA = 0, 
 			kDA = 0; // F forward, A angle
 	double sourceValF, sourceValA;
@@ -83,6 +83,10 @@ public class MoveForwardCommand extends Command {
 	protected void initialize() {
 		pidControllerF.setSetpoint(distance);
 		pidControllerA.setSetpoint(Robot.driveTrainSub.getAngle());
+		Robot.driveTrainSub.resetAngle();
+		Robot.driveTrainSub.resetForwardDistance();
+		pidControllerF.setAbsoluteTolerance(1);
+		pidControllerA.setAbsoluteTolerance(1);
 		pidControllerF.enable();
 		pidControllerA.enable();
 	}
@@ -98,6 +102,7 @@ public class MoveForwardCommand extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
+		System.out.println(outputValF + " " + outputValA + " " + (pidControllerF.onTarget() && pidControllerA.onTarget()));
 		return pidControllerF.onTarget() && pidControllerA.onTarget();
 	}
 

@@ -42,6 +42,9 @@ public class Lidar {
 				public void run() {
 					while (true) {
 						Lidar lidar = lidarList.get(counter);
+						if (lidar == null) {
+							wait(50);
+						} else {
 						lidar.setDigOutState(true);
 						wait(10);
 						byte[] by = new byte[2];
@@ -50,11 +53,13 @@ public class Lidar {
 						i2c.read(LIDAR_DISTANCE_REGISTER, 2, by);
 						int output = (int) Integer.toUnsignedLong(by[0] << 8)
 								+ Byte.toUnsignedInt(by[1]);
+						System.out.println(output);
 						lidar.setDistanceCm(output);
 						lidar.setDigOutState(true);
-						counter++;
+//						counter++;
 						if (counter == lidarList.size()) {
 							counter = 0;
+						}
 						}
 					}
 				}
@@ -81,6 +86,7 @@ public class Lidar {
 	}
 
 	public synchronized double getDistanceIn() {
+		System.out.println(distance);
 		return distance / 2.54;
 	}
 

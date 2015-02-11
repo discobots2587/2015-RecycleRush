@@ -13,7 +13,7 @@ import org.discobots.recyclerush.utils.Lidar;
 /**
  *
  */
-public class LiftSubsystem extends PIDSubsystem {
+public class LiftSubsystem extends Subsystem {
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
@@ -23,7 +23,6 @@ public class LiftSubsystem extends PIDSubsystem {
 	private double setpoint;
 
 	public LiftSubsystem() {
-		super(5, 0, 0); // 5in = 100%
 		liftMotor1 = new CANTalon(HW.motorLift1);
 		limitTop = new DigitalInput(HW.buttonLiftTop);
 		limitBottom = new DigitalInput(HW.buttonLiftBottom);
@@ -60,15 +59,5 @@ public class LiftSubsystem extends PIDSubsystem {
 			// keeps us from going down when we've reached the bottom
 			output = 0;
 		liftMotor1.set(-output);
-	}
-
-	protected double returnPIDInput() {
-		return getLiftHeightIn();
-	}
-
-	@Override
-	protected void usePIDOutput(double output) {
-		setSpeed(output);
-		
 	}
 }
