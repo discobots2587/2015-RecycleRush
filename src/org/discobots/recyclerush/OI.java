@@ -7,6 +7,7 @@ import org.discobots.recyclerush.commands.drive.pid.MoveForwardCommand;
 import org.discobots.recyclerush.commands.intake.ToggleIntakeCommand;
 import org.discobots.recyclerush.commands.lift.LiftControllerCommand;
 import org.discobots.recyclerush.commands.lift.SetLiftCommand;
+import org.discobots.recyclerush.commands.lift.SetLiftSetpointCommand;
 import org.discobots.recyclerush.commands.plow.SetPlowCommand;
 import org.discobots.recyclerush.utils.GamePad;
 import org.discobots.recyclerush.utils.GamePad.DPadButton;
@@ -75,7 +76,7 @@ public class OI {
 		
 		// debug
 		b_btnX.whenPressed(new MoveForwardCommand(12));
-		b_btnB.whenPressed(new LiftControllerCommand(30));
+		b_btnB.whenPressed(new SetLiftSetpointCommand(30));
 		// end debug
 		
 		

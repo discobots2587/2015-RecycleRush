@@ -57,5 +57,13 @@ public class HW {
 	public final static double encoderSidewaysConstant = 4 * Math.PI;
 	public final static double encoderLiftConstant = 4 * Math.PI;
 	public final static double encoderCountsPerRevolution = 200 * 4; // x4  for k4x
-
+	
+	/* Lift Positions */
+	public final static double liftPosToteOneRaise = 12 + 16; // One on ground, one tote held
+	public final static double liftPosToteTwoRaise = 12 + 12 + 16; // two on ground, one tote held, elevated
+	public final static double liftPosToteThreeRaise = 12 + 12 + 12 + 16;
+	public final static double liftPosToteFourRaise = 12 + 12 + 12 + 12 + 16;
+	public final static double liftPosBinRaise = 36;
+	public final static double liftPosBinGrab = 18;
+	
 }

@@ -2,6 +2,7 @@ package org.discobots.recyclerush.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.I2C;
@@ -13,6 +14,7 @@ public class Lidar {
 	public static class LidarController {
 		private I2C i2c;
 		private Thread updateThread;
+		private Vector lidarVector;
 		private List<Lidar> lidarList;
 		private int counter;
 
@@ -27,6 +29,7 @@ public class Lidar {
 		 */
 		public LidarController() {
 			i2c = new I2C(Port.kMXP, LIDAR_ADDRESS);
+			lidarVector = new Vector();
 			lidarList = new ArrayList<Lidar>();
 			counter = 0;
 			updateThread = new Thread() {
@@ -41,25 +44,27 @@ public class Lidar {
 
 				public void run() {
 					while (true) {
-						Lidar lidar = lidarList.get(counter);
-						if (lidar == null) {
-							wait(50);
-						} else {
-						lidar.setDigOutState(true);
-						wait(10);
-						byte[] by = new byte[2];
-						i2c.write(LIDAR_CONFIG_REGISTER, 0x04);
-						wait(30);
-						i2c.read(LIDAR_DISTANCE_REGISTER, 2, by);
-						int output = (int) Integer.toUnsignedLong(by[0] << 8)
-								+ Byte.toUnsignedInt(by[1]);
-						System.out.println(output);
-						lidar.setDistanceCm(output);
-						lidar.setDigOutState(true);
-//						counter++;
-						if (counter == lidarList.size()) {
-							counter = 0;
-						}
+						if (lidarVector.size() != 0) {
+							Lidar lidar = (Lidar) lidarVector.get(counter);//lidarList.get(counter);
+							if (lidar == null) {
+								wait(50);
+							} else {
+								lidar.setDigOutState(true);
+								wait(10);
+								byte[] by = new byte[2];
+								i2c.write(LIDAR_CONFIG_REGISTER, 0x04);
+								wait(30);
+								i2c.read(LIDAR_DISTANCE_REGISTER, 2, by);
+								int output = (int) Integer.toUnsignedLong(by[0] << 8)
+										+ Byte.toUnsignedInt(by[1]);
+								System.out.println(output);
+								lidar.setDistanceCm(output);
+								lidar.setDigOutState(true);
+								counter++;
+								if (counter == lidarVector.size()/*lidarList.size()*/) {
+									counter = 0;
+								}
+							}
 						}
 					}
 				}
@@ -68,7 +73,8 @@ public class Lidar {
 		}
 
 		public void registerLidar(Lidar lidar) {
-			lidarList.add(lidar);
+			lidarVector.add(lidar);
+			//lidarList.add(lidar);
 		}
 	}
 
@@ -86,7 +92,6 @@ public class Lidar {
 	}
 
 	public synchronized double getDistanceIn() {
-		System.out.println(distance);
 		return distance / 2.54;
 	}
 

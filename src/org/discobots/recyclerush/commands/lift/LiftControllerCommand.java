@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class LiftControllerCommand extends Command {
 	
 	PIDController pidcont;
-	double kP = 0.2, kI = 0, kD = 0;
+	double kP = 1.0 / 6.0, kI = 0, kD = 0;
 	PIDOutput output;
 	PIDSource source;
 	double outVal = 0, inVal = 0;
@@ -42,7 +42,7 @@ public class LiftControllerCommand extends Command {
     	
     	pidcont = new PIDController(kP, kI, kD, source, output);
     	pidcont.setSetpoint(setpoint);
-    	pidcont.setAbsoluteTolerance(2);
+    	pidcont.setAbsoluteTolerance(1);
     	pidcont.setOutputRange(-1, 1);
     }
 
