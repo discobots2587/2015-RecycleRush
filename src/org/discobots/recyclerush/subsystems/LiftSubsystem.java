@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 import org.discobots.recyclerush.HW;
 import org.discobots.recyclerush.commands.drive.TankDriveCommand;
+import org.discobots.recyclerush.commands.lift.VariableLiftCommand;
 import org.discobots.recyclerush.utils.Lidar;
 
 /**
@@ -51,6 +52,7 @@ public class LiftSubsystem extends PIDSubsystem {
 	}
 
 	public void initDefaultCommand() {
+		//setDefaultCommand(new VariableLiftCommand());
 	}
 	
 	int christine = 1; // the secret that makes it go
