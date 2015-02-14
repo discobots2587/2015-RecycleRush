@@ -4,6 +4,7 @@ import org.discobots.recyclerush.HW;
 import org.discobots.recyclerush.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -37,6 +38,7 @@ public class AutomatedStackingCommand extends Command {
 	static final int wait_tenthSecond = 5;
 
 	protected void execute() {
+		SmartDashboard.putNumber("Automated Stacking State ", state);
 		if (wait > 0) {
 			wait--;
 			return;
@@ -67,6 +69,7 @@ public class AutomatedStackingCommand extends Command {
 			break;
 		case state_movingDownForNext:
 			Robot.liftSub.setSetpoint(0);
+			Robot.liftSub.enable();
 			if (Robot.liftSub.isAtBottom()) {
 				state = state_downEatingNext;
 				Robot.liftSub.disable();
@@ -74,7 +77,7 @@ public class AutomatedStackingCommand extends Command {
 			break;
 		case state_downEatingNext:
 			Robot.intakeSub.setIntake(true);
-			wait = wait_tenthSecond;
+			wait = wait_tenthSecond * 5;
 			state = state_movingUpForHold;
 			break;
 		case state_movingUpForHold:
@@ -82,7 +85,7 @@ public class AutomatedStackingCommand extends Command {
 			Robot.liftSub.enable();
 			if (Robot.liftSub.onTarget()) {
 				Robot.liftSub.disable();
-				wait = wait_halfSecond * 2;
+				wait = wait_halfSecond * 4;
 				state = state_upReadyForNext;
 			}
 			break;
