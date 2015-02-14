@@ -11,12 +11,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class AutomatedStackingCommand extends Command {
 
-	public AutomatedStackingCommand() {
+	public AutomatedStackingCommand(int target) {
 		requires(Robot.liftSub);
 		requires(Robot.intakeSub);
+		this.target = target;
 	}
-
-	int counter = 0;
+	
+	boolean initialLiftPositionBelowOpeningPosition = false;
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
@@ -24,6 +25,9 @@ public class AutomatedStackingCommand extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 
+	int counter = 0;
+	int target = 0;
+	
 	int state = 0;
 	final static int state_upReadyForNext = 0;
 	final static int state_movingDownForDrop = 1;
@@ -78,6 +82,7 @@ public class AutomatedStackingCommand extends Command {
 		case state_downEatingNext:
 			Robot.intakeSub.setIntake(true);
 			wait = wait_tenthSecond * 5;
+			counter++;
 			state = state_movingUpForHold;
 			break;
 		case state_movingUpForHold:
@@ -94,15 +99,19 @@ public class AutomatedStackingCommand extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return false;
+		return counter >= target;
 	}
 
 	// Called once after isFinished returns true
 	protected void end() {
+		Robot.liftSub.disable();
+		Robot.liftSub.setSpeed(0);
+		Robot.driveTrainSub.tankDriveUnramped(0, 0);
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
+		end();
 	}
 }

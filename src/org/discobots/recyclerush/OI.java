@@ -78,7 +78,7 @@ public class OI {
 		b_btnX.whenPressed(new SetLiftSetpointCommand(0));
 		b_btnB.whenPressed(new SetLiftSetpointCommand(HW.liftPosToteOneRaise));
 		
-		b_sStar.whenPressed(new AutomatedStackingCommand());
+		b_sStar.whenPressed(new AutomatedStackingCommand(99));
 		// end debug
 		
 		b2_trigR.whenPressed(new SetLiftCommand(1));

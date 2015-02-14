@@ -64,7 +64,7 @@ public class Dashboard {
 			SmartDashboard.putNumber("Encoder Sideway ",
 					Robot.driveTrainSub.getSidewayDistance());
 			SmartDashboard.putNumber("Lift Lidar Distance (in)",
-					Robot.liftSub.getLiftHeightIn());
+					Robot.liftSub.getLiftHeightInches());
 			SmartDashboard.putNumber("Drive Lidar Distance (in)",
 					Robot.driveTrainSub.getFrontObjectDistanceIn());
 			SmartDashboard.putNumber("Gyroscope",

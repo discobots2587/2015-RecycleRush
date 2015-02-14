@@ -53,7 +53,7 @@ public class LiftControllerCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	this.inVal = Robot.liftSub.getLiftHeightIn();
+    	this.inVal = Robot.liftSub.getLiftHeightInches();
     	SmartDashboard.putNumber("TMP Lift Out", outVal);
     	Robot.liftSub.setSpeed(outVal);
     }
