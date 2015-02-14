@@ -97,15 +97,6 @@ public class OI {
 		
 		b2_btnX.whenPressed(new SetLiftSetpointCommand(0));
 		b2_btnB.whenPressed(new SetLiftSetpointCommand(HW.liftPosToteOneRaise));
-
-		
-		 /* 
-		 * joystick 2 GamePad(1)
-		 * right stick plow
-		 * left stick lift
-		 * the rest is the same for joystick 1
-		 */
-		
 		
 		// drive commands control analog sticks on joy 1
 		// VariablePlowCommand controls analog sticks on joy 2

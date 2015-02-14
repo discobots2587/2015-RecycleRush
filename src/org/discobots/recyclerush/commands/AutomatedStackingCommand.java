@@ -11,22 +11,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class AutomatedStackingCommand extends Command {
 
-	public AutomatedStackingCommand(int target) {
-		requires(Robot.liftSub);
-		requires(Robot.intakeSub);
-		this.target = target;
-	}
-	
-	boolean initialLiftPositionBelowOpeningPosition = false;
-
-	// Called just before this Command runs the first time
-	protected void initialize() {
-	}
-
-	// Called repeatedly when this Command is scheduled to run
-
 	int counter = 0;
-	int target = 0;
+	int target;
 	
 	int state = 0;
 	final static int state_upReadyForNext = 0;
@@ -40,7 +26,29 @@ public class AutomatedStackingCommand extends Command {
 	long wait = 0; 
 	static final int wait_halfSecond = 25;
 	static final int wait_tenthSecond = 5;
+	
+	static final double pos_holdAndDrop = HW.liftPosToteOneRaise - 6;
+	
+	public AutomatedStackingCommand(int target) {
+		requires(Robot.liftSub);
+		requires(Robot.intakeSub);
+		this.target = target;
+	}
+	
+	boolean initialLiftPositionBelowOpeningPosition = false;
 
+	// Called just before this Command runs the first time
+	protected void initialize() {
+		if (Robot.liftSub.getLiftHeightInches() < pos_holdAndDrop + 1) {
+			Robot.intakeSub.setIntake(false);
+			wait = wait_tenthSecond;
+			state = state_moveForwardForNext;
+		} else {
+			state = state_upReadyForNext;
+		}
+	}
+
+	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		SmartDashboard.putNumber("Automated Stacking State ", state);
 		if (wait > 0) {
@@ -51,7 +59,7 @@ public class AutomatedStackingCommand extends Command {
 		switch (state) {
 		case state_upReadyForNext:
 			state = state_movingDownForDrop;
-			Robot.liftSub.setSetpoint(HW.liftPosToteOneRaise - 6);
+			Robot.liftSub.setSetpoint(pos_holdAndDrop);
 			Robot.liftSub.enable();
 			break;
 		case state_movingDownForDrop:
