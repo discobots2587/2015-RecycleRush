@@ -13,6 +13,8 @@ public class CycleDriveCommand extends Command {
 	protected void initialize() {
 		Command driveCmd = Robot.driveTrainSub.getCurrentCommand();
 		if (driveCmd instanceof TankDriveCommand) {
+			new CheesyArcadeDriveCommand().start();
+		} else if (driveCmd instanceof CheesyArcadeDriveCommand) {
 			new ArcadeDriveCommand().start();
 		} else if (driveCmd instanceof ArcadeDriveCommand) {
 			new StickDriveCommand().start();

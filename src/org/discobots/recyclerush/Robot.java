@@ -22,13 +22,13 @@ public class Robot extends IterativeRobot {
 
 	public static ElectricalSubsystem electricalSub;
 	public static DriveTrainSubsystem driveTrainSub;
-	public static OI oi;
 	public static LiftSubsystem liftSub;
 	public static IntakeSubsystem intakeSub;
 	public static PlowSubsystem plowSub;
 	
+	public static OI oi;
+	
 	public static long loopExecutionTime = 0;
-
 	AutonomousCommand autonomousCommand;
 
 	/**

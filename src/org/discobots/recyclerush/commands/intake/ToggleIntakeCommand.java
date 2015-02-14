@@ -17,10 +17,8 @@ public class ToggleIntakeCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(Robot.intakeSub.getIntakeValue())
-    		Robot.intakeSub.setIntake(false);
-    	else
-    		Robot.intakeSub.setIntake(true);
+    	Robot.intakeSub.setIntake(!Robot.intakeSub.getIntakeValue());
+    	Robot.electricalSub.setCompressor(true);
     }
 
     // Called repeatedly when this Command is scheduled to run

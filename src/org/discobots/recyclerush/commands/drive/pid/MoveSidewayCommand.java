@@ -55,7 +55,7 @@ public class MoveSidewayCommand extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		sourceVal = Robot.driveTrainSub.getEncoderSidewayDistance();
+		sourceVal = Robot.driveTrainSub.getSidewayDistance();
 		Robot.driveTrainSub.holonomicDriveRamp(0, outputVal, 0);
 	}
 
