@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class CheesyArcadeDrive extends Command {
+public class CheesyArcadeDriveCommand extends Command {
 	
 	private double move;
     private double turn;
@@ -19,7 +19,7 @@ public class CheesyArcadeDrive extends Command {
     private boolean isQuickTurn = true;
     private double quickStopAccumulator;
 
-    public CheesyArcadeDrive() {
+    public CheesyArcadeDriveCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.driveTrainSub);
