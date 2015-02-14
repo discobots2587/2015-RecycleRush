@@ -74,10 +74,34 @@ public class OI {
 
 		b_btnA.whenPressed(new ToggleIntakeCommand());
 		
-		// debug
-		b_btnX.whenPressed(new MoveForwardCommand(12));
-		b_btnB.whenPressed(new SetLiftSetpointCommand(30));
+		b_btnX.whenPressed(new SetLiftSetpointCommand(0));
+		b_btnB.whenPressed(new SetLiftSetpointCommand(HW.liftPosToteOneRaise));
 		// end debug
+		
+		b2_trigR.whenPressed(new SetLiftCommand(1));
+		b2_trigR.whenReleased(new SetLiftCommand(0));
+		
+		b2_trigL.whenPressed(new SetLiftCommand(-1));
+		b2_trigL.whenReleased(new SetLiftCommand(0));
+
+		b2_bumpR.whenPressed(new SetLiftCommand(0.5));
+		b2_bumpR.whenReleased(new SetLiftCommand(0));
+
+		b2_bumpL.whenPressed(new SetLiftCommand(-0.5));
+		b2_bumpL.whenReleased(new SetLiftCommand(0));
+		
+		b2_btnA.whenPressed(new ToggleIntakeCommand());
+		
+		b2_btnX.whenPressed(new SetLiftSetpointCommand(0));
+		b2_btnB.whenPressed(new SetLiftSetpointCommand(HW.liftPosToteOneRaise));
+
+		
+		 /* 
+		 * joystick 2 GamePad(1)
+		 * right stick plow
+		 * left stick lift
+		 * the rest is the same for joystick 1
+		 */
 		
 		
 		// drive commands control analog sticks on joy 1
