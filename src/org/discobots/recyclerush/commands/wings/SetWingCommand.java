@@ -1,4 +1,4 @@
-package org.discobots.recyclerush.commands.lift;
+package org.discobots.recyclerush.commands.wings;
 
 import org.discobots.recyclerush.Robot;
 
@@ -7,17 +7,16 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class SetLiftSetpointCommand extends Command {
-	double setpoint;
-    public SetLiftSetpointCommand(double setpoint) {
-    	this.setpoint = setpoint;
-    	requires(Robot.liftSub);
+public class SetWingCommand extends Command {
+	boolean pos;
+    public SetWingCommand(boolean pos) {
+        requires(Robot.wingSub);
+        this.pos = pos;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.liftSub.enable();
-    	Robot.liftSub.setSetpoint(setpoint);
+    	Robot.wingSub.set(pos);
     }
 
     // Called repeatedly when this Command is scheduled to run
