@@ -10,9 +10,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class AutomatedStackingCommand extends Command {
-
-	int counter = 0;
-	int target;
 	
 	int state = 0;
 	final static int state_upReadyForNext = 0;
@@ -27,12 +24,17 @@ public class AutomatedStackingCommand extends Command {
 	static final int wait_halfSecond = 25;
 	static final int wait_tenthSecond = 5;
 	
-	static final double pos_holdAndDrop = HW.liftPosToteOneRaise - 6;
+	static final double pos_scalingFactor = 12;
+	static final double pos_holdAndDrop = HW.liftPosToteOneRaise - 8 + pos_scalingFactor;
+	static final double pos_eatIt = 4 + pos_scalingFactor;
+	static final double pos_holdUp = HW.liftPosToteOneRaise + 6 + pos_scalingFactor;
 	
-	public AutomatedStackingCommand(int target) {
+	boolean finished;
+	
+	public AutomatedStackingCommand() {
 		requires(Robot.liftSub);
 		requires(Robot.intakeSub);
-		this.target = target;
+		finished = false;
 	}
 	
 	boolean initialLiftPositionBelowOpeningPosition = false;
@@ -80,9 +82,9 @@ public class AutomatedStackingCommand extends Command {
 			state = state_movingDownForNext;
 			break;
 		case state_movingDownForNext:
-			Robot.liftSub.setSetpoint(0);
+			Robot.liftSub.setSetpoint(pos_eatIt);
 			Robot.liftSub.enable();
-			if (Robot.liftSub.isAtBottom()) {
+			if (Robot.liftSub.isAtBottom() || Robot.liftSub.onTarget()) {
 				state = state_downEatingNext;
 				Robot.liftSub.disable();
 			}
@@ -90,16 +92,17 @@ public class AutomatedStackingCommand extends Command {
 		case state_downEatingNext:
 			Robot.intakeSub.setIntake(true);
 			wait = wait_tenthSecond * 5;
-			counter++;
 			state = state_movingUpForHold;
 			break;
 		case state_movingUpForHold:
-			Robot.liftSub.setSetpoint(HW.liftPosToteOneRaise + 8);
+			Robot.liftSub.setSetpoint(pos_holdUp);
 			Robot.liftSub.enable();
 			if (Robot.liftSub.onTarget()) {
 				Robot.liftSub.disable();
+				//counter++;
 				wait = wait_halfSecond * 4;
 				state = state_upReadyForNext;
+				
 			}
 			break;
 		}
@@ -107,7 +110,7 @@ public class AutomatedStackingCommand extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return counter >= target;
+		return finished;
 	}
 
 	// Called once after isFinished returns true

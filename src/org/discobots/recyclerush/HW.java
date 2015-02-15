@@ -9,23 +9,22 @@ package org.discobots.recyclerush;
 public class HW {
 	/* CAN */// Check roboRio web interface for these values
 	public final static int motorBackLeft = 10;
-	public final static int motorCFrontLeft = 11;
-	public final static int motorCBackRight = 12;
-	public final static int motorCFrontRight = 13;
 	public final static int motorCenterDropDown = 14;
 	public final static int motorLift1 = 15;
 
 	/* PWM */
 	public final static int motorPlowLeft = 0;
 	public final static int motorPlowRight = 1;
-	public final static int motorPFrontLeft = 2;
-	public final static int motorPBackRight = 3;
-	public final static int motorPFrontRight = 4;
+	public final static int motorFrontLeft = 2;
+	public final static int motorBackRight = 3;
+	public final static int motorFrontRight = 4;
 
 	/* Pneumatics */
 	public final static int solenoidIntake = 0;
-	public final static int dsolCenterDropdownA = 1; // dsol is double solenoid
-	public final static int dsolCenterDropdownB = 2;
+	public final static int solenoidFlapLeft = 1;
+	public final static int solenoidFlapRight = 2;
+	public final static int dsolCenterDropdownA = 3; // dsol is double solenoid 
+	public final static int dsolCenterDropdownB = 4;
 
 	/* Relay */
 

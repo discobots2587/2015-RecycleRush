@@ -17,9 +17,10 @@ import org.discobots.recyclerush.utils.Lidar;
  *
  */
 public class LiftSubsystem extends PIDSubsystem {
-
-	// Put methods for controlling this subsystem
-	// here. Call these from Commands.
+	/* == == == MECHANICAL NOTE == == ==
+	 * Plastic Hub on lift shaft is broken but works.
+	 */
+	
 	private CANTalon liftMotor1;
 	private DigitalInput limitTop, limitBottom;
 	private Lidar lidarLift;

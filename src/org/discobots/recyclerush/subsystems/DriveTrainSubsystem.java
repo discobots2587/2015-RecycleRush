@@ -1,6 +1,7 @@
 package org.discobots.recyclerush.subsystems;
 
 import org.discobots.recyclerush.HW;
+import org.discobots.recyclerush.commands.drive.ArcadeDriveCommand;
 import org.discobots.recyclerush.commands.drive.CycleDriveCommand;
 import org.discobots.recyclerush.commands.drive.StickDriveCommand;
 import org.discobots.recyclerush.commands.drive.TankDriveCommand;
@@ -42,26 +43,19 @@ public class DriveTrainSubsystem extends Subsystem {
 
 	Lidar lidar;
 	
-	static final double CONSTANT_RAMP_LIMIT = 0.1; // ramping stuff
+	static final double CONSTANT_RAMP_LIMIT = 0.1; // ramping
+	// 0.05 = 4/10 seconds to full, 0.1 = 2/10 seconds to full
 	boolean allowRamped = false;
 	private double prevLeft  = 0, prevRight = 0;
 	private double prevY = 0, prevX = 0, prevR;
+	
+	static final double kSpeedScaling = 1.0;
 
 	public DriveTrainSubsystem() {
 		backLeft = new CANTalon(HW.motorBackLeft);
-		/*if (DriveTrainSubsystem.COMPETITION_ROBOT) {
-			System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-			SmartDashboard.putString("b", "a");
-			frontLeft = new CANTalon(HW.motorCFrontLeft);
-			frontRight = new CANTalon(HW.motorCFrontRight);
-			backRight = new CANTalon(HW.motorCBackRight); 
-		} else {
-			System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-			SmartDashboard.putString("a", "b");*/
-			frontLeft = new Talon(HW.motorPFrontLeft);
-			frontRight = new Talon(HW.motorPFrontRight);
-			backRight = new Talon(HW.motorPBackRight);
-		//}
+		frontLeft = new Talon(HW.motorFrontLeft);
+		frontRight = new Talon(HW.motorFrontRight);
+		backRight = new Talon(HW.motorBackRight);
 		centerDropDown = new CANTalon(HW.motorCenterDropDown);
 		
 
@@ -86,8 +80,6 @@ public class DriveTrainSubsystem extends Subsystem {
 		robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, false);
 		robotDrive.setSafetyEnabled(false);
 	}
-
-	
 	
 	public void setRamped(boolean a) {
 		this.allowRamped = a;
@@ -120,7 +112,7 @@ public class DriveTrainSubsystem extends Subsystem {
 		prevLeft = left;
 		prevRight = right;
 		
-		robotDrive.tankDrive(left, -right);
+		robotDrive.tankDrive(left * kSpeedScaling, right * kSpeedScaling);
 	}
 
 	public void arcadeDriveRamp(double iy, double ix) {
@@ -144,7 +136,7 @@ public class DriveTrainSubsystem extends Subsystem {
 		
 		prevX = ox;
 		prevY = oy;
-		robotDrive.arcadeDrive(ox, oy); 
+		robotDrive.arcadeDrive(ox * kSpeedScaling, oy * kSpeedScaling); 
 		// robotdrive is dumb arcadeDrive so params are switched
 	}
 
@@ -176,9 +168,9 @@ public class DriveTrainSubsystem extends Subsystem {
 		prevY = oy;
 		prevR = or;
 		
-		robotDrive.arcadeDrive(or, -oy); 
+		robotDrive.arcadeDrive(or * kSpeedScaling, oy * kSpeedScaling); 
 		// robotdrive is dumb arcadeDrive so params are switched
-		centerDropDown.set(ox);
+		centerDropDown.set(ox * kSpeedScaling);
 	}
 
 	public void tankDriveUnramped(double leftStick, double rightStick) {
@@ -187,7 +179,7 @@ public class DriveTrainSubsystem extends Subsystem {
 		prevX = 0;
 		prevY = 0;
 		prevR = 0;
-		robotDrive.tankDrive(leftStick, -rightStick);
+		robotDrive.tankDrive(leftStick * kSpeedScaling, -rightStick * kSpeedScaling);
 	}
 
 	public void arcadeDriveUnramped(double y, double x) {
@@ -196,14 +188,14 @@ public class DriveTrainSubsystem extends Subsystem {
 		prevX = 0;
 		prevY = 0;
 		prevR = 0;
-		robotDrive.arcadeDrive(x, -y); 
+		robotDrive.arcadeDrive(x * kSpeedScaling, -y * kSpeedScaling); 
 		// robotdrive is dumb arcadeDrive so params are switched
 	}
 
 	public void holonomicDriveUnramped(double y, double x, double r) { // h-drive
-		robotDrive.arcadeDrive(r, -y); 
+		robotDrive.arcadeDrive(r * kSpeedScaling, -y * kSpeedScaling); 
 		// robotdrive is dumb arcadeDrive so params are switched
-		centerDropDown.set(x);
+		centerDropDown.set(x * kSpeedScaling);
 	}
 
 	public double getMotorSetpoint(Motor motor) {
@@ -275,6 +267,6 @@ public class DriveTrainSubsystem extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new TankDriveCommand());
+		setDefaultCommand(new ArcadeDriveCommand());
 	}
 }

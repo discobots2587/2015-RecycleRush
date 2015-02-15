@@ -15,9 +15,15 @@ public class ArcadeDriveCommand extends Command {
 	}
 
 	// Called repeatedly when this Command is scheduled to run
+	public static final double kScaleLeftStick = 7.0/8.0;
+	public static final double kScaleRightStick = 5.0/8.0;
+	
 	protected void execute() {
-		Robot.driveTrainSub.arcadeDriveRamp(Robot.oi.getRawAnalogStickALY(),
-				Robot.oi.getRawAnalogStickALX());
+		double move = Robot.oi.getRawAnalogStickALY() * kScaleLeftStick
+				+ Robot.oi.getRawAnalogStickARY() * kScaleRightStick;
+		double turn = Robot.oi.getRawAnalogStickALX() * kScaleLeftStick
+				+ Robot.oi.getRawAnalogStickARX() * kScaleRightStick;
+		Robot.driveTrainSub.arcadeDriveRamp(move, turn);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 
 import org.discobots.recyclerush.commands.AutomatedStackingCommand;
 import org.discobots.recyclerush.commands.drive.CycleDriveCommand;
+import org.discobots.recyclerush.commands.drive.ToggleDriveRampingCommand;
 import org.discobots.recyclerush.commands.drive.pid.MoveForwardCommand;
 import org.discobots.recyclerush.commands.intake.ToggleIntakeCommand;
 import org.discobots.recyclerush.commands.lift.LiftControllerCommand;
@@ -58,9 +59,7 @@ public class OI {
 	private Button b2_clicL = new JoystickButton(gp1, GamePad.AXISBTN_L);
 
 	public OI() {
-		// register commands to buttons here
-		b_btnY.whenPressed(new CycleDriveCommand());
-
+		// first gamepad
 		b_trigR.whenPressed(new SetLiftCommand(1));
 		b_trigR.whenReleased(new SetLiftCommand(0));
 
@@ -76,27 +75,17 @@ public class OI {
 		b_btnA.whenPressed(new ToggleIntakeCommand());
 		
 		b_btnX.whenPressed(new SetLiftSetpointCommand(0));
+		
 		b_btnB.whenPressed(new SetLiftSetpointCommand(HW.liftPosToteOneRaise));
 		
-		b_sStar.whenPressed(new AutomatedStackingCommand(99));
-		// end debug
-		
-		b2_trigR.whenPressed(new SetLiftCommand(1));
-		b2_trigR.whenReleased(new SetLiftCommand(0));
-		
-		b2_trigL.whenPressed(new SetLiftCommand(-1));
-		b2_trigL.whenReleased(new SetLiftCommand(0));
+		b_btnY.whenPressed(new AutomatedStackingCommand()); // one cycle, stoppable by any button
 
-		b2_bumpR.whenPressed(new SetLiftCommand(0.5));
-		b2_bumpR.whenReleased(new SetLiftCommand(0));
+		b_sStar.whenPressed(new CycleDriveCommand());
 
-		b2_bumpL.whenPressed(new SetLiftCommand(-0.5));
-		b2_bumpL.whenReleased(new SetLiftCommand(0));
+		// second gamepad
+		b2_sBack.whenPressed(new ToggleDriveRampingCommand());
 		
-		b2_btnA.whenPressed(new ToggleIntakeCommand());
 		
-		b2_btnX.whenPressed(new SetLiftSetpointCommand(0));
-		b2_btnB.whenPressed(new SetLiftSetpointCommand(HW.liftPosToteOneRaise));
 		
 		// drive commands control analog sticks on joy 1
 		// VariablePlowCommand controls analog sticks on joy 2
