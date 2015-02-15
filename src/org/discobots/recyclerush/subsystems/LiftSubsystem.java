@@ -17,11 +17,8 @@ import org.discobots.recyclerush.utils.Lidar;
  *
  */
 public class LiftSubsystem extends PIDSubsystem {
-	/* == == == MECHANICAL NOTE == == ==
-	 * Plastic Hub on lift shaft is broken but works.
-	 */
 	
-	private CANTalon liftMotor1;
+	private CANTalon liftMotorLeft, liftMotorRight;
 	private DigitalInput limitTop, limitBottom;
 	private Lidar lidarLift;
 	public static final double kMaxHeight = 62;
@@ -37,7 +34,8 @@ public class LiftSubsystem extends PIDSubsystem {
 
 	public LiftSubsystem() {
 		super(kP, kI, kD);
-		liftMotor1 = new CANTalon(HW.motorLift1);
+		liftMotorLeft = new CANTalon(HW.motorLiftLeft);
+		liftMotorRight = new CANTalon(HW.motorLiftRight);
 		limitTop = new DigitalInput(HW.buttonLiftTop);
 		limitBottom = new DigitalInput(HW.buttonLiftBottom);
 		lidarLift = new Lidar(HW.lidarControlLift);
@@ -49,6 +47,16 @@ public class LiftSubsystem extends PIDSubsystem {
 		
 		this.setAbsoluteTolerance(1);
     	this.setOutputRange(-1, 1);
+	}
+	
+	public static final boolean kMotorLiftLeft = false;
+	public static final boolean kMotorLiftRight = true;
+	public double getCurrent(boolean motor) {
+		if (kMotorLiftLeft) {
+			return liftMotorLeft.getOutputCurrent();
+		} else {
+			return liftMotorRight.getOutputCurrent();
+		}
 	}
 	
 	public double getLiftHeightInches() {
@@ -88,7 +96,8 @@ public class LiftSubsystem extends PIDSubsystem {
 		else if (isAtBottom() && output < 0)
 			// keeps us from going down when we've reached the bottom
 			output = 0;
-		liftMotor1.set(-output);
+		liftMotorLeft.set(-output);
+		liftMotorRight.set(-output);
 	}
 
 	@Override

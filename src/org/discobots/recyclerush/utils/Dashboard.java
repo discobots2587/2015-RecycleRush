@@ -2,6 +2,7 @@ package org.discobots.recyclerush.utils;
 
 import org.discobots.recyclerush.Robot;
 import org.discobots.recyclerush.subsystems.DriveTrainSubsystem.Motor;
+import org.discobots.recyclerush.subsystems.LiftSubsystem;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotState;
@@ -43,21 +44,12 @@ public class Dashboard {
 					Robot.driveTrainSub.getMotorCurrent(Motor.FRONTRIGHT));
 			SmartDashboard.putNumber("Motor BackRight Current",
 					Robot.driveTrainSub.getMotorCurrent(Motor.BACKRIGHT));
-			SmartDashboard.putNumber("Motor DropDown Current",
+			SmartDashboard.putNumber("Motor Sideways Current",
 					Robot.driveTrainSub.getMotorCurrent(Motor.CENTERDROPDOWN));
-
-			/*
-			 * SmartDashboard.putNumber("Motor FrontLeft Setpoint",
-			 * Robot.driveTrainSub.getMotorSetpoint(Motor.FRONTLEFT));
-			 * SmartDashboard.putNumber("Motor BackLeft Setpoint",
-			 * Robot.driveTrainSub.getMotorSetpoint(Motor.BACKLEFT));
-			 * SmartDashboard.putNumber("Motor FrontRight Setpoint",
-			 * Robot.driveTrainSub.getMotorSetpoint(Motor.FRONTRIGHT));
-			 * SmartDashboard.putNumber("Motor BackRight Setpoint",
-			 * Robot.driveTrainSub.getMotorSetpoint(Motor.BACKRIGHT));
-			 * SmartDashboard.putNumber("Motor DropDown Setpoint",
-			 * Robot.driveTrainSub.getMotorSetpoint(Motor.CENTERDROPDOWN));
-			 */
+			SmartDashboard.putNumber("Motor Lift Left Current",
+					Robot.liftSub.getCurrent(LiftSubsystem.kMotorLiftLeft));
+			SmartDashboard.putNumber("Motor Lift Right Current",
+					Robot.liftSub.getCurrent(LiftSubsystem.kMotorLiftRight));
 
 			SmartDashboard.putNumber("Encoder Forward",
 					Robot.driveTrainSub.getForwardDistance());
@@ -71,8 +63,9 @@ public class Dashboard {
 					Robot.driveTrainSub.getAngle());
 
 			SmartDashboard.putBoolean("Lift Top", Robot.liftSub.isAtTop());
-			SmartDashboard.putBoolean("Lift Bottom", Robot.liftSub.isAtBottom());
-			
+			SmartDashboard
+					.putBoolean("Lift Bottom", Robot.liftSub.isAtBottom());
+
 			SmartDashboard.putData(Robot.driveTrainSub);
 			SmartDashboard.putData(Robot.liftSub);
 

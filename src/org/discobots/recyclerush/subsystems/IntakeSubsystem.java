@@ -18,7 +18,7 @@ public class IntakeSubsystem extends Subsystem {
 	Solenoid intake;
 
 	public IntakeSubsystem() {
-		intake = new Solenoid(HW.solenoidIntake);
+		intake = new Solenoid(HW.solIntake);
 		intake.set(false);
 	}
 

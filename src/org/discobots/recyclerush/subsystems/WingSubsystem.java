@@ -13,8 +13,8 @@ public class WingSubsystem extends Subsystem {
 	Solenoid left, right;
  
 	public WingSubsystem() {
-		left = new Solenoid(HW.solenoidFlapLeft);
-		right = new Solenoid(HW.solenoidFlapRight);
+		left = new Solenoid(HW.solFlapLeft);
+		right = new Solenoid(HW.solFlapRight);
 	}
 	
 	public void set(boolean pos) {

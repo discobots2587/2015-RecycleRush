@@ -13,33 +13,10 @@ import org.discobots.recyclerush.commands.plow.VariablePlowCommand;
 public class PlowSubsystem extends Subsystem {
 	
     Talon talonLeft, talonRight;
-    DigitalInput limitLeftIn, limitRightIn;
-    DigitalInput limitLeftOut, limitRightOut;
 
     public PlowSubsystem() {
     	talonLeft = new Talon(HW.motorPlowLeft);
     	talonRight = new Talon(HW.motorPlowRight);
-    	
-    	limitLeftIn = new DigitalInput(HW.buttonPlowLeftIn);
-    	limitRightIn = new DigitalInput(HW.buttonPlowRightIn);
-    	limitLeftOut = new DigitalInput(HW.buttonPlowLeftOut);
-    	limitRightOut = new DigitalInput(HW.buttonPlowRightOut);
-    }
-    
-    public boolean getLimitLeftIn() {
-    	return limitLeftIn.get();
-    }
-    
-    public boolean getLimitRightIn() {
-    	return limitRightIn.get();
-    }
-    
-    public boolean getLimitLeftOut() {
-    	return limitLeftOut.get();
-    }
-    
-    public boolean getLimitRightOut() {
-    	return limitRightOut.get();
     }
     
     public void setSpeedRight(double speed) {

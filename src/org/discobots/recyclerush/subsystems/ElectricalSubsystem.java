@@ -1,5 +1,8 @@
 package org.discobots.recyclerush.subsystems;
 
+import org.discobots.recyclerush.HW;
+import org.discobots.recyclerush.utils.PressureSensor;
+
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -9,10 +12,12 @@ public class ElectricalSubsystem extends Subsystem {
 
 	PowerDistributionPanel pdp;
 	Compressor cmp;
+	PressureSensor ps;
 
 	public ElectricalSubsystem() {
 		pdp = new PowerDistributionPanel();
 		cmp = new Compressor();
+		ps = new PressureSensor(HW.aPressureSensor);
 		
 	}
 
@@ -60,7 +65,9 @@ public class ElectricalSubsystem extends Subsystem {
 		return cmp.getCompressorCurrent();
 	}
 	
-	// consider adding other compressor debug stuff?
+	public double getPressure() {
+		return ps.getPSI();
+	}
 	
 	public void initDefaultCommand() {
 	}
