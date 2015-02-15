@@ -21,9 +21,9 @@ public class LiftSubsystem extends PIDSubsystem {
 	private CANTalon liftMotorLeft, liftMotorRight;
 	private DigitalInput limitTop, limitBottom;
 	private Lidar lidarLift;
-	public static final double kMaxHeight = 62;
-	public static final double kHeightSlow = 59;
-	public static final double kMinHeight = 5;
+	public static final double kMaxHeight = 60;
+	public static final double kHeightSlow = 56;
+	public static final double kMinHeight = 9;
 
 	public static final double kP = 1.0 / 4.0, kI = 0, kD = 0;
 	PIDOutput output;
@@ -96,8 +96,8 @@ public class LiftSubsystem extends PIDSubsystem {
 		else if (isAtBottom() && output < 0)
 			// keeps us from going down when we've reached the bottom
 			output = 0;
-		liftMotorLeft.set(-output);
-		liftMotorRight.set(-output);
+		liftMotorLeft.set(output);
+		liftMotorRight.set(output);
 	}
 
 	@Override

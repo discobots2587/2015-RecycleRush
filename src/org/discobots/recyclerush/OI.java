@@ -11,6 +11,8 @@ import org.discobots.recyclerush.commands.lift.LiftControllerCommand;
 import org.discobots.recyclerush.commands.lift.SetLiftCommand;
 import org.discobots.recyclerush.commands.lift.SetLiftSetpointCommand;
 import org.discobots.recyclerush.commands.plow.SetPlowCommand;
+import org.discobots.recyclerush.commands.wings.SetWingCommand;
+import org.discobots.recyclerush.commands.wings.ToggleWingCommand;
 import org.discobots.recyclerush.utils.GamePad;
 import org.discobots.recyclerush.utils.GamePad.DPadButton;
 
@@ -74,16 +76,18 @@ public class OI {
 
 		b_btnA.whenPressed(new ToggleIntakeCommand());
 		
-		b_btnX.whenPressed(new SetLiftSetpointCommand(0));
+		//b_btnX.whenPressed(new SetLiftSetpointCommand(0));
 		
-		b_btnB.whenPressed(new SetLiftSetpointCommand(HW.liftPosToteOneRaise));
+		//b_btnB.whenPressed(new SetLiftSetpointCommand(HW.liftPosToteOneRaise));
 		
-		b_btnY.whenPressed(new AutomatedStackingCommand()); // one cycle, stoppable by any button
+		//b_btnY.whenPressed(new AutomatedStackingCommand()); // one cycle, stoppable by any button
 
 		b_sStar.whenPressed(new CycleDriveCommand());
 
+		b_btnY.whenPressed(new ToggleWingCommand());
+		
 		// second gamepad
-		b2_sBack.whenPressed(new ToggleDriveRampingCommand());
+		//b2_sBack.whenPressed(new ToggleDriveRampingCommand());
 		
 		
 		

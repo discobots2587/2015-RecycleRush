@@ -34,8 +34,8 @@ public class DriveTrainSubsystem extends Subsystem {
 
 	DoubleSolenoid centerDropSolenoid;
 
-	Encoder encoderForward; // sensors
-	Encoder encoderSideway;
+	//Encoder encoderForward; // sensors
+	//Encoder encoderSideway;
 
 	Gyro gyroscope;
 
@@ -56,12 +56,12 @@ public class DriveTrainSubsystem extends Subsystem {
 		backRight = new CANTalon(HW.motorBackRight);
 		centerDropDown = new CANTalon(HW.motorSideways);
 
-		encoderForward = new Encoder(HW.encoderForwardA, HW.encoderForwardB,
-				false, EncodingType.k4X);
-		encoderSideway = new Encoder(HW.encoderSidewayA, HW.encoderSidewayB,
-				false, EncodingType.k4X);
-		resetForwardDistance();
-		resetSidewayDistance();
+		//encoderForward = new Encoder(HW.encoderForwardA, HW.encoderForwardB,
+		//		false, EncodingType.k4X);
+		//encoderSideway = new Encoder(HW.encoderSidewayA, HW.encoderSidewayB,
+		//		false, EncodingType.k4X);
+		//resetForwardDistance();
+		//resetSidewayDistance();
 
 		centerDropSolenoid = new DoubleSolenoid(HW.dsolCenterDropdownA,
 				HW.dsolCenterDropdownB);
@@ -229,25 +229,25 @@ public class DriveTrainSubsystem extends Subsystem {
 	}
 
 	public void resetForwardDistance() {
-		encoderForward.reset();
+		//encoderForward.reset();
 	}
 
 	public void resetSidewayDistance() {
-		encoderSideway.reset();
+		//encoderSideway.reset();
 	}
 
 	public double getForwardDistance() {
-		double encoderDistancePerCount = HW.encoderForwardConstant
-				/ HW.encoderCountsPerRevolution;
-		double output = encoderForward.getRaw() * encoderDistancePerCount;
-		return output;
+		//double encoderDistancePerCount = HW.encoderForwardConstant
+		//		/ HW.encoderCountsPerRevolution;
+		//double output = encoderForward.getRaw() * encoderDistancePerCount;
+		return 0;//output;
 	}
 
 	public double getSidewayDistance() {
-		double encoderDistancePerCount = HW.encoderSidewaysConstant
-				/ HW.encoderCountsPerRevolution;
-		double output = encoderSideway.getRaw() * encoderDistancePerCount;
-		return output;
+		//double encoderDistancePerCount = HW.encoderSidewaysConstant
+		//		/ HW.encoderCountsPerRevolution;
+		//double output = encoderSideway.getRaw() * encoderDistancePerCount;
+		return 0;//output;
 	}
 
 	public double getFrontObjectDistanceIn() {

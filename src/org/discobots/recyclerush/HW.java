@@ -8,14 +8,14 @@ package org.discobots.recyclerush;
  */
 public class HW {
 	/* CAN */// Check roboRio web interface for these values
-	public final static int motorFrontLeft = 30;
-	public final static int motorBackLeft = 31;
-	public final static int motorFrontRight = 32;
-	public final static int motorBackRight = 33;
-	public final static int motorSideways = 34;
+	public final static int motorFrontLeft = 30; // LF
+	public final static int motorBackLeft = 31; // LR
+	public final static int motorFrontRight = 33; // RF
+	public final static int motorBackRight = 32; // RR
+	public final static int motorSideways = 38;
 	
-	public final static int motorLiftLeft = 36;
-	public final static int motorLiftRight = 37;
+	public final static int motorLiftLeft = 37; // RL
+	public final static int motorLiftRight = 34; // RW
 	
 	public final static int motorPlowLeft = 35;
 	public final static int motorPlowRight = 38;
@@ -24,10 +24,10 @@ public class HW {
 
 	/* Pneumatics */
 	public final static int solIntake = 0;
-	public final static int solFlapLeft = 1;
-	public final static int solFlapRight = 2;
-	public final static int dsolCenterDropdownA = 3; 
-	public final static int dsolCenterDropdownB = 4;
+	public final static int solFlapLeft = 4;
+	public final static int solFlapRight = 3;
+	public final static int dsolCenterDropdownA = 2; 
+	public final static int dsolCenterDropdownB = 3;
 
 	/* Relay */
 
@@ -36,15 +36,15 @@ public class HW {
 	public final static int encoderForwardB = 1;
 	public final static int encoderSidewayA = 2;
 	public final static int encoderSidewayB = 3;
-	public final static int buttonLiftTop = 4;
-	public final static int buttonLiftBottom = 5;
+	public final static int buttonLiftTop = 9;
+	public final static int buttonLiftBottom = 8;
 
 	public final static int lidarControlDrive = 6;
 	public final static int lidarControlLift = 7;
 
 	/* Analog In */
-	public final static int aGyroscope = 0;
-	public final static int aPressureSensor = 1;
+	public final static int aGyroscope = 0; // GYRO
+	public final static int aPressureSensor = 1; // PSEN
 
 	/* I2C */
 	public final static int i2cLidarAddress = 0x62;

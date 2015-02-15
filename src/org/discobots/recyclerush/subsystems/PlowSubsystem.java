@@ -12,11 +12,11 @@ import org.discobots.recyclerush.commands.plow.VariablePlowCommand;
  */
 public class PlowSubsystem extends Subsystem {
 	
-    Talon talonLeft, talonRight;
+    CANTalon talonLeft, talonRight;
 
     public PlowSubsystem() {
-    	talonLeft = new Talon(HW.motorPlowLeft);
-    	talonRight = new Talon(HW.motorPlowRight);
+    	talonLeft = new CANTalon(HW.motorPlowLeft);
+    	talonRight = new CANTalon(HW.motorPlowRight);
     }
     
     public void setSpeedRight(double speed) {

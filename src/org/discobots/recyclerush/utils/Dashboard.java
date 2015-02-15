@@ -50,7 +50,7 @@ public class Dashboard {
 					Robot.liftSub.getCurrent(LiftSubsystem.kMotorLiftLeft));
 			SmartDashboard.putNumber("Motor Lift Right Current",
 					Robot.liftSub.getCurrent(LiftSubsystem.kMotorLiftRight));
-
+		} else if (driveCounter % 5 == 1) {
 			SmartDashboard.putNumber("Encoder Forward",
 					Robot.driveTrainSub.getForwardDistance());
 			SmartDashboard.putNumber("Encoder Sideway ",
@@ -61,6 +61,11 @@ public class Dashboard {
 					Robot.driveTrainSub.getFrontObjectDistanceIn());
 			SmartDashboard.putNumber("Gyroscope",
 					Robot.driveTrainSub.getAngle());
+			SmartDashboard.putBoolean("Pressure Full",
+					Robot.electricalSub.getPressureSwitchState());
+			SmartDashboard.putNumber("Pressure",
+					Robot.electricalSub.getPressure());
+			SmartDashboard.putBoolean("Wings", Robot.wingSub.get());
 
 			SmartDashboard.putBoolean("Lift Top", Robot.liftSub.isAtTop());
 			SmartDashboard
