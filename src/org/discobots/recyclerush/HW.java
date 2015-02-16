@@ -56,11 +56,11 @@ public class HW {
 	public final static double encoderCountsPerRevolution = 200 * 4; // x4  for k4x
 	
 	/* Lift Positions */
-	public final static double liftPosToteOneRaise = 12 + 16; // One on ground, one tote held
-	public final static double liftPosToteTwoRaise = 12 + 12 + 16; // two on ground, one tote held, elevated
-	public final static double liftPosToteThreeRaise = 12 + 12 + 12 + 16;
-	public final static double liftPosToteFourRaise = 12 + 12 + 12 + 12 + 16;
-	public final static double liftPosBinRaise = 36;
-	public final static double liftPosBinGrab = 18;
+	public final static double liftPosToteOneRaise = 12 + 16+4; // One on ground, one tote held
+	public final static double liftPosToteTwoRaise = (2*12) + 16+4; // two on ground, one tote held, elevated
+	public final static double liftPosToteThreeRaise = (3*12) + 16+4;
+	public final static double liftPosToteFourRaise = (4*12) + 16+4;
+	public final static double liftPosBinRaise = 36+4;
+	public final static double liftPosBinGrab = 18+4;
 	
 }
