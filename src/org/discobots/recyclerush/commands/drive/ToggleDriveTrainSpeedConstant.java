@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class ToggleDriveTrainSpeedConstant extends Command {
 
-	private static double constant = 0.5;;
+	private static double constant = 0.75;
 	
     public ToggleDriveTrainSpeedConstant() {
         // Use requires() here to declare subsystem dependencies
@@ -21,15 +21,15 @@ public class ToggleDriveTrainSpeedConstant extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(constant==0.5)
+    	if(constant==0.75)
     	{
     		Robot.driveTrainSub.setSpeedScaling(1.0); 
     		constant = 1.0;
     	}	
     	else
     	{
-    		Robot.driveTrainSub.setSpeedScaling(0.5);
-    		constant = 0.5;
+    		Robot.driveTrainSub.setSpeedScaling(0.75);
+    		constant = 0.75;
     	}
     	SmartDashboard.putNumber("Speed Scaling", constant);
     }
