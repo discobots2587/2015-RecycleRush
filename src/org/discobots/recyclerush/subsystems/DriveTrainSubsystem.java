@@ -47,8 +47,8 @@ public class DriveTrainSubsystem extends Subsystem {
 	private double prevLeft = 0, prevRight = 0;
 	private double prevY = 0, prevX = 0, prevR;
 
-	static final double kSpeedScaling = 1.0;
-
+	double speedScaling = 0.5;
+	
 	public DriveTrainSubsystem() {
 		backLeft = new CANTalon(HW.motorBackLeft);
 		frontLeft = new CANTalon(HW.motorFrontLeft);
@@ -109,7 +109,7 @@ public class DriveTrainSubsystem extends Subsystem {
 		prevLeft = left;
 		prevRight = right;
 
-		robotDrive.tankDrive(left * kSpeedScaling, right * kSpeedScaling);
+		robotDrive.tankDrive(left * speedScaling, right * speedScaling);
 	}
 
 	public void arcadeDriveRamp(double iy, double ix) {
@@ -133,7 +133,7 @@ public class DriveTrainSubsystem extends Subsystem {
 
 		prevX = ox;
 		prevY = oy;
-		robotDrive.arcadeDrive(ox * kSpeedScaling, oy * kSpeedScaling);
+		robotDrive.arcadeDrive(ox * speedScaling, oy * speedScaling);
 		// robotdrive is dumb arcadeDrive so params are switched
 	}
 
@@ -165,9 +165,9 @@ public class DriveTrainSubsystem extends Subsystem {
 		prevY = oy;
 		prevR = or;
 
-		robotDrive.arcadeDrive(or * kSpeedScaling, oy * kSpeedScaling);
+		robotDrive.arcadeDrive(or * speedScaling, oy * speedScaling);
 		// robotdrive is dumb arcadeDrive so params are switched
-		centerDropDown.set(ox * kSpeedScaling);
+		centerDropDown.set(ox * speedScaling);
 	}
 
 	public void tankDriveUnramped(double leftStick, double rightStick) {
@@ -176,8 +176,8 @@ public class DriveTrainSubsystem extends Subsystem {
 		prevX = 0;
 		prevY = 0;
 		prevR = 0;
-		robotDrive.tankDrive(leftStick * kSpeedScaling, -rightStick
-				* kSpeedScaling);
+		robotDrive.tankDrive(leftStick * speedScaling, -rightStick
+				* speedScaling);
 	}
 
 	public void arcadeDriveUnramped(double y, double x) {
@@ -186,14 +186,14 @@ public class DriveTrainSubsystem extends Subsystem {
 		prevX = 0;
 		prevY = 0;
 		prevR = 0;
-		robotDrive.arcadeDrive(x * kSpeedScaling, -y * kSpeedScaling);
+		robotDrive.arcadeDrive(x * speedScaling, -y * speedScaling);
 		// robotdrive is dumb arcadeDrive so params are switched
 	}
 
 	public void holonomicDriveUnramped(double y, double x, double r) { // h-drive
-		robotDrive.arcadeDrive(r * kSpeedScaling, -y * kSpeedScaling);
+		robotDrive.arcadeDrive(r * speedScaling, -y * speedScaling);
 		// robotdrive is dumb arcadeDrive so params are switched
-		centerDropDown.set(x * kSpeedScaling);
+		centerDropDown.set(x * speedScaling);
 	}
 
 	public double getMotorSetpoint(Motor motor) {
@@ -264,5 +264,10 @@ public class DriveTrainSubsystem extends Subsystem {
 
 	public void initDefaultCommand() {
 		setDefaultCommand(new ArcadeDriveCommand());
+	}
+	
+	public void setSpeedScaling(double x)
+	{
+		speedScaling=x;
 	}
 }

@@ -3,6 +3,7 @@ package org.discobots.recyclerush;
 import edu.wpi.first.wpilibj.buttons.Button;
 
 import org.discobots.recyclerush.commands.AutomatedStackingCommand;
+import org.discobots.recyclerush.commands.ToggleDriveTrainSpeedConstant;
 import org.discobots.recyclerush.commands.drive.CycleDriveCommand;
 import org.discobots.recyclerush.commands.drive.ToggleDriveRampingCommand;
 import org.discobots.recyclerush.commands.intake.ToggleIntakeCommand;
@@ -87,7 +88,7 @@ public class OI {
 		
 		// second gamepad
 		//b2_sBack.whenPressed(new ToggleDriveRampingCommand());
-		
+		b_btnX.whenPressed(new ToggleDriveTrainSpeedConstant());
 		
 		
 		// drive commands control analog sticks on joy 1
