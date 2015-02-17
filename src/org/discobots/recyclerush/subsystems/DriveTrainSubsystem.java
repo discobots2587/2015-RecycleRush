@@ -47,7 +47,7 @@ public class DriveTrainSubsystem extends Subsystem {
 	private double prevLeft = 0, prevRight = 0;
 	private double prevY = 0, prevX = 0, prevR;
 
-	double speedScaling = 0.5;
+	double speedScaling = 1.0;
 	
 	public DriveTrainSubsystem() {
 		backLeft = new CANTalon(HW.motorBackLeft);
