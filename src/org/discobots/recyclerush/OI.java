@@ -80,7 +80,7 @@ public class OI {
 		
 		//b_btnB.whenPressed(new SetLiftSetpointCommand(HW.liftPosToteOneRaise));
 		
-		//b_btnY.whenPressed(new AutomatedStackingCommand()); // one cycle, stoppable by any button
+		b_btnB.whenPressed(new AutomatedStackingCommand()); // one cycle, stoppable by any button
 
 		b_sStar.whenPressed(new CycleDriveCommand());
 

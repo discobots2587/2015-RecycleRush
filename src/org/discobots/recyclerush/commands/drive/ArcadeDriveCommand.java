@@ -16,7 +16,7 @@ public class ArcadeDriveCommand extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	public static final double kScaleLeftStick = 7.0/8.0;
-	public static final double kScaleRightStick = 5.0/8.0;
+	public static final double kScaleRightStick = 1.0;
 	
 	protected void execute() {
 		double move = Robot.oi.getRawAnalogStickALY() * kScaleLeftStick

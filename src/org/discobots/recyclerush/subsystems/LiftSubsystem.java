@@ -23,7 +23,7 @@ public class LiftSubsystem extends PIDSubsystem {
 	private Lidar lidarLift;
 	public static final double kMaxHeight = 60;
 	public static final double kHeightSlow = 56;
-	public static final double kMinHeight = 10;
+	public static final double kMinHeight = 10.3;
 
 	public static final double kP = 1.0 / 4.0, kI = 0, kD = 0;
 	PIDOutput output;

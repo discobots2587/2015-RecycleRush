@@ -30,10 +30,11 @@ public class AutonomousCommand extends CommandGroup {
     private void autonomousMode1Init() {
     	// TWO BINS FROM BUMP
     	addSequential(new SetWingCommand(true)); // both wing down
-    	addSequential(new AutonomousArcadeDriveCommand(-1, 0, 500)); // move back at 0.5 speed backward while wings go down
+    	addSequential(new WaitCommand(3));
+    	addSequential(new AutonomousArcadeDriveCommand(-1, 0, 600)); // move back at 0.5 speed backward while wings go down
     	addSequential(new WaitCommand(.5)); // wait half a second
     	addSequential(new SetWingCommand(false)); // wings come up
-    	addSequential(new WaitCommand(2)); // wait, stabilize
+    	addSequential(new WaitCommand(5)); // wait, stabilize
     	addSequential(new AutonomousArcadeDriveCommand(.5, 0, 5000)); // drive forward at 0.5 speed forward for 5 seconds
     	addSequential(new WaitCommand(.5)); // wait half a second
     	addSequential(new SetWingCommand(true)); // wings come down 
