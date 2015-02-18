@@ -11,11 +11,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import org.discobots.recyclerush.HW;
 import org.discobots.recyclerush.commands.drive.TankDriveCommand;
 import org.discobots.recyclerush.commands.lift.VariableLiftCommand;
-import org.discobots.recyclerush.utils.Lidar;
+import org.discobots.recyclerush.utils.*;
 
 /**
  *
  */
+
 public class LiftSubsystem extends PIDSubsystem {
 	/* == == == MECHANICAL NOTE == == ==
 	 * Plastic Hub on lift shaft is broken but works.
@@ -23,7 +24,7 @@ public class LiftSubsystem extends PIDSubsystem {
 	
 	private CANTalon liftMotor1;
 	private DigitalInput limitTop, limitBottom;
-	private Lidar lidarLift;
+//	private Lidar lidarLift;
 	public static final double kMaxHeight = 62;
 	public static final double kHeightSlow = 59;
 	public static final double kMinHeight = 5;
@@ -40,7 +41,7 @@ public class LiftSubsystem extends PIDSubsystem {
 		liftMotor1 = new CANTalon(HW.motorLift1);
 		limitTop = new DigitalInput(HW.buttonLiftTop);
 		limitBottom = new DigitalInput(HW.buttonLiftBottom);
-		lidarLift = new Lidar(HW.lidarControlLift);
+		//lidarLift = new Lidar(HW.lidarControlLift);
 
 		setpointSpeed = 0;
 		speedControlThread = new SpeedMonitor();
@@ -51,21 +52,21 @@ public class LiftSubsystem extends PIDSubsystem {
     	this.setOutputRange(-1, 1);
 	}
 	
-	public double getLiftHeightInches() {
-		return lidarLift.getDistanceIn() + 4.5;
-	}  
+	//public double getLiftHeightInches() {
+	//return lidarLift.getDistanceIn() + 4.5;
+//	}  
 	
 	
 	public boolean isAtTop() {
-		return !limitTop.get() || getLiftHeightInches() > LiftSubsystem.kMaxHeight;
+		return !limitTop.get();
 	}
 
 	public boolean isAtBottom() {
-		return !limitBottom.get() || getLiftHeightInches() < LiftSubsystem.kMinHeight;
+		return !limitBottom.get();
 	}
-
+	
 	public void initDefaultCommand() {
-		//setDefaultCommand(new VariableLiftCommand());
+		setDefaultCommand(new VariableLiftCommand());
 	}
 	
 	int christine = 1; // the secret that makes it go
@@ -79,9 +80,9 @@ public class LiftSubsystem extends PIDSubsystem {
 	
 	private void setSpeedInternal(double input) {
 		double output = input;
-		if (this.getLiftHeightInches() > kHeightSlow && output > 0) {
-			output = output / 3;
-		}
+		//if (this.getLiftHeightInches() > kHeightSlow && output > 0) {
+		//	output = output / 3;
+		//}
 		if (isAtTop() && output > 0)
 			// keeps us from going up when we've reached the top
 			output = 0;
@@ -91,11 +92,11 @@ public class LiftSubsystem extends PIDSubsystem {
 		liftMotor1.set(-output);
 	}
 
-	@Override
-	protected double returnPIDInput() {
+	//@Override
+	//protected double returnPIDInput() {
 		// TODO Auto-generated method stub
-		return this.getLiftHeightInches();
-	}
+		//return this.getLiftHeightInches();
+//	}
 
 	@Override
 	protected void usePIDOutput(double output) {
@@ -118,5 +119,11 @@ public class LiftSubsystem extends PIDSubsystem {
 				}
 			}
 		}
+	}
+
+	@Override
+	protected double returnPIDInput() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

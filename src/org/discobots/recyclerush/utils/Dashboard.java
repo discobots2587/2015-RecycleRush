@@ -63,10 +63,10 @@ public class Dashboard {
 					Robot.driveTrainSub.getForwardDistance());
 			SmartDashboard.putNumber("Encoder Sideway ",
 					Robot.driveTrainSub.getSidewayDistance());
-			SmartDashboard.putNumber("Lift Lidar Distance (in)",
-					Robot.liftSub.getLiftHeightInches());
-			SmartDashboard.putNumber("Drive Lidar Distance (in)",
-					Robot.driveTrainSub.getFrontObjectDistanceIn());
+			//SmartDashboard.putNumber("Lift Lidar Distance (in)",
+		//			Robot.liftSub.getLiftHeightInches());
+		//	SmartDashboard.putNumber("Drive Lidar Distance (in)",
+			//		Robot.driveTrainSub.getFrontObjectDistanceIn());
 			SmartDashboard.putNumber("Gyroscope",
 					Robot.driveTrainSub.getAngle());
 

@@ -42,14 +42,14 @@ public class HW {
 	public final static int buttonLiftTop = 10;
 	public final static int buttonLiftBottom = 11;
 
-	public final static int lidarControlDrive = 19;
-	public final static int lidarControlLift = 20;
+	//public final static int lidarControlDrive = 19;
+	//public final static int lidarControlLift = 20;
 
 	/* Analog In */
 	public final static int gyroscope = 0;
 
 	/* I2C */
-	public final static int i2cLidarAddress = 0x62;
+//	public final static int i2cLidarAddress = 0x62;
 
 	/* Constants */
 	public final static double encoderForwardConstant = (6) /* radius */ * Math.PI * (1 / 2 /* ratio */); // output in inches

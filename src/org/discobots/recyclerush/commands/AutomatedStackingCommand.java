@@ -41,14 +41,14 @@ public class AutomatedStackingCommand extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		if (Robot.liftSub.getLiftHeightInches() < pos_holdAndDrop + 1) {
-			Robot.intakeSub.setIntake(false);
-			wait = wait_tenthSecond;
-			state = state_moveForwardForNext;
-		} else {
+//		if (Robot.liftSub.getLiftHeightInches() < pos_holdAndDrop + 1) {
+			//Robot.intakeSub.setIntake(false);
+		//	wait = wait_tenthSecond;
+			//state = state_moveForwardForNext;
+	//	} else {
 			state = state_upReadyForNext;
 		}
-	}
+	
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {

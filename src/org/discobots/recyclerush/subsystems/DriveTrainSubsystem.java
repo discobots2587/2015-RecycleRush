@@ -5,7 +5,6 @@ import org.discobots.recyclerush.commands.drive.ArcadeDriveCommand;
 import org.discobots.recyclerush.commands.drive.CycleDriveCommand;
 import org.discobots.recyclerush.commands.drive.StickDriveCommand;
 import org.discobots.recyclerush.commands.drive.TankDriveCommand;
-import org.discobots.recyclerush.utils.Lidar;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
@@ -41,7 +40,7 @@ public class DriveTrainSubsystem extends Subsystem {
 
 	Gyro gyroscope;
 
-	Lidar lidar;
+//	Lidar lidar;
 	
 	static final double CONSTANT_RAMP_LIMIT = 0.1; // ramping
 	// 0.05 = 4/10 seconds to full, 0.1 = 2/10 seconds to full
@@ -71,7 +70,7 @@ public class DriveTrainSubsystem extends Subsystem {
 
 		gyroscope = new Gyro(HW.gyroscope);
 
-		lidar = new Lidar(HW.lidarControlDrive);
+	//	lidar = new Lidar(HW.lidarControlDrive);
 
 		robotDrive = new RobotDrive(frontLeft, backLeft, frontRight, backRight);
 		robotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
@@ -254,9 +253,9 @@ public class DriveTrainSubsystem extends Subsystem {
 		return output;
 	}
 
-	public double getFrontObjectDistanceIn() {
-		return lidar.getDistanceIn();
-	}
+//	public double getFrontObjectDistanceIn() {
+//		return lidar.getDistanceIn();
+//	}
 
 	public double getAngle() {
 		return gyroscope.getAngle();
