@@ -26,7 +26,7 @@ public class DriveTrainSubsystem extends Subsystem {
 	public enum Motor {
 		FRONTLEFT, BACKLEFT, FRONTRIGHT, BACKRIGHT, CENTERDROPDOWN;
 	}
-	CANTalon backLeft, centerDropDown;
+	CANTalon backLeft;//, centerDropDown;
 	Talon frontRight, frontLeft ,backRight;
 	// switch to TalonSRX class if we use pwm instead.
 	// with can the following values are available:
@@ -56,7 +56,7 @@ public class DriveTrainSubsystem extends Subsystem {
 		frontLeft = new Talon(HW.motorFrontLeft);
 		frontRight = new Talon(HW.motorFrontRight);
 		backRight = new Talon(HW.motorBackRight);
-		centerDropDown = new CANTalon(HW.motorCenterDropDown);
+		//centerDropDown = new CANTalon(HW.motorCenterDropDown);
 		
 
 		encoderForward = new Encoder(HW.encoderForwardA, HW.encoderForwardB,
@@ -168,9 +168,10 @@ public class DriveTrainSubsystem extends Subsystem {
 		prevY = oy;
 		prevR = or;
 		
-		robotDrive.arcadeDrive(or * kSpeedScaling, oy * kSpeedScaling); 
+		robotDrive.mecanumDrive_Cartesian(ox * kSpeedScaling, oy * kSpeedScaling, or * kSpeedScaling, 0);
+		//robotDrive.arcadeDrive(or * kSpeedScaling, oy * kSpeedScaling); 
 		// robotdrive is dumb arcadeDrive so params are switched
-		centerDropDown.set(ox * kSpeedScaling);
+		//centerDropDown.set(ox * kSpeedScaling);
 	}
 
 	public void tankDriveUnramped(double leftStick, double rightStick) {
@@ -193,9 +194,10 @@ public class DriveTrainSubsystem extends Subsystem {
 	}
 
 	public void holonomicDriveUnramped(double y, double x, double r) { // h-drive
-		robotDrive.arcadeDrive(r * kSpeedScaling, -y * kSpeedScaling); 
+		robotDrive.mecanumDrive_Cartesian(ox * kSpeedScaling, oy * kSpeedScaling, or * kSpeedScaling, 0);
+		//robotDrive.arcadeDrive(r * kSpeedScaling, -y * kSpeedScaling); 
 		// robotdrive is dumb arcadeDrive so params are switched
-		centerDropDown.set(x * kSpeedScaling);
+		//centerDropDown.set(x * kSpeedScaling);
 	}
 
 	public double getMotorSetpoint(Motor motor) {
@@ -208,7 +210,7 @@ public class DriveTrainSubsystem extends Subsystem {
 		} else if (motor == Motor.FRONTRIGHT) {
 			return this.frontRight.get();
 		} else if (motor == Motor.CENTERDROPDOWN) {
-			return this.centerDropDown.get();
+			return 0;//this.centerDropDown.get();
 		} else {
 			return -9001;
 		}
