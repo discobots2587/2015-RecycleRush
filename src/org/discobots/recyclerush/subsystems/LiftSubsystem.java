@@ -57,11 +57,11 @@ public class LiftSubsystem extends PIDSubsystem {
 	
 	
 	public boolean isAtTop() {
-		return !limitTop.get() || getLiftHeightInches() > LiftSubsystem.kMaxHeight;
+		return !limitTop.get() /*|| getLiftHeightInches() > LiftSubsystem.kMaxHeight*/;
 	}
 
 	public boolean isAtBottom() {
-		return !limitBottom.get() || getLiftHeightInches() < LiftSubsystem.kMinHeight;
+		return !limitBottom.get() /*|| getLiftHeightInches() < LiftSubsystem.kMinHeight*/;
 	}
 
 	public void initDefaultCommand() {
@@ -79,9 +79,12 @@ public class LiftSubsystem extends PIDSubsystem {
 	
 	private void setSpeedInternal(double input) {
 		double output = input;
-		if (this.getLiftHeightInches() > kHeightSlow && output > 0) {
+		/*if (this.getLiftHeightInches() > kHeightSlow && output > 0) {
 			output = output / 3;
-		}
+		}*/
+		/*if (this.getLiftHeightInches() < kMinHeight + 3 && output > 0) {
+			output = output / 3;
+		}*/
 		if (isAtTop() && output > 0)
 			// keeps us from going up when we've reached the top
 			output = 0;
