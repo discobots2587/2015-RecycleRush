@@ -3,6 +3,7 @@ package org.discobots.recyclerush;
 import edu.wpi.first.wpilibj.buttons.Button;
 
 import org.discobots.recyclerush.commands.AutomatedStackingCommand;
+import org.discobots.recyclerush.commands.ToggleCompressor;
 import org.discobots.recyclerush.commands.drive.CycleDriveCommand;
 import org.discobots.recyclerush.commands.drive.ToggleDriveRampingCommand;
 import org.discobots.recyclerush.commands.drive.pid.MoveForwardCommand;
@@ -76,7 +77,7 @@ public class OI {
 		
 		b_btnX.whenPressed(new SetLiftSetpointCommand(0));
 		
-		b_btnB.whenPressed(new SetLiftSetpointCommand(HW.liftPosToteOneRaise));
+		b_btnB.whenPressed(/*new SetLiftSetpointCommand(HW.liftPosToteOneRaise)*/new ToggleCompressor());
 		
 		b_btnY.whenPressed(new AutomatedStackingCommand()); // one cycle, stoppable by any button
 
