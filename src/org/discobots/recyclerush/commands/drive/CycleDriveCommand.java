@@ -14,7 +14,7 @@ public class CycleDriveCommand extends Command {
 		Command driveCmd = Robot.driveTrainSub.getCurrentCommand();
 		if (driveCmd instanceof ArcadeDriveCommand) {
 			new TankDriveCommand().start();
-		} else if (driveCmd instanceof ArcadeDriveCommand) {
+		} else if (driveCmd instanceof TankDriveCommand) {
 			new StickDriveCommand().start();
 		} else if (driveCmd instanceof StickDriveCommand) {
 			new HolonomicDriveCommand().start();

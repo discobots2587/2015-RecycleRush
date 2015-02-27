@@ -194,6 +194,10 @@ public class DriveTrainSubsystem extends Subsystem {
 	}
 
 	public void holonomicDriveUnramped(double y, double x, double r) { // h-drive
+		double ox, oy, or;
+		ox = x;
+		oy = y;
+		or = r;
 		robotDrive.mecanumDrive_Cartesian(ox * kSpeedScaling, oy * kSpeedScaling, or * kSpeedScaling, 0);
 		//robotDrive.arcadeDrive(r * kSpeedScaling, -y * kSpeedScaling); 
 		// robotdrive is dumb arcadeDrive so params are switched
