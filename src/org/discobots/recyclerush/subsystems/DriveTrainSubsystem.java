@@ -50,7 +50,7 @@ public class DriveTrainSubsystem extends Subsystem {
 	private double prevLeft  = 0, prevRight = 0;
 	private double prevY = 0, prevX = 0, prevR;
 	
-	static final double kSpeedScaling = 1.0;
+	static double kSpeedScaling = 1.0;
 
 	public DriveTrainSubsystem() {
 		backLeft = new CANTalon(HW.motorBackLeft);
@@ -275,5 +275,13 @@ public class DriveTrainSubsystem extends Subsystem {
 
 	public void initDefaultCommand() {
 		setDefaultCommand(new HolonomicDriveCommand());
+	}
+	
+	public double getSpeedScaling() {
+		return DriveTrainSubsystem.kSpeedScaling;
+	}
+	
+	public void setSpeedScaling(double a) {
+		kSpeedScaling = a;
 	}
 }

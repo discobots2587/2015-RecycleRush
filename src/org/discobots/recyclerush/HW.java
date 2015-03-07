@@ -29,18 +29,19 @@ public class HW {
 	/* Relay */
 
 	/* DIO */// 0-9 are on roboRio, 10-25 are on MXP
-	public final static int encoderForwardA = 0;
-	public final static int encoderForwardB = 1;
-	public final static int encoderLiftA = 2;
-	public final static int encoderLiftB = 3;
-	public final static int encoderSidewayA = 4;
-	public final static int encoderSidewayB = 5;
+	public final static int encoderForwardA = 11;
+	public final static int encoderForwardB = 12;
+	public final static int encoderLiftA = 13;
+	public final static int encoderLiftB = 14;
+	public final static int encoderSidewayA = 15;
+	public final static int encoderSidewayB = 16;
+	
 	public final static int buttonPlowLeftIn = 6;
 	public final static int buttonPlowRightIn = 7;
 	public final static int buttonPlowLeftOut = 8;
 	public final static int buttonPlowRightOut = 9;
-	public final static int buttonLiftTop = 10;
-	public final static int buttonLiftBottom = 11;
+	public final static int buttonLiftTop = 0;
+	public final static int buttonLiftBottom = 1;
 
 	public final static int lidarControlDrive = 19;
 	public final static int lidarControlLift = 20;

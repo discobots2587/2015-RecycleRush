@@ -24,40 +24,17 @@ public class Dashboard {
 	private static int driveCounter = 0;
 
 	public static void updateDriver() {
-		driveCounter++;
+		/*driveCounter++;
 		if (driveCounter == Integer.MAX_VALUE) {
 			driveCounter = 0;
 		}
-		if (driveCounter % 5 == 0) { // 100ms
+		if (driveCounter % 5 == 0) { // 100ms*/
+			System.out.println("potato");
 			SmartDashboard.putNumber("Robot Loop Execution Time",
 					Robot.loopExecutionTime);
 
 			SmartDashboard.putNumber("Battery Voltage", DriverStation
 					.getInstance().getBatteryVoltage());
-
-			SmartDashboard.putNumber("Motor FrontLeft Current",
-					Robot.driveTrainSub.getMotorCurrent(Motor.FRONTLEFT));
-			SmartDashboard.putNumber("Motor BackLeft Current",
-					Robot.driveTrainSub.getMotorCurrent(Motor.BACKLEFT));
-			SmartDashboard.putNumber("Motor FrontRight Current",
-					Robot.driveTrainSub.getMotorCurrent(Motor.FRONTRIGHT));
-			SmartDashboard.putNumber("Motor BackRight Current",
-					Robot.driveTrainSub.getMotorCurrent(Motor.BACKRIGHT));
-			SmartDashboard.putNumber("Motor DropDown Current",
-					Robot.driveTrainSub.getMotorCurrent(Motor.CENTERDROPDOWN));
-
-			/*
-			 * SmartDashboard.putNumber("Motor FrontLeft Setpoint",
-			 * Robot.driveTrainSub.getMotorSetpoint(Motor.FRONTLEFT));
-			 * SmartDashboard.putNumber("Motor BackLeft Setpoint",
-			 * Robot.driveTrainSub.getMotorSetpoint(Motor.BACKLEFT));
-			 * SmartDashboard.putNumber("Motor FrontRight Setpoint",
-			 * Robot.driveTrainSub.getMotorSetpoint(Motor.FRONTRIGHT));
-			 * SmartDashboard.putNumber("Motor BackRight Setpoint",
-			 * Robot.driveTrainSub.getMotorSetpoint(Motor.BACKRIGHT));
-			 * SmartDashboard.putNumber("Motor DropDown Setpoint",
-			 * Robot.driveTrainSub.getMotorSetpoint(Motor.CENTERDROPDOWN));
-			 */
 
 			SmartDashboard.putNumber("Encoder Forward",
 					Robot.driveTrainSub.getForwardDistance());
@@ -76,7 +53,7 @@ public class Dashboard {
 			SmartDashboard.putData(Robot.driveTrainSub);
 			SmartDashboard.putData(Robot.liftSub);
 
-		}
+	//	}
 	}
 
 	private static int debugCounter = 2;
