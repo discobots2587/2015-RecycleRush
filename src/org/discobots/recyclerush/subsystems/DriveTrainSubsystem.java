@@ -3,6 +3,7 @@ package org.discobots.recyclerush.subsystems;
 import org.discobots.recyclerush.HW;
 import org.discobots.recyclerush.commands.drive.ArcadeDriveCommand;
 import org.discobots.recyclerush.commands.drive.CycleDriveCommand;
+import org.discobots.recyclerush.commands.drive.HolonomicDriveCommand;
 import org.discobots.recyclerush.commands.drive.StickDriveCommand;
 import org.discobots.recyclerush.commands.drive.TankDriveCommand;
 import org.discobots.recyclerush.utils.Lidar;
@@ -273,6 +274,6 @@ public class DriveTrainSubsystem extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new ArcadeDriveCommand());
+		setDefaultCommand(new HolonomicDriveCommand());
 	}
 }
