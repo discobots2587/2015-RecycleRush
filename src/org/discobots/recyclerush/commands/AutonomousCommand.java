@@ -24,15 +24,15 @@ public class AutonomousCommand extends CommandGroup {
 	}
 
 	public void autonomousMode1Init() {
-		addSequential(new MoveForwardHoloCommand(5000,0.5));
+		addSequential(new MoveForwardHoloCommand(5000,0.5)); //Forward for 5 seconds at half speed
 		addSequential(new WaitCommand(.5));
-		addSequential(new MoveForwardHoloCommand(-2500,0.5));
+		addSequential(new MoveForwardHoloCommand(-2500,0.5)); //Backwards for 2.5 seconds at half speed
 		addSequential(new WaitCommand(.25));
-		addSequential(new MoveSidewayHoloCommand(2000,0.5));
+		addSequential(new MoveSidewayHoloCommand(2000,0.5)); //Moving Sideways (right) for 5 seconds at half speed
 		addSequential(new WaitCommand(.25));
-		addSequential(new MoveForwardHoloCommand(2500,0.5));
+		addSequential(new MoveForwardHoloCommand(2500,0.5)); //Forward for 2.5 seconds at half speed
 		addSequential(new WaitCommand(.5));
-		addSequential(new MoveForwardHoloCommand(-2700,0.5));
+		addSequential(new MoveForwardHoloCommand(-2700,0.5)); //Backwards for 2.7 seconds at half speed
 		
 	}
 
