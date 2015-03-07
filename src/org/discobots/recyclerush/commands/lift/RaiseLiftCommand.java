@@ -35,7 +35,7 @@ public class RaiseLiftCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return System.currentTimeMillis() - time >= duration || Robot.liftSub.isAtTop() || Robot.liftSub.isAtBottom();
+        return System.currentTimeMillis() - time >= duration;
     }
 
     // Called once after isFinished returns true
