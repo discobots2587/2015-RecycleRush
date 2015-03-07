@@ -3,6 +3,7 @@ package org.discobots.recyclerush.commands;
 
 import org.discobots.recyclerush.commands.autonomous.MoveForwardHoloCommand;
 import org.discobots.recyclerush.commands.autonomous.MoveSidewayHoloCommand;
+import org.discobots.recyclerush.commands.intake.ToggleIntakeCommand;
 import org.discobots.recyclerush.commands.lift.RaiseLiftCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -25,6 +26,7 @@ public class AutonomousCommand extends CommandGroup {
 	}
 
 	public void autonomousMode1Init() {
+		addSequential(new ToggleIntakeCommand());
 		addSequential(new MoveForwardHoloCommand(450,0.5)); //Forward for 5 seconds at half speed
 		addSequential(new WaitCommand(.25));
 		addSequential(new RaiseLiftCommand(1,800));
@@ -32,14 +34,15 @@ public class AutonomousCommand extends CommandGroup {
 		addSequential(new WaitCommand(.25));
 		addSequential(new RaiseLiftCommand(-1,1000));
 		addSequential(new WaitCommand(.25));
-		/*addSequential(new MoveSidewayHoloCommand(1000,0.5)); //Moving Sideways (right) for 5 seconds at half speed
+		addSequential(new MoveForwardHoloCommand(250,-0.5)); //Backwards for .25 seconds at half speed
+		addSequential(new MoveSidewayHoloCommand(3000,1)); //Moving Sideways (right) for 5 seconds at half speed
 		addSequential(new WaitCommand(.25));
-		addSequential(new MoveForwardHoloCommand(2500,0.5)); //Forward for 2.5 seconds at half speed
+		addSequential(new MoveForwardHoloCommand(1950,0.5)); //Forward for 2.75 seconds at half speed
 		addSequential(new WaitCommand(.25));
 		addSequential(new RaiseLiftCommand(1,1000));
-		addSequential(new MoveForwardHoloCommand(2500,-0.5)); //Backwards for 2.7 seconds at half speed
+		addSequential(new MoveForwardHoloCommand(2500,-0.5)); //Backwards for 2.5 seconds at half speed
 		addSequential(new RaiseLiftCommand(-1,1000));
-		addSequential(new MoveForwardHoloCommand(1000,-0.5));*/
+		addSequential(new MoveForwardHoloCommand(1000,-0.5));
 		
 	}
 

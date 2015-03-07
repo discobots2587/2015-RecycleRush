@@ -27,7 +27,7 @@ public class HolonomicDriveCommand extends Command {
     	//	y = 0.0;
     	//}
     	
-    	Robot.driveTrainSub.holonomicDriveRamp(-y, x, r);
+    	Robot.driveTrainSub.holonomicDriveRamp(-y, x, r*Math.abs(r));
     }
 
     // Make this return true when this Command no longer needs to run execute()
