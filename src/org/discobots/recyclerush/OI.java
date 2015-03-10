@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 
 import org.discobots.recyclerush.commands.ToggleCompressor;
 import org.discobots.recyclerush.commands.autonomous.AutomatedStackingCommand;
+import org.discobots.recyclerush.commands.drive.AssistedHolonomicDriveCommand;
 import org.discobots.recyclerush.commands.drive.CycleDriveCommand;
 import org.discobots.recyclerush.commands.drive.SetScalingCommand;
 import org.discobots.recyclerush.commands.drive.ToggleDriveRampingCommand;
@@ -101,6 +102,8 @@ public class OI {
 		b2_bumpL.whenReleased(new SetLiftCommand(0));
 
 		b2_btnA.whenPressed(new ToggleIntakeCommand());
+		
+		b2_btnX.whenPressed(new AssistedHolonomicDriveCommand());
 		
 		// drive commands control analog sticks on joy 1
 		// VariablePlowCommand controls analog sticks on joy 2
