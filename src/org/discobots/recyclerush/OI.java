@@ -12,8 +12,8 @@ import org.discobots.recyclerush.commands.intake.ToggleIntakeCommand;
 import org.discobots.recyclerush.commands.lift.LiftControllerCommand;
 import org.discobots.recyclerush.commands.lift.SetLiftCommand;
 import org.discobots.recyclerush.commands.lift.SetLiftSetpointCommand;
-import org.discobots.recyclerush.commands.plow.SetPlowCommand;
 import org.discobots.recyclerush.utils.GamePad;
+import org.discobots.recyclerush.utils.SetPlowCommand;
 import org.discobots.recyclerush.utils.GamePad.DPadButton;
 
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -43,22 +43,22 @@ public class OI {
 	private Button b_clicR = new JoystickButton(gp1, GamePad.AXISBTN_R);
 	private Button b_clicL = new JoystickButton(gp1, GamePad.AXISBTN_L);
 	// JOYSTICK 2
-	private Button b2_dpadU = new DPadButton(gp1, GamePad.DPAD_Y, true);
-	private Button b2_dpadD = new DPadButton(gp1, GamePad.DPAD_Y, false);
-	private Button b2_dpadR = new DPadButton(gp1, GamePad.DPAD_X, true);
-	private Button b2_dpadL = new DPadButton(gp1, GamePad.DPAD_X, false);
-	private Button b2_bumpR = new JoystickButton(gp1, GamePad.BTN_RB);
-	private Button b2_bumpL = new JoystickButton(gp1, GamePad.BTN_LB);
-	private Button b2_trigR = new JoystickButton(gp1, GamePad.BTN_RT);
-	private Button b2_trigL = new JoystickButton(gp1, GamePad.BTN_LT);
-	private Button b2_sBack = new JoystickButton(gp1, GamePad.BTN_BACK);
-	private Button b2_sStar = new JoystickButton(gp1, GamePad.BTN_START);
-	private Button b2_btnA = new JoystickButton(gp1, GamePad.BTN_A);
-	private Button b2_btnX = new JoystickButton(gp1, GamePad.BTN_X);
-	private Button b2_btnB = new JoystickButton(gp1, GamePad.BTN_B);
-	private Button b2_btnY = new JoystickButton(gp1, GamePad.BTN_Y);
-	private Button b2_clicR = new JoystickButton(gp1, GamePad.AXISBTN_R);
-	private Button b2_clicL = new JoystickButton(gp1, GamePad.AXISBTN_L);
+	private Button b2_dpadU = new DPadButton(gp2, GamePad.DPAD_Y, true);
+	private Button b2_dpadD = new DPadButton(gp2, GamePad.DPAD_Y, false);
+	private Button b2_dpadR = new DPadButton(gp2, GamePad.DPAD_X, true);
+	private Button b2_dpadL = new DPadButton(gp2, GamePad.DPAD_X, false);
+	private Button b2_bumpR = new JoystickButton(gp2, GamePad.BTN_RB);
+	private Button b2_bumpL = new JoystickButton(gp2, GamePad.BTN_LB);
+	private Button b2_trigR = new JoystickButton(gp2, GamePad.BTN_RT);
+	private Button b2_trigL = new JoystickButton(gp2, GamePad.BTN_LT);
+	private Button b2_sBack = new JoystickButton(gp2, GamePad.BTN_BACK);
+	private Button b2_sStar = new JoystickButton(gp2, GamePad.BTN_START);
+	private Button b2_btnA = new JoystickButton(gp2, GamePad.BTN_A);
+	private Button b2_btnX = new JoystickButton(gp2, GamePad.BTN_X);
+	private Button b2_btnB = new JoystickButton(gp2, GamePad.BTN_B);
+	private Button b2_btnY = new JoystickButton(gp2, GamePad.BTN_Y);
+	private Button b2_clicR = new JoystickButton(gp2, GamePad.AXISBTN_R);
+	private Button b2_clicL = new JoystickButton(gp2, GamePad.AXISBTN_L);
 
 	public OI() {
 		// first gamepad
@@ -87,9 +87,21 @@ public class OI {
 		b_sStar.whenPressed(new CycleDriveCommand());
 
 		// second gamepad
-		b2_sBack.whenPressed(new ToggleDriveRampingCommand());
 		
-		
+
+		b2_trigR.whenPressed(new SetLiftCommand(1));
+		b2_trigR.whenReleased(new SetLiftCommand(0));
+
+		b2_trigL.whenPressed(new SetLiftCommand(-1));
+		b2_trigL.whenReleased(new SetLiftCommand(0));
+
+		b2_bumpR.whenPressed(new SetLiftCommand(0.5));
+		b2_bumpR.whenReleased(new SetLiftCommand(0));
+
+		b2_bumpL.whenPressed(new SetLiftCommand(-0.5));
+		b2_bumpL.whenReleased(new SetLiftCommand(0));
+
+		b2_btnA.whenPressed(new ToggleIntakeCommand());
 		
 		// drive commands control analog sticks on joy 1
 		// VariablePlowCommand controls analog sticks on joy 2

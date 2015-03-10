@@ -34,10 +34,10 @@ public class AutonomousCommand extends CommandGroup {
 		addSequential(new WaitCommand(.25));
 		addSequential(new RaiseLiftCommand(-1,1000));
 		addSequential(new WaitCommand(.25));
-		addSequential(new MoveForwardHoloCommand(250,-0.5)); //Backwards for .25 seconds at half speed
+		addSequential(new MoveForwardHoloCommand(500,-0.5)); //Backwards for .25 seconds at half speed
 		addSequential(new MoveSidewayHoloCommand(3000,1)); //Moving Sideways (right) for 5 seconds at half speed
 		addSequential(new WaitCommand(.25));
-		addSequential(new MoveForwardHoloCommand(1950,0.5)); //Forward for 2.75 seconds at half speed
+		addSequential(new MoveForwardHoloCommand(2200,0.5)); //Forward for 2.75 seconds at half speed
 		addSequential(new WaitCommand(.25));
 		addSequential(new RaiseLiftCommand(1,1000));
 		addSequential(new MoveForwardHoloCommand(2500,-0.5)); //Backwards for 2.5 seconds at half speed

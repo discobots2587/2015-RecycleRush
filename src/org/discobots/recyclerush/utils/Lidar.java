@@ -58,6 +58,7 @@ public class Lidar {
 								int output = (int) Integer.toUnsignedLong(by[0] << 8)
 										+ Byte.toUnsignedInt(by[1]);
 								System.out.println(output);
+								
 								lidar.setDistanceCm(output);
 								lidar.setDigOutState(true);
 								counter++;
