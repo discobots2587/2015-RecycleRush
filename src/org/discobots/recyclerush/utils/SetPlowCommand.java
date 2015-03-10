@@ -1,4 +1,4 @@
-package org.discobots.recyclerush.commands.plow;
+package org.discobots.recyclerush.utils;
 
 import org.discobots.recyclerush.Robot;
 

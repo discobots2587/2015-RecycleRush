@@ -24,9 +24,9 @@ public class LiftSubsystem extends PIDSubsystem {
 	private CANTalon liftMotor1;
 	private DigitalInput limitTop, limitBottom;
 	private Lidar lidarLift;
-	public static final double kMaxHeight = 62;
-	public static final double kHeightSlow = 59;
-	public static final double kMinHeight = 5;
+	public static final double kMaxHeight = 60;
+	public static final double kHeightSlow = 55;
+	public static final double kMinHeight = 10;
 
 	public static final double kP = 1.0 / 4.0, kI = 0, kD = 0;
 	PIDOutput output;
@@ -39,6 +39,7 @@ public class LiftSubsystem extends PIDSubsystem {
 		super(kP, kI, kD);
 		liftMotor1 = new CANTalon(HW.motorLift1);
 		limitTop = new DigitalInput(HW.buttonLiftTop);
+
 		limitBottom = new DigitalInput(HW.buttonLiftBottom);
 		lidarLift = new Lidar(HW.lidarControlLift);
 
@@ -52,16 +53,16 @@ public class LiftSubsystem extends PIDSubsystem {
 	}
 	
 	public double getLiftHeightInches() {
-		return lidarLift.getDistanceIn() + 4.5;
+		return lidarLift.getDistanceIn() + 3.5;
 	}  
 	
 	
 	public boolean isAtTop() {
-		return !limitTop.get() /*|| getLiftHeightInches() > LiftSubsystem.kMaxHeight*/;
+		return !limitTop.get() || getLiftHeightInches() > LiftSubsystem.kMaxHeight;
 	}
 
 	public boolean isAtBottom() {
-		return !limitBottom.get() /*|| getLiftHeightInches() < LiftSubsystem.kMinHeight*/;
+		return !limitBottom.get() || getLiftHeightInches() < LiftSubsystem.kMinHeight;
 	}
 
 	public void initDefaultCommand() {
