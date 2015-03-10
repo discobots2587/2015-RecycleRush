@@ -21,11 +21,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveTrainSubsystem extends Subsystem {
-
-	public static final boolean COMPETITION_ROBOT = false;
-	
 	public enum Motor {
-		FRONTLEFT, BACKLEFT, FRONTRIGHT, BACKRIGHT, CENTERDROPDOWN;
+		FRONTLEFT, BACKLEFT, FRONTRIGHT, BACKRIGHT;
 	}
 	CANTalon backLeft;//, centerDropDown;
 	Talon frontRight, frontLeft ,backRight;
@@ -147,7 +144,7 @@ public class DriveTrainSubsystem extends Subsystem {
 			return;
 		}
 		
-		double ox = x, oy = -y, or = r;
+		double ox = x, oy = y, or = r;
 		
 		if (ox - prevX > CONSTANT_RAMP_LIMIT) {
 			ox = prevX + CONSTANT_RAMP_LIMIT;
@@ -170,9 +167,6 @@ public class DriveTrainSubsystem extends Subsystem {
 		prevR = or;
 		
 		robotDrive.mecanumDrive_Cartesian(ox * kSpeedScaling, oy * kSpeedScaling, or * kSpeedScaling, 0);
-		//robotDrive.arcadeDrive(or * kSpeedScaling, oy * kSpeedScaling); 
-		// robotdrive is dumb arcadeDrive so params are switched
-		//centerDropDown.set(ox * kSpeedScaling);
 	}
 
 	public void tankDriveUnramped(double leftStick, double rightStick) {
@@ -200,9 +194,6 @@ public class DriveTrainSubsystem extends Subsystem {
 		oy = y;
 		or = r;
 		robotDrive.mecanumDrive_Cartesian(ox * kSpeedScaling, oy * kSpeedScaling, or * kSpeedScaling, 0);
-		//robotDrive.arcadeDrive(r * kSpeedScaling, -y * kSpeedScaling); 
-		// robotdrive is dumb arcadeDrive so params are switched
-		//centerDropDown.set(x * kSpeedScaling);
 	}
 
 	public double getMotorSetpoint(Motor motor) {
@@ -214,8 +205,6 @@ public class DriveTrainSubsystem extends Subsystem {
 			return this.frontLeft.get();
 		} else if (motor == Motor.FRONTRIGHT) {
 			return this.frontRight.get();
-		} else if (motor == Motor.CENTERDROPDOWN) {
-			return 0;//this.centerDropDown.get();
 		} else {
 			return -9001;
 		}

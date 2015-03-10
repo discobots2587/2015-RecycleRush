@@ -1,4 +1,4 @@
-package org.discobots.recyclerush.commands;
+package org.discobots.recyclerush.commands.autonomous;
 
 import org.discobots.recyclerush.HW;
 import org.discobots.recyclerush.Robot;

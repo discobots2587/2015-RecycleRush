@@ -2,12 +2,11 @@ package org.discobots.recyclerush;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 
-import org.discobots.recyclerush.commands.AutomatedStackingCommand;
 import org.discobots.recyclerush.commands.ToggleCompressor;
+import org.discobots.recyclerush.commands.autonomous.AutomatedStackingCommand;
 import org.discobots.recyclerush.commands.drive.CycleDriveCommand;
 import org.discobots.recyclerush.commands.drive.SetScalingCommand;
 import org.discobots.recyclerush.commands.drive.ToggleDriveRampingCommand;
-import org.discobots.recyclerush.commands.drive.pid.MoveForwardCommand;
 import org.discobots.recyclerush.commands.intake.ToggleIntakeCommand;
 import org.discobots.recyclerush.commands.lift.LiftControllerCommand;
 import org.discobots.recyclerush.commands.lift.SetLiftCommand;

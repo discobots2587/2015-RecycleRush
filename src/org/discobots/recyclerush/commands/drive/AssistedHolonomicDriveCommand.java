@@ -1,4 +1,4 @@
-package org.discobots.recyclerush.commands.autonomous;
+package org.discobots.recyclerush.commands.drive;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -11,11 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class MoveForwardHoloCommand extends Command {
-
-	long time;
-	long duration;
-	double speed;
+public class AssistedHolonomicDriveCommand extends Command {
 	
 	PIDController controller;
 	PIDSource controllerSource;
@@ -23,12 +19,10 @@ public class MoveForwardHoloCommand extends Command {
 	double controllerSourceVal;
 	double controllerOutputVal;
 	
-    public MoveForwardHoloCommand(long time, double speed) {
+    public AssistedHolonomicDriveCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.driveTrainSub);
-    	duration = time;
-    	this.speed = speed;
     	controllerSource = new PIDSource() {
 			public double pidGet() {
 				return controllerSourceVal;
@@ -44,7 +38,6 @@ public class MoveForwardHoloCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	time = System.currentTimeMillis();
     	controller.setSetpoint(Robot.driveTrainSub.getAngle());
     	controller.enable();
     }
@@ -54,18 +47,20 @@ public class MoveForwardHoloCommand extends Command {
     	double y = Robot.oi.getRawAnalogStickALY();
     	double x = Robot.oi.getRawAnalogStickALX();
     	double r = Robot.oi.getRawAnalogStickARX();
-
-
     	
-    	Robot.driveTrainSub.holonomicDriveRamp(y, x, r*Math.abs(r));
-    	
-    	this.controllerSourceVal = Robot.driveTrainSub.getAngle();
-    	Robot.driveTrainSub.holonomicDriveRamp(-speed,0, controllerOutputVal);
+    	if (Math.abs(r) > 0.1) { // we're rotating
+        	controller.setSetpoint(Robot.driveTrainSub.getAngle());
+    		this.controllerSourceVal = Robot.driveTrainSub.getAngle();
+        	Robot.driveTrainSub.holonomicDriveRamp(y, x, r*Math.abs(r));
+    	} else { // we're strafing or standing still
+    		this.controllerSourceVal = Robot.driveTrainSub.getAngle();
+        	Robot.driveTrainSub.holonomicDriveRamp(y, x, this.controllerOutputVal);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return System.currentTimeMillis()-time>=duration;
+    	return false;
 
     }
 
