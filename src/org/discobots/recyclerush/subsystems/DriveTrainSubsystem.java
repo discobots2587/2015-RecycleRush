@@ -191,7 +191,7 @@ public class DriveTrainSubsystem extends Subsystem {
 	public void holonomicDriveUnramped(double y, double x, double r) { // h-drive
 		double ox, oy, or;
 		ox = x;
-		oy = y;
+		oy = -y;
 		or = r;
 		robotDrive.mecanumDrive_Cartesian(ox * kSpeedScaling, oy * kSpeedScaling, or * kSpeedScaling, 0);
 	}
