@@ -13,7 +13,6 @@ import org.discobots.recyclerush.commands.lift.LiftControllerCommand;
 import org.discobots.recyclerush.commands.lift.SetLiftCommand;
 import org.discobots.recyclerush.commands.lift.SetLiftSetpointCommand;
 import org.discobots.recyclerush.utils.GamePad;
-import org.discobots.recyclerush.utils.SetPlowCommand;
 import org.discobots.recyclerush.utils.GamePad.DPadButton;
 
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
