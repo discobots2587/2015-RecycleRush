@@ -1,10 +1,8 @@
 package org.discobots.recyclerush.subsystems;
 
 import org.discobots.recyclerush.HW;
-import org.discobots.recyclerush.commands.drive.ArcadeDriveCommand;
 import org.discobots.recyclerush.commands.drive.CycleDriveCommand;
 import org.discobots.recyclerush.commands.drive.HolonomicDriveCommand;
-import org.discobots.recyclerush.commands.drive.StickDriveCommand;
 import org.discobots.recyclerush.commands.drive.TankDriveCommand;
 import org.discobots.recyclerush.utils.Lidar;
 
@@ -31,9 +29,7 @@ public class DriveTrainSubsystem extends Subsystem {
 	// out curr, out volt, in volt, setpoint, temp,
 
 	RobotDrive robotDrive;
-
-	DoubleSolenoid centerDropSolenoid;
-
+	
 	Encoder encoderForward; // sensors
 	Encoder encoderSideway;
 
@@ -54,7 +50,6 @@ public class DriveTrainSubsystem extends Subsystem {
 		frontLeft = new Talon(HW.motorFrontLeft);
 		frontRight = new Talon(HW.motorFrontRight);
 		backRight = new Talon(HW.motorBackRight);
-		//centerDropDown = new CANTalon(HW.motorCenterDropDown);
 		
 
 		encoderForward = new Encoder(HW.encoderForwardA, HW.encoderForwardB,
@@ -63,10 +58,7 @@ public class DriveTrainSubsystem extends Subsystem {
 				false, EncodingType.k4X);
 		resetForwardDistance();
 		resetSidewayDistance();
-
-		centerDropSolenoid = new DoubleSolenoid(HW.dsolCenterDropdownA,
-				HW.dsolCenterDropdownB);
-
+		
 		gyroscope = new Gyro(HW.gyroscope);
 
 		lidar = new Lidar(HW.lidarControlDrive);
@@ -211,21 +203,7 @@ public class DriveTrainSubsystem extends Subsystem {
 	}
 
 	public double getMotorCurrent(Motor motor) {
-		/*if (DriveTrainSubsystem.COMPETITION_ROBOT) {
-			if (motor == Motor.BACKLEFT) {
-				return ((CANTalon)this.backLeft).getOutputCurrent();
-			} else if (motor == Motor.BACKRIGHT) {
-				return ((CANTalon)this.backRight).getOutputCurrent();
-			} else if (motor == Motor.FRONTLEFT) {
-				return ((CANTalon)this.frontLeft).getOutputCurrent();
-			} else if (motor == Motor.FRONTRIGHT) {
-			} else if (motor == Motor.CENTERDROPDOWN) {
-				return ((CANTalon)this.centerDropDown).getOutputCurrent();
-			} else {
-				return -9001;
-			}
-		}*/
-		return 0;// ((CANTalon)this.frontRight).getOutputCurrent();
+		return this.backLeft.getOutputCurrent();
 	}
 
 	public void resetForwardDistance() {
