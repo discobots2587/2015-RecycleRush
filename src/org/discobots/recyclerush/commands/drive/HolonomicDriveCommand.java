@@ -22,10 +22,6 @@ public class HolonomicDriveCommand extends Command {
     	double y = Robot.oi.getRawAnalogStickALY();
     	double x = Robot.oi.getRawAnalogStickALX();
     	double r = Robot.oi.getRawAnalogStickARX();
-    			
-    	if (Math.abs(x) < 0.1) {
-    		y = 0.0;
-    	}
     	
     	Robot.driveTrainSub.holonomicDriveRamp(y, x, r);
     }
