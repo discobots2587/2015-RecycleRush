@@ -2,6 +2,7 @@ package org.discobots.recyclerush;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 
+import org.discobots.recyclerush.commands.ShutdownSensors;
 import org.discobots.recyclerush.commands.ToggleCompressor;
 import org.discobots.recyclerush.commands.autonomous.AutomatedStackingCommand;
 import org.discobots.recyclerush.commands.drive.AssistedHolonomicDriveCommand;
@@ -75,15 +76,17 @@ public class OI {
 
 		b_btnA.whenPressed(new ToggleIntakeCommand());
 		
-		b_btnX.whenPressed(new SetLiftSetpointCommand(0));
+		//b_btnX.whenPressed(new SetLiftSetpointCommand(0));
 		
-		b_btnY.whenPressed(/*new SetLiftSetpointCommand(HW.liftPosToteOneRaise)*/new ToggleCompressor());
+		b_btnX.whenPressed(new ToggleCompressor());
 		
 		b_btnB.whenPressed(new SetScalingCommand());
 		
-		//b_btnY.whenPressed(new AutomatedStackingCommand()); // one cycle, stoppable by any button
+		b_btnY.whenPressed(new AutomatedStackingCommand()); // one cycle, stoppable by any button
 
-		b_sStar.whenPressed(new CycleDriveCommand());
+		b_sStar.whenPressed(new ShutdownSensors());
+		
+		b_sBack.whenPressed(new CycleDriveCommand());
 
 		// second gamepad
 		
