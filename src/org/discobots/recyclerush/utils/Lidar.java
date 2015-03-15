@@ -57,7 +57,6 @@ public class Lidar {
 								i2c.read(LIDAR_DISTANCE_REGISTER, 2, by);
 								int output = (int) Integer.toUnsignedLong(by[0] << 8)
 										+ Byte.toUnsignedInt(by[1]);
-								System.out.println(output);
 								
 								lidar.setDistanceCm(output);
 								lidar.setDigOutState(true);

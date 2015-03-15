@@ -29,7 +29,6 @@ public class Dashboard {
 			driveCounter = 0;
 		}
 		if (driveCounter % 5 == 0) { // 100ms*/
-			System.out.println("potato");
 			SmartDashboard.putNumber("Robot Loop Execution Time",
 					Robot.loopExecutionTime);
 

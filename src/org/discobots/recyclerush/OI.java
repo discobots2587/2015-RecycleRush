@@ -2,6 +2,7 @@ package org.discobots.recyclerush;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 
+import org.discobots.recyclerush.commands.PrintALine;
 import org.discobots.recyclerush.commands.ShutdownSensors;
 import org.discobots.recyclerush.commands.ToggleCompressor;
 import org.discobots.recyclerush.commands.autonomous.AutomatedStackingCommand;
@@ -88,6 +89,7 @@ public class OI {
 		
 		b_sBack.whenPressed(new CycleDriveCommand());
 
+		b_dpadD.whenPressed(new PrintALine("Dpad down pressed"));
 		// second gamepad
 		
 
