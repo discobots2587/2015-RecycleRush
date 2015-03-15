@@ -1,20 +1,17 @@
 package org.discobots.recyclerush;
 
-import edu.wpi.first.wpilibj.buttons.Button;
-
+import org.discobots.recyclerush.commands.ShutdownSensors;
 import org.discobots.recyclerush.commands.auton.AutomatedStackingCommand;
 import org.discobots.recyclerush.commands.drive.CycleDriveCommand;
 import org.discobots.recyclerush.commands.drive.ToggleDriveRampingCommand;
 import org.discobots.recyclerush.commands.drive.ToggleDriveTrainSpeedConstant;
 import org.discobots.recyclerush.commands.intake.ToggleIntakeCommand;
-import org.discobots.recyclerush.commands.lift.LiftControllerCommand;
 import org.discobots.recyclerush.commands.lift.SetLiftCommand;
-import org.discobots.recyclerush.commands.lift.SetLiftSetpointCommand;
-import org.discobots.recyclerush.commands.wings.SetWingCommand;
 import org.discobots.recyclerush.commands.wings.ToggleWingCommand;
 import org.discobots.recyclerush.utils.GamePad;
 import org.discobots.recyclerush.utils.GamePad.DPadButton;
 
+import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
@@ -61,6 +58,7 @@ public class OI {
 
 	public OI() {
 		// first gamepad
+		// drive commands control analog sticks on joy 1
 		b_trigR.whenPressed(new SetLiftCommand(1));
 		b_trigR.whenReleased(new SetLiftCommand(0));
 
@@ -74,25 +72,29 @@ public class OI {
 		b_bumpL.whenReleased(new SetLiftCommand(0));
 
 		b_btnA.whenPressed(new ToggleIntakeCommand());
+		b_btnX.whenPressed(new ToggleWingCommand());
 		
-		//b_btnX.whenPressed(new SetLiftSetpointCommand(0));
-		
-		//b_btnB.whenPressed(new SetLiftSetpointCommand(HW.liftPosToteOneRaise));
-		
-		b_btnB.whenPressed(new AutomatedStackingCommand()); // one cycle, stoppable by any button
+		b_sStar.whenPressed(new ShutdownSensors());
+		b_sBack.whenPressed(new CycleDriveCommand());
 
-		b_sStar.whenPressed(new CycleDriveCommand());
-
-		b_btnY.whenPressed(new ToggleWingCommand());
-		
 		// second gamepad
-		//b2_sBack.whenPressed(new ToggleDriveRampingCommand());
-		b_btnX.whenPressed(new ToggleDriveTrainSpeedConstant());
-		
-		
-		// drive commands control analog sticks on joy 1
-		// VariablePlowCommand controls analog sticks on joy 2
-		
+		b2_trigR.whenPressed(new SetLiftCommand(1));
+		b2_trigR.whenReleased(new SetLiftCommand(0));
+
+		b2_trigL.whenPressed(new SetLiftCommand(-1));
+		b2_trigL.whenReleased(new SetLiftCommand(0));
+
+		b2_bumpR.whenPressed(new SetLiftCommand(0.5));
+		b2_bumpR.whenReleased(new SetLiftCommand(0));
+
+		b2_bumpL.whenPressed(new SetLiftCommand(-0.5));
+		b2_bumpL.whenReleased(new SetLiftCommand(0));
+
+		b2_btnA.whenPressed(new ToggleIntakeCommand());
+		b2_btnB.whenPressed(new AutomatedStackingCommand()); // one cycle, stoppable by any button
+
+		b2_sStar.whenPressed(new ToggleDriveTrainSpeedConstant());
+		b2_sBack.whenPressed(new ToggleDriveRampingCommand());
 	}
 
 	public double getRawAnalogStickALX() {

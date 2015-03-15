@@ -5,9 +5,6 @@ import org.discobots.recyclerush.HW;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- *
- */
 public class WingSubsystem extends Subsystem {
     
 	Solenoid left, right;
@@ -27,8 +24,6 @@ public class WingSubsystem extends Subsystem {
 	}
 	
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
     }
 }
 

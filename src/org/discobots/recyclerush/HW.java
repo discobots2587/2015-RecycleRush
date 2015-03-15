@@ -12,13 +12,13 @@ public class HW {
 	public final static int motorBackLeft = 31; // LR
 	public final static int motorFrontRight = 33; // RF
 	public final static int motorBackRight = 32; // RR
-	public final static int motorSideways = 38;
+	public final static int motorSideways = 38;// NOW UNUSED
 	
 	public final static int motorLiftLeft = 37; // RL
 	public final static int motorLiftRight = 34; // RW
 	
-	public final static int motorPlowLeft = 35;
-	public final static int motorPlowRight = 38;
+	public final static int motorPlowLeft = 35; // NOW UNUSED
+	public final static int motorPlowRight = 38; // NOW UNUSED
 
 	/* PWM */
 
@@ -26,8 +26,6 @@ public class HW {
 	public final static int solIntake = 0;
 	public final static int solFlapLeft = 4;
 	public final static int solFlapRight = 3;
-	public final static int dsolCenterDropdownA = 2; 
-	public final static int dsolCenterDropdownB = 3;
 
 	/* Relay */
 
@@ -39,7 +37,6 @@ public class HW {
 	public final static int buttonLiftTop = 9;
 	public final static int buttonLiftBottom = 8;
 
-	public final static int lidarControlDrive = 6;
 	public final static int lidarControlLift = 7;
 
 	/* Analog In */
@@ -50,10 +47,6 @@ public class HW {
 	public final static int i2cLidarAddress = 0x62;
 
 	/* Constants */
-	public final static double encoderForwardConstant = (6) /* radius */ * Math.PI * (1 / 2 /* ratio */); // output in inches
-	public final static double encoderSidewaysConstant = 4 * Math.PI;
-	public final static double encoderLiftConstant = 4 * Math.PI;
-	public final static double encoderCountsPerRevolution = 200 * 4; // x4  for k4x
 	
 	/* Lift Positions */
 	public final static double liftPosToteOneRaise = 12 + 16+4; // One on ground, one tote held

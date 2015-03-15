@@ -4,7 +4,6 @@ import org.discobots.recyclerush.HW;
 import org.discobots.recyclerush.commands.drive.HolonomicDriveCommand;
 
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -22,8 +21,6 @@ public class DriveTrainSubsystem extends Subsystem {
 
 	RobotDrive robotDrive;
 
-	DoubleSolenoid centerDropSolenoid;
-
 	Gyro gyroscope;
 
 	static final double CONSTANT_RAMP_LIMIT = 0.1; // ramping
@@ -40,8 +37,6 @@ public class DriveTrainSubsystem extends Subsystem {
 		frontRight = new CANTalon(HW.motorFrontRight);
 		backRight = new CANTalon(HW.motorBackRight);
 
-		centerDropSolenoid = new DoubleSolenoid(HW.dsolCenterDropdownA,
-				HW.dsolCenterDropdownB);
 
 		gyroscope = new Gyro(HW.aGyroscope);
 
