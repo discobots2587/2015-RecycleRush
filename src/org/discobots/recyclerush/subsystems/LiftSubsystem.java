@@ -32,8 +32,10 @@ public class LiftSubsystem extends PIDSubsystem {
 	PIDOutput output;
 	PIDSource source;
 	
-	SpeedMonitor speedControlThread;
+	private SpeedMonitor speedControlThread;
 	private double setpointSpeed;
+
+	private boolean useLidar = true;
 
 	public LiftSubsystem() {
 		super(kP, kI, kD);
@@ -58,11 +60,19 @@ public class LiftSubsystem extends PIDSubsystem {
 	
 	
 	public boolean isAtTop() {
-		return !limitTop.get() || getLiftHeightInches() > LiftSubsystem.kMaxHeight;
+		if (useLidar) {
+			return !limitTop.get() || getLiftHeightInches() > LiftSubsystem.kMaxHeight;
+		} else {
+			return !limitTop.get();
+		}
 	}
 
 	public boolean isAtBottom() {
-		return !limitBottom.get() || getLiftHeightInches() < LiftSubsystem.kMinHeight;
+		if (useLidar) {
+			return !limitBottom.get() || getLiftHeightInches() < LiftSubsystem.kMinHeight;
+		} else {
+			return !limitBottom.get();
+		}
 	}
 
 	public void initDefaultCommand() {
@@ -80,12 +90,14 @@ public class LiftSubsystem extends PIDSubsystem {
 	
 	private void setSpeedInternal(double input) {
 		double output = input;
-		/*if (this.getLiftHeightInches() > kHeightSlow && output > 0) {
-			output = output / 3;
-		}*/
-		/*if (this.getLiftHeightInches() < kMinHeight + 3 && output > 0) {
-			output = output / 3;
-		}*/
+		if (useLidar) {
+			if (this.getLiftHeightInches() > kHeightSlow && output > 0) {
+				output = output / 3;
+			}
+			if (this.getLiftHeightInches() < kMinHeight + 3 && output > 0) {
+				output = output / 3;
+			}
+		}
 		if (isAtTop() && output > 0)
 			// keeps us from going up when we've reached the top
 			output = 0;
@@ -105,6 +117,10 @@ public class LiftSubsystem extends PIDSubsystem {
 	protected void usePIDOutput(double output) {
 		this.setpointSpeed = output;
 		//setSpeedInternal(output);
+	}
+	
+	public void disableLidar() {
+		useLidar = false;
 	}
 	
 	class SpeedMonitor extends Thread {
