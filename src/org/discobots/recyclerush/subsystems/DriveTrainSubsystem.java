@@ -1,31 +1,21 @@
 package org.discobots.recyclerush.subsystems;
 
 import org.discobots.recyclerush.HW;
-import org.discobots.recyclerush.commands.drive.ArcadeDriveCommand;
-import org.discobots.recyclerush.commands.drive.CycleDriveCommand;
-import org.discobots.recyclerush.commands.drive.StickDriveCommand;
-import org.discobots.recyclerush.commands.drive.TankDriveCommand;
-import org.discobots.recyclerush.utils.Lidar;
+import org.discobots.recyclerush.commands.drive.HolonomicDriveCommand;
 
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveTrainSubsystem extends Subsystem {
 
 	public enum Motor {
-		FRONTLEFT, BACKLEFT, FRONTRIGHT, BACKRIGHT, CENTERDROPDOWN;
+		FRONTLEFT, BACKLEFT, FRONTRIGHT, BACKRIGHT;
 	}
 
-	CANTalon backLeft, centerDropDown, frontRight, frontLeft, backRight;
+	CANTalon backLeft, frontRight, frontLeft, backRight;
 	// switch to TalonSRX class if we use pwm instead.
 	// with can the following values are available:
 	// out curr, out volt, in volt, setpoint, temp,
@@ -34,12 +24,7 @@ public class DriveTrainSubsystem extends Subsystem {
 
 	DoubleSolenoid centerDropSolenoid;
 
-	//Encoder encoderForward; // sensors
-	//Encoder encoderSideway;
-
 	Gyro gyroscope;
-
-	Lidar lidar;
 
 	static final double CONSTANT_RAMP_LIMIT = 0.1; // ramping
 	// 0.05 = 4/10 seconds to full, 0.1 = 2/10 seconds to full
@@ -48,27 +33,17 @@ public class DriveTrainSubsystem extends Subsystem {
 	private double prevY = 0, prevX = 0, prevR;
 
 	double speedScaling = 1.0;
-	
+
 	public DriveTrainSubsystem() {
 		backLeft = new CANTalon(HW.motorBackLeft);
 		frontLeft = new CANTalon(HW.motorFrontLeft);
 		frontRight = new CANTalon(HW.motorFrontRight);
 		backRight = new CANTalon(HW.motorBackRight);
-		centerDropDown = new CANTalon(HW.motorSideways);
-
-		//encoderForward = new Encoder(HW.encoderForwardA, HW.encoderForwardB,
-		//		false, EncodingType.k4X);
-		//encoderSideway = new Encoder(HW.encoderSidewayA, HW.encoderSidewayB,
-		//		false, EncodingType.k4X);
-		//resetForwardDistance();
-		//resetSidewayDistance();
 
 		centerDropSolenoid = new DoubleSolenoid(HW.dsolCenterDropdownA,
 				HW.dsolCenterDropdownB);
 
 		gyroscope = new Gyro(HW.aGyroscope);
-
-		lidar = new Lidar(HW.lidarControlDrive);
 
 		robotDrive = new RobotDrive(frontLeft, backLeft, frontRight, backRight);
 		robotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
@@ -165,9 +140,7 @@ public class DriveTrainSubsystem extends Subsystem {
 		prevY = oy;
 		prevR = or;
 
-		robotDrive.arcadeDrive(or * speedScaling, oy * speedScaling);
-		// robotdrive is dumb arcadeDrive so params are switched
-		centerDropDown.set(ox * speedScaling);
+		robotDrive.mecanumDrive_Cartesian(ox * speedScaling, oy * speedScaling, or * speedScaling, 0);
 	}
 
 	public void tankDriveUnramped(double leftStick, double rightStick) {
@@ -191,9 +164,7 @@ public class DriveTrainSubsystem extends Subsystem {
 	}
 
 	public void holonomicDriveUnramped(double y, double x, double r) { // h-drive
-		robotDrive.arcadeDrive(r * speedScaling, -y * speedScaling);
-		// robotdrive is dumb arcadeDrive so params are switched
-		centerDropDown.set(x * speedScaling);
+		robotDrive.mecanumDrive_Cartesian(x * speedScaling, y * speedScaling, r * speedScaling, 0);
 	}
 
 	public double getMotorSetpoint(Motor motor) {
@@ -205,8 +176,6 @@ public class DriveTrainSubsystem extends Subsystem {
 			return this.frontLeft.get();
 		} else if (motor == Motor.FRONTRIGHT) {
 			return this.frontRight.get();
-		} else if (motor == Motor.CENTERDROPDOWN) {
-			return this.centerDropDown.get();
 		} else {
 			return -9001;
 		}
@@ -221,37 +190,9 @@ public class DriveTrainSubsystem extends Subsystem {
 			return frontLeft.getOutputCurrent();
 		} else if (motor == Motor.FRONTRIGHT) {
 			return frontRight.getOutputCurrent();
-		} else if (motor == Motor.CENTERDROPDOWN) {
-			return centerDropDown.getOutputCurrent();
 		} else {
 			return -9001;
 		}
-	}
-
-	public void resetForwardDistance() {
-		//encoderForward.reset();
-	}
-
-	public void resetSidewayDistance() {
-		//encoderSideway.reset();
-	}
-
-	public double getForwardDistance() {
-		//double encoderDistancePerCount = HW.encoderForwardConstant
-		//		/ HW.encoderCountsPerRevolution;
-		//double output = encoderForward.getRaw() * encoderDistancePerCount;
-		return 0;//output;
-	}
-
-	public double getSidewayDistance() {
-		//double encoderDistancePerCount = HW.encoderSidewaysConstant
-		//		/ HW.encoderCountsPerRevolution;
-		//double output = encoderSideway.getRaw() * encoderDistancePerCount;
-		return 0;//output;
-	}
-
-	public double getFrontObjectDistanceIn() {
-		return lidar.getDistanceIn();
 	}
 
 	public double getAngle() {
@@ -263,11 +204,10 @@ public class DriveTrainSubsystem extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new ArcadeDriveCommand());
+		setDefaultCommand(new HolonomicDriveCommand());
 	}
-	
-	public void setSpeedScaling(double x)
-	{
-		speedScaling=x;
+
+	public void setSpeedScaling(double x) {
+		speedScaling = x;
 	}
 }
