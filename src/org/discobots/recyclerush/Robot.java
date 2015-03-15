@@ -9,8 +9,6 @@ import org.discobots.recyclerush.subsystems.DriveTrainSubsystem;
 import org.discobots.recyclerush.subsystems.ElectricalSubsystem;
 import org.discobots.recyclerush.subsystems.WingSubsystem;
 import org.discobots.recyclerush.subsystems.LiftSubsystem;
-import org.discobots.recyclerush.subsystems.PlowSubsystem;
-import org.discobots.recyclerush.utils.Dashboard;
 import org.discobots.recyclerush.subsystems.IntakeSubsystem;
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,7 +23,6 @@ public class Robot extends IterativeRobot {
 	public static DriveTrainSubsystem driveTrainSub;
 	public static LiftSubsystem liftSub;
 	public static IntakeSubsystem intakeSub;
-	public static PlowSubsystem plowSub;
 	public static WingSubsystem wingSub;
 	
 	public static OI oi;
@@ -43,7 +40,6 @@ public class Robot extends IterativeRobot {
 		driveTrainSub = new DriveTrainSubsystem();
 		liftSub	= new LiftSubsystem();
 		intakeSub = new IntakeSubsystem();
-		plowSub = new PlowSubsystem();
 		wingSub = new WingSubsystem();
 		// gamepad code
 		oi = new OI();

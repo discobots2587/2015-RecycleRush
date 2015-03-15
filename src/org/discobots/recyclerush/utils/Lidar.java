@@ -1,7 +1,5 @@
 package org.discobots.recyclerush.utils;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Vector;
 
 import edu.wpi.first.wpilibj.DigitalOutput;
@@ -14,8 +12,7 @@ public class Lidar {
 	public static class LidarController {
 		private I2C i2c;
 		private Thread updateThread;
-		private Vector lidarVector;
-		private List<Lidar> lidarList;
+		private Vector<Lidar> lidarVector;
 		private int counter;
 
 		private final int LIDAR_CONFIG_REGISTER = 0x00;
@@ -29,8 +26,7 @@ public class Lidar {
 		 */
 		public LidarController() {
 			i2c = new I2C(Port.kMXP, LIDAR_ADDRESS);
-			lidarVector = new Vector();
-			lidarList = new ArrayList<Lidar>();
+			lidarVector = new Vector<Lidar>();
 			counter = 0;
 			updateThread = new Thread() {
 

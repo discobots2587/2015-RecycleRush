@@ -1,20 +1,20 @@
 package org.discobots.recyclerush.subsystems;
 
+import org.discobots.recyclerush.HW;
+import org.discobots.recyclerush.utils.Lidar;
+
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
-import org.discobots.recyclerush.HW;
-import org.discobots.recyclerush.commands.drive.TankDriveCommand;
-import org.discobots.recyclerush.commands.lift.VariableLiftCommand;
-import org.discobots.recyclerush.utils.Lidar;
-
-/**
- *
+/** LiftSubsystem
+ * This class has a thread so that we can actively update the speed of the 
+ * lift motor based on the height. Otherwise speed will only be set when
+ * the button is pressed and not while the lift is moving. PID Controller
+ * does work with the lidar.
+ * 
  */
 public class LiftSubsystem extends PIDSubsystem {
 	
@@ -23,7 +23,7 @@ public class LiftSubsystem extends PIDSubsystem {
 	private Lidar lidarLift;
 	public static final double kMaxHeight = 60;
 	public static final double kHeightSlow = 56;
-	public static final double kMinHeight = 10.3;
+	public static final double kMinHeight = 10;
 
 	public static final double kP = 1.0 / 4.0, kI = 0, kD = 0;
 	PIDOutput output;
@@ -31,6 +31,8 @@ public class LiftSubsystem extends PIDSubsystem {
 	
 	SpeedMonitor speedControlThread;
 	private double setpointSpeed;
+	
+	private boolean useLidar = true;
 
 	public LiftSubsystem() {
 		super(kP, kI, kD);
@@ -65,15 +67,22 @@ public class LiftSubsystem extends PIDSubsystem {
 	
 	
 	public boolean isAtTop() {
-		return !limitTop.get() || getLiftHeightInches() > LiftSubsystem.kMaxHeight;
+		if (useLidar) {
+			return !limitTop.get() || getLiftHeightInches() > LiftSubsystem.kMaxHeight;
+		} else {
+			return !limitTop.get();
+		}
 	}
 
 	public boolean isAtBottom() {
-		return /*!limitBottom.get() || */getLiftHeightInches() < LiftSubsystem.kMinHeight;
+		if (useLidar) {
+			return !limitTop.get() || getLiftHeightInches() > LiftSubsystem.kMaxHeight;
+		} else {
+			return !limitBottom.get();
+		}
 	}
 
 	public void initDefaultCommand() {
-		//setDefaultCommand(new VariableLiftCommand());
 	}
 	
 	int christine = 1; // the secret that makes it go
@@ -81,13 +90,16 @@ public class LiftSubsystem extends PIDSubsystem {
 	public void setSpeed(double input) {
 		this.disable();
 		this.setpointSpeed = input;
-		//setSpeedInternal(input);
 	}
-	
+
+	public void shutdownLidar() {
+		this.useLidar = false;
+		this.disable();
+	}
 	
 	private void setSpeedInternal(double input) {
 		double output = input;
-		if (this.getLiftHeightInches() > kHeightSlow && output > 0) {
+		if (useLidar && this.getLiftHeightInches() > kHeightSlow && output > 0) {
 			output = output / 3;
 		}
 		if (isAtTop() && output > 0)
@@ -102,14 +114,16 @@ public class LiftSubsystem extends PIDSubsystem {
 
 	@Override
 	protected double returnPIDInput() {
-		// TODO Auto-generated method stub
 		return this.getLiftHeightInches();
 	}
 
 	@Override
 	protected void usePIDOutput(double output) {
-		this.setpointSpeed = output;
-		//setSpeedInternal(output);
+		if (useLidar) {
+			this.setpointSpeed = output;
+		} else {
+			this.setpointSpeed = 0;
+		}
 	}
 	
 	class SpeedMonitor extends Thread {

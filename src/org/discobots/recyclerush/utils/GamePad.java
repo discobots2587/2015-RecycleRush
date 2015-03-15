@@ -59,7 +59,7 @@ public class GamePad extends Joystick {
 	}
 	
 	public static class DPadButton extends Button {
-		public static final double kDefaultThreshold = 0.7;
+		public static final double kDefaultThreshold = 0.3;
 		private double m_threshold;
 		private GamePad m_gp;
 		private int m_buttonAxis;

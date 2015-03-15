@@ -1,7 +1,7 @@
 
 package org.discobots.recyclerush.commands;
 
-import org.discobots.recyclerush.commands.drive.AutonomousArcadeDriveCommand;
+import org.discobots.recyclerush.commands.auton.AutonomousArcadeDriveCommand;
 import org.discobots.recyclerush.commands.wings.SetWingCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -27,9 +27,9 @@ public class AutonomousCommand extends CommandGroup {
     	// Do Nothing
     }
     
-    private void autonomousMode1Init() {
-    	// TWO BINS FROM BUMP
-    	addSequential(new SetWingCommand(true)); // both wing down
+    private void autonomousMode1Init() { 
+    	// WINGS, TWO BINS FROM BUMP
+    	addSequential(new SetWingCommand(true)); // both wings down
     	addSequential(new WaitCommand(3));
     	addSequential(new AutonomousArcadeDriveCommand(-1, 0, 600)); // move back at 0.5 speed backward while wings go down
     	addSequential(new WaitCommand(.5)); // wait half a second

@@ -6,7 +6,6 @@ import org.discobots.recyclerush.utils.PressureSensor;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.communication.HALControlWord;
 
 public class ElectricalSubsystem extends Subsystem {
 
@@ -69,6 +68,7 @@ public class ElectricalSubsystem extends Subsystem {
 		return ps.getPSI();
 	}
 	
+	@Override
 	public void initDefaultCommand() {
 	}
 }
