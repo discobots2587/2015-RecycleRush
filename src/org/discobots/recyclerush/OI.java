@@ -1,6 +1,7 @@
 package org.discobots.recyclerush;
 
 import org.discobots.recyclerush.commands.ShutdownSensors;
+import org.discobots.recyclerush.commands.ToggleCompressor;
 import org.discobots.recyclerush.commands.auton.AutomatedStackingCommand;
 import org.discobots.recyclerush.commands.drive.CycleDriveCommand;
 import org.discobots.recyclerush.commands.drive.ToggleDriveRampingCommand;
@@ -73,6 +74,7 @@ public class OI {
 
 		b_btnA.whenPressed(new ToggleIntakeCommand());
 		b_btnX.whenPressed(new ToggleWingCommand());
+		b_btnB.whenPressed(new ToggleCompressor());
 		
 		b_sStar.whenPressed(new ShutdownSensors());
 		b_sBack.whenPressed(new CycleDriveCommand());
@@ -92,6 +94,7 @@ public class OI {
 
 		b2_btnA.whenPressed(new ToggleIntakeCommand());
 		b2_btnB.whenPressed(new AutomatedStackingCommand()); // one cycle, stoppable by any button
+		b2_btnY.whenPressed(new ShutdownSensors());
 
 		b2_sStar.whenPressed(new ToggleDriveTrainSpeedConstant());
 		b2_sBack.whenPressed(new ToggleDriveRampingCommand());
