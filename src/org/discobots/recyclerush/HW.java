@@ -12,6 +12,8 @@ public class HW {
 	public final static int motorLift1 = 15;
 
 	/* PWM */
+	public final static int motorPlowLeft = 0;
+	public final static int motorPlowRight = 1;
 	public final static int motorFrontLeft = 2;
 	public final static int motorBackRight = 3;
 	public final static int motorFrontRight = 4;

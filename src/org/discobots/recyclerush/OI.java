@@ -2,7 +2,6 @@ package org.discobots.recyclerush;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 
-import org.discobots.recyclerush.commands.PrintALine;
 import org.discobots.recyclerush.commands.ShutdownSensors;
 import org.discobots.recyclerush.commands.ToggleCompressor;
 import org.discobots.recyclerush.commands.autonomous.AutomatedStackingCommand;
@@ -13,6 +12,7 @@ import org.discobots.recyclerush.commands.drive.ToggleDriveRampingCommand;
 import org.discobots.recyclerush.commands.intake.ToggleIntakeCommand;
 import org.discobots.recyclerush.commands.lift.LiftControllerCommand;
 import org.discobots.recyclerush.commands.lift.SetLiftCommand;
+import org.discobots.recyclerush.commands.plow.SetPlowCommand;
 import org.discobots.recyclerush.commands.lift.SetLiftSetpointCommand;
 import org.discobots.recyclerush.utils.GamePad;
 import org.discobots.recyclerush.utils.GamePad.DPadButton;
@@ -89,7 +89,11 @@ public class OI {
 		
 		b_sBack.whenPressed(new CycleDriveCommand());
 
-		b_dpadD.whenPressed(new PrintALine("Dpad down pressed"));
+		b_dpadU.whenPressed(new SetPlowCommand(1.0));
+		b_dpadU.whenReleased(new SetPlowCommand(0.0));
+
+		b_dpadD.whenPressed(new SetPlowCommand(-1.0));
+		b_dpadD.whenReleased(new SetPlowCommand(0.0));
 		// second gamepad
 		
 
