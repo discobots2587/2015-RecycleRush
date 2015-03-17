@@ -10,6 +10,7 @@ import org.discobots.recyclerush.subsystems.ElectricalSubsystem;
 import org.discobots.recyclerush.subsystems.WingSubsystem;
 import org.discobots.recyclerush.subsystems.LiftSubsystem;
 import org.discobots.recyclerush.subsystems.IntakeSubsystem;
+import org.discobots.recyclerush.subsystems.PlowSubsystem;
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -24,6 +25,7 @@ public class Robot extends IterativeRobot {
 	public static LiftSubsystem liftSub;
 	public static IntakeSubsystem intakeSub;
 	public static WingSubsystem wingSub;
+	public static PlowSubsystem plowSub;
 	
 	public static OI oi;
 	
@@ -41,6 +43,7 @@ public class Robot extends IterativeRobot {
 		liftSub	= new LiftSubsystem();
 		intakeSub = new IntakeSubsystem();
 		wingSub = new WingSubsystem();
+		plowSub = new PlowSubsystem();
 		// gamepad code
 		oi = new OI();
 		// autonomous command
