@@ -1,7 +1,9 @@
 package org.discobots.recyclerush.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Talon;
+
 import org.discobots.recyclerush.HW;
 
 /**
