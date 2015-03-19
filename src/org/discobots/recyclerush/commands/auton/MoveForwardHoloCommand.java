@@ -50,7 +50,7 @@ public class MoveForwardHoloCommand extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		this.controllerSourceVal = Robot.driveTrainSub.getAngle();
-		Robot.driveTrainSub.holonomicDriveRamp(-speed, 0, controllerOutputVal);
+		Robot.driveTrainSub.holonomicDriveRamp(speed, 0, controllerOutputVal);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

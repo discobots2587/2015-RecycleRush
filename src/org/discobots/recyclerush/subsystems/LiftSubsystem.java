@@ -21,8 +21,8 @@ public class LiftSubsystem extends PIDSubsystem {
 	private CANTalon liftMotorLeft, liftMotorRight;
 	private DigitalInput limitTop, limitBottom;
 	private Lidar lidarLift;
-	public static final double kMaxHeight = 60;
-	public static final double kHeightSlow = 55;
+	public static final double kMaxHeight = 65;
+	public static final double kHeightSlow = 60;
 	public static final double kHeightSlowBottom = 15;
 	public static final double kMinHeight = 10;
 
@@ -69,7 +69,7 @@ public class LiftSubsystem extends PIDSubsystem {
 	
 	public boolean isAtTop() {
 		if (useLidar) {
-			return !limitTop.get() || getLiftHeightInches() > LiftSubsystem.kMaxHeight;
+			return !limitTop.get(); // || getLiftHeightInches() > LiftSubsystem.kMaxHeight;
 		} else {
 			return !limitTop.get();
 		}
@@ -77,7 +77,7 @@ public class LiftSubsystem extends PIDSubsystem {
 
 	public boolean isAtBottom() {
 		if (useLidar) {
-			return !limitBottom.get() || getLiftHeightInches() < LiftSubsystem.kMinHeight;
+			return !limitBottom.get(); // || getLiftHeightInches() < LiftSubsystem.kMinHeight;
 		} else {
 			return !limitBottom.get();
 		}
@@ -101,10 +101,10 @@ public class LiftSubsystem extends PIDSubsystem {
 	private void setSpeedInternal(double input) {
 		double output = input;
 		if (useLidar && this.getLiftHeightInches() > kHeightSlow && output > 0) {
-			output = output / 3;
+			output = output / 2;
 		}
 		if (useLidar && this.getLiftHeightInches() < kHeightSlowBottom && output < 0) {
-			output = output / 3;
+			output = output / 2;
 		}
 		if (isAtTop() && output > 0)
 			// keeps us from going up when we've reached the top
