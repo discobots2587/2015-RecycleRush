@@ -22,7 +22,8 @@ public class LiftSubsystem extends PIDSubsystem {
 	private DigitalInput limitTop, limitBottom;
 	private Lidar lidarLift;
 	public static final double kMaxHeight = 60;
-	public static final double kHeightSlow = 56;
+	public static final double kHeightSlow = 55;
+	public static final double kHeightSlowBottom = 15;
 	public static final double kMinHeight = 10;
 
 	public static final double kP = 1.0 / 4.0, kI = 0, kD = 0;
@@ -100,6 +101,9 @@ public class LiftSubsystem extends PIDSubsystem {
 	private void setSpeedInternal(double input) {
 		double output = input;
 		if (useLidar && this.getLiftHeightInches() > kHeightSlow && output > 0) {
+			output = output / 3;
+		}
+		if (useLidar && this.getLiftHeightInches() < kHeightSlowBottom && output < 0) {
 			output = output / 3;
 		}
 		if (isAtTop() && output > 0)
