@@ -3,6 +3,7 @@ package org.discobots.recyclerush;
 import org.discobots.recyclerush.commands.ShutdownSensors;
 import org.discobots.recyclerush.commands.ToggleCompressor;
 import org.discobots.recyclerush.commands.auton.AutomatedStackingCommand;
+import org.discobots.recyclerush.commands.drive.AssistedHolonomicDriveCommand;
 import org.discobots.recyclerush.commands.drive.CycleDriveCommand;
 import org.discobots.recyclerush.commands.drive.ToggleDriveRampingCommand;
 import org.discobots.recyclerush.commands.drive.ToggleDriveTrainSpeedConstant;
@@ -76,6 +77,7 @@ public class OI {
 		b_btnA.whenPressed(new ToggleIntakeCommand());
 		b_btnX.whenPressed(new ToggleWingCommand());
 		b_btnB.whenPressed(new ToggleCompressor());
+		b_btnY.whenPressed(new AssistedHolonomicDriveCommand());
 		
 		b_sStar.whenPressed(new ShutdownSensors());
 		b_sBack.whenPressed(new CycleDriveCommand());
