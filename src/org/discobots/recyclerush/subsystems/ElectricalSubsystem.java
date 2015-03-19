@@ -1,6 +1,7 @@
 package org.discobots.recyclerush.subsystems;
 
 import org.discobots.recyclerush.HW;
+import org.discobots.recyclerush.Robot;
 import org.discobots.recyclerush.utils.PressureSensor;
 
 import edu.wpi.first.wpilibj.Compressor;
@@ -41,7 +42,7 @@ public class ElectricalSubsystem extends Subsystem {
 	}
 
 	public void setCompressor(boolean var) {
-		if (var) {
+		if (var && getPressure() < 115) {
 			cmp.start();
 		} else {
 			cmp.stop();

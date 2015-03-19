@@ -76,7 +76,7 @@ public class LiftSubsystem extends PIDSubsystem {
 
 	public boolean isAtBottom() {
 		if (useLidar) {
-			return !limitTop.get() || getLiftHeightInches() > LiftSubsystem.kMaxHeight;
+			return !limitBottom.get() || getLiftHeightInches() < LiftSubsystem.kMinHeight;
 		} else {
 			return !limitBottom.get();
 		}
