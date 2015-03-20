@@ -23,7 +23,7 @@ public class HolonomicDriveCommand extends Command {
     	double x = Robot.oi.getRawAnalogStickALX();
     	double r = Robot.oi.getRawAnalogStickARX();
     	
-    	Robot.driveTrainSub.holonomicDriveRamp(y, x, r * Math.abs(r));
+    	Robot.driveTrainSub.holonomicDriveRamp(y, x, r);
     }
 
     // Make this return true when this Command no longer needs to run execute()

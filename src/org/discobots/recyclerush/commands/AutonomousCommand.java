@@ -33,8 +33,8 @@ public class AutonomousCommand extends CommandGroup {
     
     private void autonomousMode1Init() { 
     	addSequential(new ToggleIntakeCommand());
-		addSequential(new MoveForwardHoloCommand(750,0.5)); //Forward for 5 seconds at half speed
-		addSequential(new WaitCommand(.25));
+		addSequential(new MoveForwardHoloCommand(750,0.25)); //Forward for 5 seconds at half speed
+		addSequential(new WaitCommand(.5));
 		addSequential(new RaiseLiftCommand(1,500));
 		addSequential(new MoveForwardHoloCommand(1700,-0.5)); //Backwards for 2.5 seconds at half speed
 		addSequential(new WaitCommand(.25));

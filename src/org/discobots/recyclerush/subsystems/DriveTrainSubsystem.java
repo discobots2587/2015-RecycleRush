@@ -135,7 +135,7 @@ public class DriveTrainSubsystem extends Subsystem {
 		prevY = oy;
 		prevR = or;
 
-		robotDrive.mecanumDrive_Cartesian(ox * speedScaling, oy * speedScaling, or * speedScaling, 0);
+		robotDrive.mecanumDrive_Cartesian(ox * speedScaling *3/4, oy * speedScaling *3/4, or * speedScaling/2.5, 0);
 	}
 
 	public void tankDriveUnramped(double leftStick, double rightStick) {
