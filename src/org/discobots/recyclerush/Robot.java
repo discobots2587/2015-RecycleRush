@@ -52,7 +52,7 @@ public class Robot extends IterativeRobot {
 		// dashboard init
 		Dashboard.init();
 		Dashboard.update();
-	}
+			}
 
 	public void disabledPeriodic() {
 		long start = System.currentTimeMillis();

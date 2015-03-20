@@ -1,6 +1,7 @@
 package org.discobots.recyclerush.subsystems;
 
 import org.discobots.recyclerush.HW;
+import org.discobots.recyclerush.Robot;
 import org.discobots.recyclerush.commands.drive.HolonomicDriveCommand;
 
 import edu.wpi.first.wpilibj.CANTalon;
@@ -22,7 +23,7 @@ public class DriveTrainSubsystem extends Subsystem {
 	RobotDrive robotDrive;
 
 	Gyro gyroscope;
-
+	boolean speedUp = false;
 	static final double CONSTANT_RAMP_LIMIT = 0.05; // ramping
 	// 0.05 = 4/10 seconds to full, 0.1 = 2/10 seconds to full
 	boolean allowRamped = true;
@@ -134,8 +135,10 @@ public class DriveTrainSubsystem extends Subsystem {
 		prevX = ox;
 		prevY = oy;
 		prevR = or;
-
-		robotDrive.mecanumDrive_Cartesian(ox * speedScaling *3/4, oy * speedScaling *3/4, or * speedScaling/2.5, 0);
+		if (speedUp == true)
+			robotDrive.mecanumDrive_Cartesian(ox * speedScaling, oy * speedScaling, or * speedScaling, 0);
+		else 
+			robotDrive.mecanumDrive_Cartesian(ox * speedScaling *3/4, oy * speedScaling *3/4, or * speedScaling/2.5, 0);
 	}
 
 	public void tankDriveUnramped(double leftStick, double rightStick) {
@@ -204,5 +207,13 @@ public class DriveTrainSubsystem extends Subsystem {
 
 	public void setSpeedScaling(double x) {
 		speedScaling = x;
+	}
+	public boolean speedBoostTest()
+	{
+		return speedUp;
+	}
+	public void setSpeedUp(boolean newSpd)
+	{
+		speedUp = newSpd;
 	}
 }

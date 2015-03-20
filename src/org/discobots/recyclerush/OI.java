@@ -1,6 +1,7 @@
 package org.discobots.recyclerush;
 
 import org.discobots.recyclerush.commands.ShutdownSensors;
+import org.discobots.recyclerush.commands.SpeedUpCommand;
 import org.discobots.recyclerush.commands.ToggleCompressor;
 import org.discobots.recyclerush.commands.auton.AutomatedStackingCommand;
 import org.discobots.recyclerush.commands.drive.AssistedHolonomicDriveCommand;
@@ -85,6 +86,8 @@ public class OI {
 		b_dpadU.whenPressed(new SetPlowCommand(1.0));
 		b_dpadU.whenReleased(new SetPlowCommand(0.0));
 
+		b_dpadL.whenPressed(new SpeedUpCommand());
+		
 		b_dpadD.whenPressed(new SetPlowCommand(-1.0));
 		b_dpadD.whenReleased(new SetPlowCommand(0.0));
 
