@@ -21,8 +21,8 @@ public class LiftSubsystem extends PIDSubsystem {
 	private CANTalon liftMotorLeft, liftMotorRight;
 	private DigitalInput limitTop, limitBottom;
 	private Lidar lidarLift;
-	public static final double kMaxHeight = 65;
-	public static final double kHeightSlow = 60;
+	public static final double kMaxHeight = 70;
+	public static final double kHeightSlow = 65;
 	public static final double kHeightSlowBottom = 15;
 	public static final double kMinHeight = 10;
 

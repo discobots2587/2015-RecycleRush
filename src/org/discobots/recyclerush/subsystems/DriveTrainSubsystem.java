@@ -23,7 +23,7 @@ public class DriveTrainSubsystem extends Subsystem {
 
 	Gyro gyroscope;
 
-	static final double CONSTANT_RAMP_LIMIT = 0.1; // ramping
+	static final double CONSTANT_RAMP_LIMIT = 0.05; // ramping
 	// 0.05 = 4/10 seconds to full, 0.1 = 2/10 seconds to full
 	boolean allowRamped = true;
 	private double prevLeft = 0, prevRight = 0;
