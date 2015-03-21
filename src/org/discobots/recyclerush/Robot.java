@@ -47,7 +47,7 @@ public class Robot extends IterativeRobot {
 		// gamepad code
 		oi = new OI();
 		// autonomous command
-		autonomousCommand = new AutonomousCommand(2);
+		autonomousCommand = new AutonomousCommand(1);
 
 		// dashboard init
 		Dashboard.init();
