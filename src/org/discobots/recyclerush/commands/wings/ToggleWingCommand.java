@@ -14,9 +14,7 @@ public class ToggleWingCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	int pos = -Robot.wingSub.get();
-    	if (pos==0)
-    		pos=-1;
+    	boolean pos = !Robot.wingSub.get();
     	Robot.wingSub.set(pos);
     }
 

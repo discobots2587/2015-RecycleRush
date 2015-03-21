@@ -8,8 +8,8 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class SetWingCommand extends Command {
-	int pos;
-    public SetWingCommand(int pos) {
+	boolean pos;
+    public SetWingCommand(boolean pos) {
         requires(Robot.wingSub);
         this.pos = pos;
     }

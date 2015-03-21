@@ -57,29 +57,13 @@ public class AutonomousCommand extends CommandGroup {
 //    	addSequential(new WaitCommand(3));
     	addSequential(new AutonomousArcadeDriveCommand(-1, 0, 600)); // move back at 0.5 speed backward while wings go down
     	addSequential(new WaitCommand(.5)); // wait half a second
-    	addSequential(new SetWingCommand(1)); // wings come up
+    	addSequential(new SetWingCommand(true)); // wings come up
     	addSequential(new WaitCommand(2)); // wait to raise, catch trashcan
-<<<<<<< HEAD
-    	addSequential(new AutonomousArcadeDriveCommand(.5, 0, 6000)); // drive forward at 0.5 speed forward for 5 seconds
-    	addSequential(new WaitCommand(1.5)); // wait one and  seconds
-    	addSequential(new SetWingCommand(false)); // wings come down 
-    	addSequential(new WaitCommand(0.75));
-    	addSequential(new AutonomousArcadeDriveCommand(.6, 0, 250));   
-=======
-<<<<<<< HEAD
-    	addSequential(new AutonomousArcadeDriveCommand(.5, 0, 6000)); // drive forward at 0.5 speed forward for 5 seconds
-    	addSequential(new WaitCommand(1.5)); // wait one and a half seconds
-    	addSequential(new SetWingCommand(false)); // wings come down 
-=======
     	addSequential(new AutonomousArcadeDriveCommand(.5, 0, 7500)); // drive forward at 0.5 speed forward for 5 seconds
     	addSequential(new WaitCommand(1)); // wait half a second
-    	addSequential(new SetWingCommand(-1)); // wings come down 
->>>>>>> origin/sully
+    	addSequential(new SetWingCommand(false)); // wings come down 
     	addSequential(new WaitCommand(0.75));
     	addSequential(new AutonomousArcadeDriveCommand(.6, 0, 250));  
-    	addSequential(new SetWingCommand(1)); //wings back up again
-
->>>>>>> origin/sully
     }
 
 }
