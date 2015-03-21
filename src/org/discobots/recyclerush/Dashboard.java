@@ -24,18 +24,18 @@ public class Dashboard {
 			// SmartDashboard.putNumber("Battery Voltage", DriverStation
 			// .getInstance().getBatteryVoltage());
 
-			SmartDashboard.putNumber("Motor FrontLeft Current",
-					Robot.driveTrainSub.getMotorCurrent(Motor.FRONTLEFT));
-			SmartDashboard.putNumber("Motor BackLeft Current",
-					Robot.driveTrainSub.getMotorCurrent(Motor.BACKLEFT));
-			SmartDashboard.putNumber("Motor FrontRight Current",
-					Robot.driveTrainSub.getMotorCurrent(Motor.FRONTRIGHT));
-			SmartDashboard.putNumber("Motor BackRight Current",
-					Robot.driveTrainSub.getMotorCurrent(Motor.BACKRIGHT));
-			SmartDashboard.putNumber("Motor Lift Left Current",
-					Robot.liftSub.getCurrent(LiftSubsystem.kMotorLiftLeft));
-			SmartDashboard.putNumber("Motor Lift Right Current",
-					Robot.liftSub.getCurrent(LiftSubsystem.kMotorLiftRight));
+		//	SmartDashboard.putNumber("Motor FrontLeft Current",
+		//			Robot.driveTrainSub.getMotorCurrent(Motor.FRONTLEFT));
+		//	SmartDashboard.putNumber("Motor BackLeft Current",
+			//		Robot.driveTrainSub.getMotorCurrent(Motor.BACKLEFT));
+		//	SmartDashboard.putNumber("Motor FrontRight Current",
+			//		Robot.driveTrainSub.getMotorCurrent(Motor.FRONTRIGHT));
+		//	SmartDashboard.putNumber("Motor BackRight Current",
+			//		Robot.driveTrainSub.getMotorCurrent(Motor.BACKRIGHT));
+		//	SmartDashboard.putNumber("Motor Lift Left Current",
+	//				Robot.liftSub.getCurrent(LiftSubsystem.kMotorLiftLeft));
+		//	SmartDashboard.putNumber("Motor Lift Right Current",
+		//			Robot.liftSub.getCurrent(LiftSubsystem.kMotorLiftRight));
 		} else if (driveCounter % 5 == 1) {
 			SmartDashboard.putNumber("Lift Lidar Distance (in)",
 					Robot.liftSub.getLiftHeightInches());
