@@ -23,7 +23,7 @@ public class DriveTrainSubsystem extends Subsystem {
 	public enum Motor {
 		FRONTLEFT, BACKLEFT, FRONTRIGHT, BACKRIGHT;
 	}
-	CANTalon backLeft;//, centerDropDown;
+	Talon backLeft;//, centerDropDown;
 	Talon frontRight, frontLeft ,backRight;
 	// switch to TalonSRX class if we use pwm instead.
 	// with can the following values are available:
@@ -47,7 +47,7 @@ public class DriveTrainSubsystem extends Subsystem {
 	static double kSpeedScaling = 1.0;
 
 	public DriveTrainSubsystem() {
-		backLeft = new CANTalon(HW.motorBackLeft);
+		backLeft = new Talon(HW.motorBackLeft);
 		frontLeft = new Talon(HW.motorFrontLeft);
 		frontRight = new Talon(HW.motorFrontRight);
 		backRight = new Talon(HW.motorBackRight);
@@ -204,7 +204,8 @@ public class DriveTrainSubsystem extends Subsystem {
 	}
 
 	public double getMotorCurrent(Motor motor) {
-		return this.backLeft.getOutputCurrent();
+//		return this.backLeft.getOutputCurrent();
+		return 0;
 	}
 
 	public void resetForwardDistance() {

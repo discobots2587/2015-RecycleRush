@@ -114,6 +114,7 @@ public class LiftSubsystem extends PIDSubsystem {
 			// keeps us from going down when we've reached the bottom
 			output = 0;
 		liftMotor1.set(-output);
+		liftMotor2.set(output);
 	}
 
 	@Override
