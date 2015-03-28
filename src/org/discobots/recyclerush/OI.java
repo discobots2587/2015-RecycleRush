@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import org.discobots.recyclerush.commands.ShutdownSensors;
 import org.discobots.recyclerush.commands.ToggleCompressor;
 import org.discobots.recyclerush.commands.autonomous.AutomatedStackingCommand;
+import org.discobots.recyclerush.commands.claw.ToggleClawCommand;
 import org.discobots.recyclerush.commands.drive.AssistedHolonomicDriveCommand;
 import org.discobots.recyclerush.commands.drive.CycleDriveCommand;
 import org.discobots.recyclerush.commands.drive.SetScalingCommand;
@@ -81,7 +82,7 @@ public class OI {
 		
 		b_btnX.whenPressed(new ToggleCompressor());
 		
-		b_btnB.whenPressed(new SetScalingCommand());
+		b_btnB.whenPressed(new ToggleClawCommand());
 		
 		b_btnY.whenPressed(new AutomatedStackingCommand()); // one cycle, stoppable by any button
 

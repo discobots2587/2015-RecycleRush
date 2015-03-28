@@ -20,6 +20,7 @@ public class HW {
 
 	/* Pneumatics */
 	public final static int solenoidIntake = 0;
+	public final static int solenoidClaw = 1;
 
 	/* Relay */
 

@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.discobots.recyclerush.commands.AutonomousCommand;
+import org.discobots.recyclerush.subsystems.ClawSubsystem;
 import org.discobots.recyclerush.subsystems.DriveTrainSubsystem;
 import org.discobots.recyclerush.subsystems.ElectricalSubsystem;
 import org.discobots.recyclerush.subsystems.LiftSubsystem;
@@ -25,6 +26,7 @@ public class Robot extends IterativeRobot {
 	public static LiftSubsystem liftSub;
 	public static IntakeSubsystem intakeSub;
 	public static PlowSubsystem plowSub;
+	public static ClawSubsystem clawSub;
 	
 	public static OI oi;
 	
@@ -42,6 +44,7 @@ public class Robot extends IterativeRobot {
 		liftSub	= new LiftSubsystem();
 		intakeSub = new IntakeSubsystem();
 		plowSub = new PlowSubsystem();
+		clawSub = new ClawSubsystem();
 
 		// gamepad code
 		oi = new OI();
