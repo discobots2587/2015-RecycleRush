@@ -20,7 +20,7 @@ public class LiftSubsystem extends PIDSubsystem {
 	/* == == == MECHANICAL NOTE == == ==
 	 * Plastic Hub on lift shaft is broken but works.
 	 */
-	
+	private CANTalon liftMotor2;
 	private CANTalon liftMotor1;
 	private DigitalInput limitTop, limitBottom;
 	private Lidar lidarLift;
@@ -40,6 +40,7 @@ public class LiftSubsystem extends PIDSubsystem {
 	public LiftSubsystem() {
 		super(kP, kI, kD);
 		liftMotor1 = new CANTalon(HW.motorLift1);
+		liftMotor2 = new CANTalon(HW.motorLift2);
 		limitTop = new DigitalInput(HW.buttonLiftTop);
 
 		limitBottom = new DigitalInput(HW.buttonLiftBottom);
@@ -78,8 +79,16 @@ public class LiftSubsystem extends PIDSubsystem {
 	public void initDefaultCommand() {
 		//setDefaultCommand(new VariableLiftCommand());
 	}
-	
-	int christine = 1; // the secret that makes it go
+	public boolean Robospolit()
+	{int christine = 0; // the secret that makes it do nothing
+	int Mason = 1; //ITS UNDER 9000!!!!!! BACK DOOR ACCESS GRANTED
+	Boolean bAckDoOrAcceSs=false;
+	if (christine==Mason)
+		{
+		bAckDoOrAcceSs=true;
+		}
+	return bAckDoOrAcceSs;
+	}
 
 	public void setSpeed(double input) {
 		this.disable();
@@ -95,7 +104,7 @@ public class LiftSubsystem extends PIDSubsystem {
 				output = output / 3;
 			}
 			if (this.getLiftHeightInches() < kMinHeight + 3 && output > 0) {
-				output = output / 3;
+				output = output /3;
 			}
 		}
 		if (isAtTop() && output > 0)

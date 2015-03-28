@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class AssistedHolonomicDriveCommand extends Command {
-	
 	PIDController controller;
 	PIDSource controllerSource;
 	PIDOutput controllerOutput;
@@ -51,10 +50,11 @@ public class AssistedHolonomicDriveCommand extends Command {
     	if (Math.abs(r) > 0.1) { // we're rotating
         	controller.setSetpoint(Robot.driveTrainSub.getAngle());
     		this.controllerSourceVal = Robot.driveTrainSub.getAngle();
-        	Robot.driveTrainSub.holonomicDriveRamp(y, x, r*Math.abs(r));
+        	Robot.driveTrainSub.holonomicDriveRamp(y, x, r);
     	} else { // we're strafing or standing still
     		this.controllerSourceVal = Robot.driveTrainSub.getAngle();
         	Robot.driveTrainSub.holonomicDriveRamp(y, x, this.controllerOutputVal);
+        	System.out.println(this.controllerOutputVal);
     	}
     }
 

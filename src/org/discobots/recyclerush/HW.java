@@ -8,10 +8,12 @@ package org.discobots.recyclerush;
  */
 public class HW {
 	/* CAN */// Check roboRio web interface for these values
-	public final static int motorBackLeft = 35;
+
 	public final static int motorLift1 = 38;
+	public final static int motorLift2 = 35;
 
 	/* PWM */
+	public final static int motorBackLeft = 7;
 	public final static int motorPlowLeft = 0;
 	public final static int motorPlowRight = 1;
 	public final static int motorFrontLeft = 2;
