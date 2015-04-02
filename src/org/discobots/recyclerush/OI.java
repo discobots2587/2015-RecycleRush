@@ -64,16 +64,16 @@ public class OI {
 
 	public OI() {
 		// first gamepad
-		b_trigR.whenPressed(new SetLiftCommand(1));
+		b_trigR.whenPressed(new SetLiftCommand(-1));
 		b_trigR.whenReleased(new SetLiftCommand(0));
 
-		b_trigL.whenPressed(new SetLiftCommand(-1));
+		b_trigL.whenPressed(new SetLiftCommand(1));
 		b_trigL.whenReleased(new SetLiftCommand(0));
 
-		b_bumpR.whenPressed(new SetLiftCommand(0.5));
+		b_bumpR.whenPressed(new SetLiftCommand(-0.5));
 		b_bumpR.whenReleased(new SetLiftCommand(0));
 
-		b_bumpL.whenPressed(new SetLiftCommand(-0.5));
+		b_bumpL.whenPressed(new SetLiftCommand(0.5));
 		b_bumpL.whenReleased(new SetLiftCommand(0));
 
 		b_btnA.whenPressed(new ToggleIntakeCommand());
