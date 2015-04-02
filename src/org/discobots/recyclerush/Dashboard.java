@@ -45,8 +45,8 @@ public class Dashboard {
 					Robot.electricalSub.getPressureSwitchState());
 			SmartDashboard.putNumber("Pressure",
 					Robot.electricalSub.getPressure());
-			SmartDashboard.putBoolean("Wings", Robot.wingSub.get());
-
+			SmartDashboard.putNumber("Wings", Robot.wingSub.get());
+			
 			SmartDashboard.putBoolean("Lift Top", Robot.liftSub.isAtTop());
 			SmartDashboard
 					.putBoolean("Lift Bottom", Robot.liftSub.isAtBottom());
