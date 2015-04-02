@@ -10,17 +10,17 @@ public class WingSubsystem extends Subsystem {
 	Solenoid left, right;
  
 	public WingSubsystem() {
-		left = new Solenoid(HW.solFlapLeft);
+		//left = new Solenoid(HW.solFlapLeft);
 		right = new Solenoid(HW.solFlapRight);
 	}
 	
 	public void set(boolean pos) {
-		left.set(pos);
+		//left.set(pos);
 		right.set(pos);
 	}
 	
 	public boolean get() {
-		return left.get();
+		return right.get();
 	}
 	
     public void initDefaultCommand() {

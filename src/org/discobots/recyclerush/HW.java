@@ -24,7 +24,7 @@ public class HW {
 
 	/* Pneumatics */
 	public final static int solIntake = 0;
-	public final static int solFlapLeft = 4;
+	//public final static int solFlapLeft = 4;
 	public final static int solFlapRight = 3;
 	public final static int solClaw = 1;
 
