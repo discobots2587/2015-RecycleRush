@@ -4,6 +4,7 @@ import org.discobots.recyclerush.commands.ShutdownSensors;
 import org.discobots.recyclerush.commands.SpeedUpCommand;
 import org.discobots.recyclerush.commands.ToggleCompressor;
 import org.discobots.recyclerush.commands.auton.AutomatedStackingCommand;
+import org.discobots.recyclerush.commands.claw.ToggleClawCommand;
 import org.discobots.recyclerush.commands.drive.AssistedHolonomicDriveCommand;
 import org.discobots.recyclerush.commands.drive.CycleDriveCommand;
 import org.discobots.recyclerush.commands.drive.ToggleDriveRampingCommand;
@@ -63,36 +64,36 @@ public class OI {
 	public OI() {
 		// first gamepad
 		// drive commands control analog sticks on joy 1
-		b_trigR.whenPressed(new SetLiftCommand(1));
-		b_trigR.whenReleased(new SetLiftCommand(0));
+		b2_trigR.whenPressed(new SetLiftCommand(1));
+		b2_trigR.whenReleased(new SetLiftCommand(0));
 
-		b_trigL.whenPressed(new SetLiftCommand(-1));
-		b_trigL.whenReleased(new SetLiftCommand(0));
+		b2_trigL.whenPressed(new SetLiftCommand(-1));
+		b2_trigL.whenReleased(new SetLiftCommand(0));
 
-		b_bumpR.whenPressed(new SetLiftCommand(0.5));
-		b_bumpR.whenReleased(new SetLiftCommand(0));
+		b2_bumpR.whenPressed(new SetLiftCommand(0.5));
+		b2_bumpR.whenReleased(new SetLiftCommand(0));
 
-		b_bumpL.whenPressed(new SetLiftCommand(-0.5));
-		b_bumpL.whenReleased(new SetLiftCommand(0));
+		b2_bumpL.whenPressed(new SetLiftCommand(-0.5));
+		b2_bumpL.whenReleased(new SetLiftCommand(0));
 
-		b_btnA.whenPressed(new ToggleIntakeCommand());
-		b_btnX.whenPressed(new ToggleWingCommand());
-		b_btnB.whenPressed(new ToggleCompressor());
-		b_btnY.whenPressed(new AssistedHolonomicDriveCommand());
+		b2_btnA.whenPressed(new ToggleIntakeCommand());
+		b2_btnX.whenPressed(new ToggleWingCommand());
+		b2_btnY.whenPressed(new ToggleCompressor());
+		b2_btnB.whenPressed(new ToggleClawCommand());
 		
-		b_sStar.whenPressed(new ShutdownSensors());
-		b_sBack.whenPressed(new CycleDriveCommand());
+		b2_sStar.whenPressed(new ShutdownSensors());
+		b2_sBack.whenPressed(new CycleDriveCommand());
 
-		b_dpadU.whenPressed(new SetPlowCommand(1.0));
-		b_dpadU.whenReleased(new SetPlowCommand(0.0));
+		b2_dpadU.whenPressed(new SetPlowCommand(1.0));
+		b2_dpadU.whenReleased(new SetPlowCommand(0.0));
 
-		b_dpadL.whenPressed(new SpeedUpCommand());
+		b2_dpadL.whenPressed(new SpeedUpCommand());
 		
-		b_dpadD.whenPressed(new SetPlowCommand(-1.0));
-		b_dpadD.whenReleased(new SetPlowCommand(0.0));
+		b2_dpadD.whenPressed(new SetPlowCommand(-1.0));
+		b2_dpadD.whenReleased(new SetPlowCommand(0.0));
 
 		// second gamepad
-		b2_trigR.whenPressed(new SetLiftCommand(1));
+		/*b2_trigR.whenPressed(new SetLiftCommand(1));
 		b2_trigR.whenReleased(new SetLiftCommand(0));
 
 		b2_trigL.whenPressed(new SetLiftCommand(-1));
@@ -109,7 +110,7 @@ public class OI {
 		b2_btnY.whenPressed(new ShutdownSensors());
 
 		b2_sStar.whenPressed(new ToggleDriveTrainSpeedConstant());
-		b2_sBack.whenPressed(new ToggleDriveRampingCommand());
+		b2_sBack.whenPressed(new ToggleDriveRampingCommand());*/
 	}
 
 	public double getRawAnalogStickALX() {

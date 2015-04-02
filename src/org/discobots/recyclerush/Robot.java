@@ -46,6 +46,7 @@ public class Robot extends IterativeRobot {
 		intakeSub = new IntakeSubsystem();
 		wingSub = new WingSubsystem();
 		plowSub = new PlowSubsystem();
+		clawSub = new ClawSubsystem();
 		// gamepad code
 		oi = new OI();
 		// autonomous command
