@@ -2,6 +2,7 @@
 package org.discobots.recyclerush.commands;
 
 import org.discobots.recyclerush.commands.auton.AutonomousArcadeDriveCommand;
+import org.discobots.recyclerush.commands.auton.AutonomousArcadeDriveRampCommand;
 import org.discobots.recyclerush.commands.auton.MoveForwardHoloCommand;
 import org.discobots.recyclerush.commands.auton.MoveSidewayHoloCommand;
 import org.discobots.recyclerush.commands.intake.ToggleIntakeCommand;
@@ -15,6 +16,9 @@ public class AutonomousCommand extends CommandGroup {
 
     public AutonomousCommand(int mode) {
     	switch(mode) {
+    	case 3:
+    		autonomousMode3Init();
+    		break;
     	case 1:
     		autonomousMode1Init();
     		break;
@@ -53,17 +57,34 @@ public class AutonomousCommand extends CommandGroup {
     
     private void autonomousMode2Init() {
     	// WINGS, TWO BINS FROM BUMP
-//    	addSequential(new SetWingCommand(true)); // both wings down
-//    	addSequential(new WaitCommand(3));
-    	addSequential(new AutonomousArcadeDriveCommand(-1, 0, 750)); // move back at 0.5 speed backward while wings go down
-    	addSequential(new WaitCommand(.5)); // wait half a second
+    	//addSequential(new SetWingCommand(-1)); // both wings down
+    	//addSequential(new WaitCommand(3));
+    	//addSequential(new CheckWingStateCommand());
+    	addSequential(new AutonomousArcadeDriveCommand(-.75,0,100));
+    	addSequential(new AutonomousArcadeDriveCommand(-1, 0, 550));// move back at 0.5 speed backward while wings go down
+    	//addSequential(new WaitCommand(.3));
+    	addSequential(new AutonomousArcadeDriveCommand(-0.5, 0, 750));
+    	//addSequential(new WaitCommand(.3));
+    	addSequential(new AutonomousArcadeDriveCommand(-0.25, 0, 500));
+    	
+    	
+    	//addSequential(new WaitCommand(.5)); // wait half a second
     	addSequential(new SetWingCommand(1)); // wings come up
     	addSequential(new WaitCommand(2)); // wait to raise, catch trashcan
-    	addSequential(new AutonomousArcadeDriveCommand(.75, 0, 1000)); // drive forward at 0.5 speed forward for 5 seconds
-    	addSequential(new WaitCommand(1.5)); // wait half a second
+    	addSequential(new AutonomousArcadeDriveCommand(.75, 0, 2500)); // drive forward at 0.5 speed forward for 5 seconds
+    	/*addSequential(new WaitCommand(1.5)); // wait half a second
     	addSequential(new SetWingCommand(-1)); // wings come down 
     	addSequential(new WaitCommand(0.75));
-    	addSequential(new AutonomousArcadeDriveCommand(.6, 0, 250));  
+    	addSequential(new AutonomousArcadeDriveCommand(.6, 0, 250));
+    	addSequential(new WaitCommand(.5));
+    	addSequential(new SetWingCommand(1));*/
+    }
+    private void autonomousMode3Init() {
+    	addSequential(new ToggleIntakeCommand());
+    	addSequential(new RaiseLiftCommand(1,500));
+    	addSequential(new MoveForwardHoloCommand(2000,.5));
+    	//addSequential(new ToggleIntakeCommand());
+    	addSequential(new MoveForwardHoloCommand(500,-1.0));
     }
 
 }

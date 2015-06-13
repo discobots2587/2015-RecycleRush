@@ -3,6 +3,7 @@ package org.discobots.recyclerush;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.discobots.recyclerush.commands.AutonomousCommand;
 import org.discobots.recyclerush.subsystems.ClawSubsystem;
@@ -95,7 +96,14 @@ public class Robot extends IterativeRobot {
 	 * to reset subsystems before shutting down.
 	 */
 	public void disabledInit() {
-
+		if(!wingSub.isFirstTime)
+		{
+			wingSub.set(-1);
+			
+		}
+		//else
+		//	wingSub.set(-1);
+		wingSub.isFirstTime = false;
 	}
 
 	/**

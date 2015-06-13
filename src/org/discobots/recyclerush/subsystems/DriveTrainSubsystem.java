@@ -5,6 +5,7 @@ import org.discobots.recyclerush.Robot;
 import org.discobots.recyclerush.commands.drive.HolonomicDriveCommand;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -29,6 +30,7 @@ public class DriveTrainSubsystem extends Subsystem {
 	boolean allowRamped = true;
 	private double prevLeft = 0, prevRight = 0;
 	private double prevY = 0, prevX = 0, prevR;
+	private DigitalInput limitBackA, limitBackB;
 
 	double speedScaling = 1.0;
 
@@ -38,6 +40,8 @@ public class DriveTrainSubsystem extends Subsystem {
 		frontRight = new CANTalon(HW.motorFrontRight);
 		backRight = new CANTalon(HW.motorBackRight);
 
+		//limitBackA = new DigitalInput(HW.switchBackLimitA);
+		//limitBackB = new DigitalInput(HW.switchBackLimitB);
 
 		gyroscope = new Gyro(HW.aGyroscope);
 
@@ -47,6 +51,11 @@ public class DriveTrainSubsystem extends Subsystem {
 		robotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, false);
 		robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, false);
 		robotDrive.setSafetyEnabled(false);
+	}
+	
+	public boolean isAtBack()
+	{
+		return limitBackA.get() || limitBackB.get();
 	}
 
 	public void setRamped(boolean a) {

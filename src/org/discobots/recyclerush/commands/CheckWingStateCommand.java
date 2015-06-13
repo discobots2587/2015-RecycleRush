@@ -1,4 +1,4 @@
-package org.discobots.recyclerush.commands.drive;
+package org.discobots.recyclerush.commands;
 
 import org.discobots.recyclerush.Robot;
 
@@ -7,31 +7,31 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class HolonomicDriveCommand extends Command {
+public class CheckWingStateCommand extends Command {
 
-    public HolonomicDriveCommand() {
-        requires(Robot.driveTrainSub);
+    public CheckWingStateCommand() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	requires(Robot.wingSub);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	if(Robot.wingSub.get()==1){
+    		Robot.wingSub.set(-1);
+    		try{
+    			Thread.sleep(1000);
+    		}
+    		catch(InterruptedException ex)
+    		{
+    			ex.printStackTrace();
+    		}
+    	}
+    		
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double y = Robot.oi.getRawAnalogStickALY();
-    	double x = Robot.oi.getRawAnalogStickALX();
-    	double r = Robot.oi.getRawAnalogStickARX();
-    	
-    	//if (Math.abs(y) < 0.1)
-    	//	y = 0;
-    	//if (Math.abs(x) < 0.1)
-    	//	x = 0;
-    	//if (Math.abs(r) < 0.1)
-    	//	r = 0;
-    	
-    	Robot.driveTrainSub.holonomicDriveRamp(y, x, r);
-    	//System.out.println(x + " " + y + " " + r);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -41,12 +41,10 @@ public class HolonomicDriveCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.driveTrainSub.holonomicDriveUnramped(0, 0, 0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }

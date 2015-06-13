@@ -53,6 +53,7 @@ public class Dashboard {
 
 			SmartDashboard.putData(Robot.driveTrainSub);
 			SmartDashboard.putData(Robot.liftSub);
+			SmartDashboard.putNumber("Wings Down", Robot.wingSub.get());
 
 		}
 	}

@@ -39,6 +39,9 @@ public class HW {
 	public final static int encoderSidewayB = 3;
 	public final static int buttonLiftTop = 9;
 	public final static int buttonLiftBottom = 8;
+	
+	public final static int switchBackLimitA = -1;
+	public final static int switchBackLimitB = -1;
 
 	public final static int lidarControlLift = 7;
 

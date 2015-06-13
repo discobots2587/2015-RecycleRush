@@ -8,11 +8,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class WingSubsystem extends Subsystem {
     
+	public boolean isFirstTime;
 	DoubleSolenoid left, right;
 	int position;
 	public WingSubsystem() {
 	//	left = new DoubleSolenoid(HW.solFlapLeft1, HW.solFlapLeft2);
+		
+		isFirstTime = true;
 		right = new DoubleSolenoid(HW.solFlapRight1, HW.solFlapRight2);
+		
 	}
 	
 	public void set(int pos) {
