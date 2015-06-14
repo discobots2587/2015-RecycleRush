@@ -9,6 +9,7 @@ import org.discobots.recyclerush.commands.drive.AssistedHolonomicDriveCommand;
 import org.discobots.recyclerush.commands.drive.CycleDriveCommand;
 import org.discobots.recyclerush.commands.drive.ToggleDriveRampingCommand;
 import org.discobots.recyclerush.commands.drive.ToggleDriveTrainSpeedConstant;
+import org.discobots.recyclerush.commands.intake.SetActiveIntakeCommand;
 import org.discobots.recyclerush.commands.intake.ToggleIntakeCommand;
 import org.discobots.recyclerush.commands.lift.SetLiftCommand;
 import org.discobots.recyclerush.commands.plow.SetPlowCommand;
@@ -84,13 +85,13 @@ public class OI {
 		b2_sStar.whenPressed(new ShutdownSensors());
 		b2_sBack.whenPressed(new CycleDriveCommand());
 
-		b2_dpadU.whenPressed(new SetPlowCommand(1.0));
-		b2_dpadU.whenReleased(new SetPlowCommand(0.0));
+		b2_dpadU.whenPressed(new SetActiveIntakeCommand(1.0));
+		b2_dpadU.whenReleased(new SetActiveIntakeCommand(0.0));
 
 		b2_dpadL.whenPressed(new SpeedUpCommand());
 		
-		b2_dpadD.whenPressed(new SetPlowCommand(-1.0));
-		b2_dpadD.whenReleased(new SetPlowCommand(0.0));
+		b2_dpadD.whenPressed(new SetActiveIntakeCommand(-1.0));
+		b2_dpadD.whenReleased(new SetActiveIntakeCommand(0.0));
 
 		// second gamepad
 		/*b2_trigR.whenPressed(new SetLiftCommand(1));
