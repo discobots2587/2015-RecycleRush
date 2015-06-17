@@ -11,6 +11,7 @@ import org.discobots.recyclerush.commands.drive.ToggleDriveRampingCommand;
 import org.discobots.recyclerush.commands.drive.ToggleDriveTrainSpeedConstant;
 import org.discobots.recyclerush.commands.intake.SetActiveIntakeCommand;
 import org.discobots.recyclerush.commands.intake.ToggleIntakeCommand;
+import org.discobots.recyclerush.commands.intake.ToggleIntakeSolenoids;
 import org.discobots.recyclerush.commands.lift.SetLiftCommand;
 import org.discobots.recyclerush.commands.plow.SetPlowCommand;
 import org.discobots.recyclerush.commands.wings.ToggleWingCommand;
@@ -79,7 +80,8 @@ public class OI {
 
 		b2_btnA.whenPressed(new ToggleIntakeCommand());
 		b2_btnX.whenPressed(new ToggleWingCommand());
-		b2_btnY.whenPressed(new ToggleCompressor());
+		b2_btnY.whileHeld(new ToggleIntakeSolenoids(1));
+		b2_btnY.whenReleased(new ToggleIntakeSolenoids(-1));
 		b2_btnB.whenPressed(new ToggleClawCommand());
 		
 		b2_sStar.whenPressed(new ShutdownSensors());

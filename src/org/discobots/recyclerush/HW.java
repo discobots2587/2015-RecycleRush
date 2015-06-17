@@ -30,7 +30,10 @@ public class HW {
 	//public final static int solFlapLeft = 4;
 	public final static int solFlapRight1 = 3;
 	public final static int solFlapRight2 = 4;
-
+	public final static int intakeRight1=5;
+	public final static int intakeRight2=6;
+	public final static int intakeLeft1=5;
+	public final static int intakeLeft2=6;
 	public final static int solClaw = 1;
 
 	/* Relay */
