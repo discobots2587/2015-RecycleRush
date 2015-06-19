@@ -20,7 +20,7 @@ public class HW {
 	public final static int motorPlowLeft = 35 ;
 	public final static int motorPlowRight = 38;
 	
-	public final static int motorIntakeLeft = 38;
+	public final static int motorIntakeLeft = 36;
 	public final static int motorIntakeRight = 35;
 
 	/* PWM */
