@@ -1,5 +1,6 @@
 package org.discobots.recyclerush;
 
+
 import org.discobots.recyclerush.commands.ShutdownSensors;
 import org.discobots.recyclerush.commands.SpeedUpCommand;
 import org.discobots.recyclerush.commands.ToggleCompressor;
@@ -29,7 +30,6 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 	private GamePad gp1 = new GamePad(0);
 	private GamePad xbox = new GamePad(1); 
-	boolean enabled;
 
 	// JOYSTICK 2
 	private Button b_dpadU = new DPadButton(gp1, GamePad.DPAD_Y, true);
@@ -98,14 +98,10 @@ public class OI {
 		b2_dpadD.whenReleased(new SetActiveIntakeCommand(0.0));
 		
 		
-		//enables second controller
-		if(b_sStar.equals(1))
-			enabled=true;
-		if(b_sStar.equals(1) && b_sBack.equals(1))
-			enabled=false;
 
-if(enabled==true)
-{
+		
+
+
 		// second gamepad
 		if (b_triggers<=-0.3)//right trigger pressed
 		{
@@ -125,14 +121,29 @@ if(enabled==true)
 		b_bumpL.whenPressed(new SetLiftCommand(-0.5));
 		b_bumpL.whenReleased(new SetLiftCommand(0));
 
-		b_btnA.whenPressed(new ToggleIntakeCommand());
-		b_btnB.whenPressed(new AutomatedStackingCommand()); // one cycle, stoppable by any button
-		b_btnY.whenPressed(new ShutdownSensors());
+	//	b_btnA.whenPressed(new ToggleIntakeCommand());
+	//	b_btnB.whenPressed(new AutomatedStackingCommand()); // one cycle, stoppable by any button
+	//	b_btnY.whenPressed(new ShutdownSensors());
 
-		b_sStar.whenPressed(new ToggleDriveTrainSpeedConstant());
-		b_sBack.whenPressed(new ToggleDriveRampingCommand());
+	//	b_sBack.whenPressed(new ToggleDriveRampingCommand());
+		
+		b_btnA.whenPressed(new ToggleIntakeCommand());
+		b_btnX.whenPressed(new ToggleWingCommand());
+		b_btnY.whileHeld(new ToggleIntakeSolenoids(1));
+		b_btnY.whenReleased(new ToggleIntakeSolenoids(-1));
+		b_btnB.whenPressed(new ToggleClawCommand());
+		
+		b_dpadU.whenPressed(new SetActiveIntakeCommand(1.0));
+		b_dpadU.whenReleased(new SetActiveIntakeCommand(0.0));
+
+		b_dpadL.whenPressed(new SpeedUpCommand());
+		
+		b_dpadD.whenPressed(new SetActiveIntakeCommand(-1.0));
+		b_dpadD.whenReleased(new SetActiveIntakeCommand(0.0));
+		b_sStar.whenPressed(new ShutdownSensors());
+		b_sBack.whenPressed(new CycleDriveCommand());
 	}
-	}
+	
 	public double getRawAnalogStickALX() {
 		return gp1.getLX();
 	}
@@ -150,30 +161,23 @@ if(enabled==true)
 	}
 
 	public double getRawAnalogStickBLX() {
-		if (enabled==true)
 		return xbox.getLX();
-		else
-			return 0;
+
 	}
 
 	public double getRawAnalogStickBLY() {
-		if (enabled==true)
 		return xbox.getLY();
-		else
-			return 0;
+
 	}
 
 	public double getRawAnalogStickBRX() {
-		if (enabled==true)
 		return xbox.getRX();
-		else
-			return 0;
+
 	}
 
 	public double getRawAnalogStickBRY() {
-		if (enabled==true)
 		return xbox.getRY();
-		else
-			return 0;
+
 	}
+
 }

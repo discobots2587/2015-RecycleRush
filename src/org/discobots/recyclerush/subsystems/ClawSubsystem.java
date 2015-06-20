@@ -16,7 +16,7 @@ public class ClawSubsystem extends Subsystem {
 
 	public ClawSubsystem() {
 		claw = new Solenoid(HW.solClaw);
-		claw.set(false);
+		claw.set(true);
 	}
 
 	public void setClaw(boolean clawSPD) {
