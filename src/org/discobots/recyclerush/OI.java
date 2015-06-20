@@ -18,6 +18,7 @@ import org.discobots.recyclerush.commands.wings.ToggleWingCommand;
 import org.discobots.recyclerush.utils.GamePad;
 import org.discobots.recyclerush.utils.GamePad.DPadButton;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -27,25 +28,26 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	private GamePad gp1 = new GamePad(0);
-	private GamePad gp2 = new GamePad(1);
-	// JOYSTICK 1
-	private Button b_dpadU = new DPadButton(gp1, GamePad.DPAD_Y, true);
-	private Button b_dpadD = new DPadButton(gp1, GamePad.DPAD_Y, false);
-	private Button b_dpadR = new DPadButton(gp1, GamePad.DPAD_X, true);
-	private Button b_dpadL = new DPadButton(gp1, GamePad.DPAD_X, false);
-	private Button b_bumpR = new JoystickButton(gp1, GamePad.BTN_RB);
-	private Button b_bumpL = new JoystickButton(gp1, GamePad.BTN_LB);
-	private Button b_trigR = new JoystickButton(gp1, GamePad.BTN_RT);
-	private Button b_trigL = new JoystickButton(gp1, GamePad.BTN_LT);
-	private Button b_sBack = new JoystickButton(gp1, GamePad.BTN_BACK);
-	private Button b_sStar = new JoystickButton(gp1, GamePad.BTN_START);
-	private Button b_btnA = new JoystickButton(gp1, GamePad.BTN_A);
-	private Button b_btnX = new JoystickButton(gp1, GamePad.BTN_X);
-	private Button b_btnB = new JoystickButton(gp1, GamePad.BTN_B);
-	private Button b_btnY = new JoystickButton(gp1, GamePad.BTN_Y);
-	private Button b_clicR = new JoystickButton(gp1, GamePad.AXISBTN_R);
-	private Button b_clicL = new JoystickButton(gp1, GamePad.AXISBTN_L);
+	private GamePad xbox = new GamePad(1); 
+	boolean enabled;
+
 	// JOYSTICK 2
+	private Button b_dpadU = new DPadButton(gp1, GamePad.DPAD_Y, true);
+	private Button b_dpadD = new DPadButton(xbox, GamePad.DPAD_Y, false);
+	private Button b_dpadR = new DPadButton(xbox, GamePad.DPAD_X, true);
+	private Button b_dpadL = new DPadButton(xbox, GamePad.DPAD_X, false);
+	private Button b_bumpR = new JoystickButton(xbox, 6);
+	private Button b_bumpL = new JoystickButton(xbox, 5);
+	private double b_triggers = (float) xbox.getRawAxis(3);
+	private Button b_sBack = new JoystickButton(xbox, 7);
+	private Button b_sStar = new JoystickButton(xbox, 8);
+	private Button b_btnA = new JoystickButton(xbox, 1);
+	private Button b_btnX = new JoystickButton(xbox, 3);
+	private Button b_btnB = new JoystickButton(xbox, 2);
+	private Button b_btnY = new JoystickButton(xbox, 4);
+	private Button b_clicR = new JoystickButton(xbox, 10);
+	private Button b_clicL = new JoystickButton(xbox, 9);
+	// JOYSTICK 1
 	private Button b2_dpadU = new DPadButton(gp1, GamePad.DPAD_Y, true);
 	private Button b2_dpadD = new DPadButton(gp1, GamePad.DPAD_Y, false);
 	private Button b2_dpadR = new DPadButton(gp1, GamePad.DPAD_X, true);
@@ -94,28 +96,43 @@ public class OI {
 		
 		b2_dpadD.whenPressed(new SetActiveIntakeCommand(-1.0));
 		b2_dpadD.whenReleased(new SetActiveIntakeCommand(0.0));
+		
+		
+		//enables second controller
+		if(b_sStar.equals(1))
+			enabled=true;
+		if(b_sStar.equals(1) && b_sBack.equals(1))
+			enabled=false;
 
+if(enabled==true)
+{
 		// second gamepad
-		/*b2_trigR.whenPressed(new SetLiftCommand(1));
-		b2_trigR.whenReleased(new SetLiftCommand(0));
+		if (b_triggers<=-0.3)//right trigger pressed
+		{
+			new SetLiftCommand(1);
+		}
+		if(-0.3<b_triggers && b_triggers<0.3)
+		{
+			new SetLiftCommand(0);
+		}
+		if (b_triggers>=0.3)
+		{
+			new SetLiftCommand(-1);
+		}
+		b_bumpR.whenPressed(new SetLiftCommand(0.5));
+		b_bumpR.whenReleased(new SetLiftCommand(0));
 
-		b2_trigL.whenPressed(new SetLiftCommand(-1));
-		b2_trigL.whenReleased(new SetLiftCommand(0));
+		b_bumpL.whenPressed(new SetLiftCommand(-0.5));
+		b_bumpL.whenReleased(new SetLiftCommand(0));
 
-		b2_bumpR.whenPressed(new SetLiftCommand(0.5));
-		b2_bumpR.whenReleased(new SetLiftCommand(0));
+		b_btnA.whenPressed(new ToggleIntakeCommand());
+		b_btnB.whenPressed(new AutomatedStackingCommand()); // one cycle, stoppable by any button
+		b_btnY.whenPressed(new ShutdownSensors());
 
-		b2_bumpL.whenPressed(new SetLiftCommand(-0.5));
-		b2_bumpL.whenReleased(new SetLiftCommand(0));
-
-		b2_btnA.whenPressed(new ToggleIntakeCommand());
-		b2_btnB.whenPressed(new AutomatedStackingCommand()); // one cycle, stoppable by any button
-		b2_btnY.whenPressed(new ShutdownSensors());
-
-		b2_sStar.whenPressed(new ToggleDriveTrainSpeedConstant());
-		b2_sBack.whenPressed(new ToggleDriveRampingCommand());*/
+		b_sStar.whenPressed(new ToggleDriveTrainSpeedConstant());
+		b_sBack.whenPressed(new ToggleDriveRampingCommand());
 	}
-
+	}
 	public double getRawAnalogStickALX() {
 		return gp1.getLX();
 	}
@@ -133,18 +150,30 @@ public class OI {
 	}
 
 	public double getRawAnalogStickBLX() {
-		return gp2.getLX();
+		if (enabled==true)
+		return xbox.getLX();
+		else
+			return 0;
 	}
 
 	public double getRawAnalogStickBLY() {
-		return gp2.getLY();
+		if (enabled==true)
+		return xbox.getLY();
+		else
+			return 0;
 	}
 
 	public double getRawAnalogStickBRX() {
-		return gp2.getRX();
+		if (enabled==true)
+		return xbox.getRX();
+		else
+			return 0;
 	}
 
 	public double getRawAnalogStickBRY() {
-		return gp2.getRY();
+		if (enabled==true)
+		return xbox.getRY();
+		else
+			return 0;
 	}
 }

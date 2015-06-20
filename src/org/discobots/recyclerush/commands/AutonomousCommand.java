@@ -5,9 +5,12 @@ import org.discobots.recyclerush.commands.auton.AutonomousArcadeDriveCommand;
 import org.discobots.recyclerush.commands.auton.AutonomousArcadeDriveRampCommand;
 import org.discobots.recyclerush.commands.auton.MoveForwardHoloCommand;
 import org.discobots.recyclerush.commands.auton.MoveSidewayHoloCommand;
+import org.discobots.recyclerush.commands.intake.SetActiveIntakeCommand;
 import org.discobots.recyclerush.commands.intake.ToggleIntakeCommand;
+import org.discobots.recyclerush.commands.intake.ToggleIntakeSolenoids;
 import org.discobots.recyclerush.commands.lift.RaiseLiftCommand;
 import org.discobots.recyclerush.commands.wings.SetWingCommand;
+import org.discobots.recyclerush.commands.wings.ToggleWingCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
@@ -24,6 +27,9 @@ public class AutonomousCommand extends CommandGroup {
     		break;
     	case 2:
     		autonomousMode2Init();
+    		break;
+    	case 4:
+    		autonomousMode4Init();
     		break;
     	default:
     		autonomousMode0Init();
@@ -87,4 +93,20 @@ public class AutonomousCommand extends CommandGroup {
     	addSequential(new MoveForwardHoloCommand(500,-1.0));
     }
 
-}
+    private void autonomousMode4Init(){
+    addSequential(new ToggleIntakeCommand());
+    addSequential(new RaiseLiftCommand(1,200));
+    addSequential(new SetActiveIntakeCommand(1));
+    addSequential(new WaitCommand(.5));
+    //addSequential(new ToggleIntakeSolenoids(1)); //for when wings are added back in
+    addSequential(new ToggleWingCommand());
+    addSequential(new SetActiveIntakeCommand(1));
+    addSequential(new WaitCommand(.5));
+    addSequential(new SetActiveIntakeCommand(0));
+    //addSequential(new ToggleIntakeSolenoids(1)); //for when wings are added back in
+    addSequential(new ToggleWingCommand());
+    
+
+    }
+    }
+
