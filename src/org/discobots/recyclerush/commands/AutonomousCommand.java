@@ -43,7 +43,7 @@ public class AutonomousCommand extends CommandGroup {
     
     private void autonomousMode1Init() { 
     	addSequential(new ToggleIntakeCommand());
-		addSequential(new MoveForwardHoloCommand(750,0.25)); //Forward for 5 seconds at half speed
+		addSequential(new MoveForwardHoloCommand(500,0.25)); //Forward for 5 seconds at half speed
 		addSequential(new WaitCommand(.5));
 		addSequential(new RaiseLiftCommand(1,500));
 		addSequential(new MoveForwardHoloCommand(2100,-0.5)); //Backwards for 2.5 seconds at half speed
@@ -66,6 +66,9 @@ public class AutonomousCommand extends CommandGroup {
     	//addSequential(new SetWingCommand(-1)); // both wings down
     	//addSequential(new WaitCommand(3));
     	//addSequential(new CheckWingStateCommand());
+    	addSequential(new SetWingCommand(1)); // wings come down
+    	addSequential(new WaitCommand(0.5)); // wait to lower
+
     	addSequential(new AutonomousArcadeDriveCommand(-.75,0,100));
     	addSequential(new AutonomousArcadeDriveCommand(-1, 0, 550));// move back at 0.5 speed backward while wings go down
     	//addSequential(new WaitCommand(.3));
@@ -75,8 +78,8 @@ public class AutonomousCommand extends CommandGroup {
     	
     	
     	//addSequential(new WaitCommand(.5)); // wait half a second
-    	addSequential(new SetWingCommand(1)); // wings come up
-    	addSequential(new WaitCommand(2)); // wait to raise, catch trashcan
+    	addSequential(new SetWingCommand(-1)); // wings come up
+    	addSequential(new WaitCommand(4)); // wait to raise, catch trashcan
     	addSequential(new AutonomousArcadeDriveCommand(.75, 0, 2500)); // drive forward at 0.5 speed forward for 5 seconds
     	/*addSequential(new WaitCommand(1.5)); // wait half a second
     	addSequential(new SetWingCommand(-1)); // wings come down 

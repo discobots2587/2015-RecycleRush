@@ -1,6 +1,9 @@
 package org.discobots.recyclerush.subsystems;
 
 import org.discobots.recyclerush.HW;
+import org.discobots.recyclerush.Robot;
+import org.discobots.recyclerush.commands.drive.HolonomicDriveCommand;
+import org.discobots.recyclerush.commands.lift.LTRTXBOX;
 import org.discobots.recyclerush.utils.Lidar;
 
 import edu.wpi.first.wpilibj.CANTalon;
@@ -31,7 +34,7 @@ public class LiftSubsystem extends PIDSubsystem {
 	PIDSource source;
 	
 	SpeedMonitor speedControlThread;
-	private double setpointSpeed;
+	double setpointSpeed;
 	
 	private boolean useLidar = true;
 
@@ -43,7 +46,7 @@ public class LiftSubsystem extends PIDSubsystem {
 		limitBottom = new DigitalInput(HW.buttonLiftBottom);
 		lidarLift = new Lidar(HW.lidarControlLift);
 
-		setpointSpeed = 0;
+		setpointSpeed=0;
 		speedControlThread = new SpeedMonitor();
 		speedControlThread.setName("D.SpeedControl");
 		speedControlThread.start();
@@ -83,13 +86,14 @@ public class LiftSubsystem extends PIDSubsystem {
 		}
 	}
 
-	public void initDefaultCommand() {
-	}
-	
+	public void initDefaultCommand() {//runs when no other command requires this subysystem - HOW I CONSTANTLY RUN A COMMAND TO UPDATE VALUES OUT OF OI
+			setDefaultCommand(new LTRTXBOX());
+		}
 	int christine = 1; // the secret that makes it go
 
 	public void setSpeed(double input) {
 		this.disable();
+		
 		this.setpointSpeed = input;
 	}
 

@@ -38,7 +38,8 @@ public class OI {
 	private Button b_dpadL = new DPadButton(xbox, GamePad.DPAD_X, false);
 	private Button b_bumpR = new JoystickButton(xbox, 6);
 	private Button b_bumpL = new JoystickButton(xbox, 5);
-	private double b_triggers = (float) xbox.getRawAxis(3);
+	public double b_triggerR = xbox.getRawAxis(3);//Right Trigger
+	public double b_triggerL = xbox.getRawAxis(2);//left trigger
 	private Button b_sBack = new JoystickButton(xbox, 7);
 	private Button b_sStar = new JoystickButton(xbox, 8);
 	private Button b_btnA = new JoystickButton(xbox, 1);
@@ -103,18 +104,12 @@ public class OI {
 
 
 		// second gamepad
-		if (b_triggers<=-0.3)//right trigger pressed
-		{
-			new SetLiftCommand(1);
-		}
-		if(-0.3<b_triggers && b_triggers<0.3)
-		{
-			new SetLiftCommand(0);
-		}
-		if (b_triggers>=0.3)
-		{
-			new SetLiftCommand(-1);
-		}
+		//raise lift w/ triggers
+		while (b_triggerR>0.2)
+			new SetLiftCommand(b_triggerR);
+		while(b_triggerL>0.2)
+			new SetLiftCommand(-b_triggerL);			
+			
 		b_bumpR.whenPressed(new SetLiftCommand(0.5));
 		b_bumpR.whenReleased(new SetLiftCommand(0));
 
@@ -142,42 +137,61 @@ public class OI {
 		b_dpadD.whenReleased(new SetActiveIntakeCommand(0.0));
 		b_sStar.whenPressed(new ShutdownSensors());
 		b_sBack.whenPressed(new CycleDriveCommand());
+		
 	}
 	
 	public double getRawAnalogStickALX() {
-		return gp1.getLX();
+		if(gp1.getLX()>0.1||gp1.getLX()<=-0.1)
+			return gp1.getLX();
+		else
+			return (xbox.getRawAxis(0));// left stick y-axis	}
 	}
-
 	public double getRawAnalogStickALY() {
+		if(gp1.getLY()>0.1||gp1.getLY()<=-0.1)
 		return gp1.getLY();
+		else
+		return (-xbox.getRawAxis(1));// left stick y-axis
+
 	}
 
 	public double getRawAnalogStickARX() {
+		if(gp1.getRX()>=0.1||gp1.getRX()<=-0.1)
 		return gp1.getRX();
+		else
+		return (xbox.getRawAxis(4));// left stick x-axis
+
+		
 	}
 
 	public double getRawAnalogStickARY() {
+		if(gp1.getRY()>=0.1||gp1.getRY()<=-0.1)
 		return gp1.getRY();
+		else
+		return (xbox.getRawAxis(5));
 	}
 
 	public double getRawAnalogStickBLX() {
-		return xbox.getLX();
-
+		return (xbox.getRawAxis(0));
 	}
 
 	public double getRawAnalogStickBLY() {
-		return xbox.getLY();
+		return (-xbox.getRawAxis(1));// left stick y-axis
 
 	}
 
 	public double getRawAnalogStickBRX() {
-		return xbox.getRX();
+		return (xbox.getRawAxis(4));// left stick x-axis
 
 	}
 
 	public double getRawAnalogStickBRY() {
-		return xbox.getRY();
+		return (xbox.getRawAxis(5));// left stick x-axis
 
 	}
-
+	public double getRT(){
+		return (xbox.getRawAxis(3));
+	}
+	public double getLT(){
+		return (xbox.getRawAxis(2));
+	} 
 }
