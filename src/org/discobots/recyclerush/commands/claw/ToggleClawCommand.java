@@ -1,4 +1,4 @@
-package org.discobots.recyclerush.commands.drive;
+package org.discobots.recyclerush.commands.claw;
 
 import org.discobots.recyclerush.Robot;
 
@@ -7,42 +7,35 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class HolonomicDriveCommand extends Command {
+public class ToggleClawCommand extends Command {
 
-    public HolonomicDriveCommand() {
-        requires(Robot.driveTrainSub);
+    public ToggleClawCommand() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	requires(Robot.clawSub);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.clawSub.setIntake(!Robot.clawSub.getIntakeValue());
+    	Robot.electricalSub.setCompressor(true);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double y = Robot.oi.getRawAnalogStickALY();
-    	double x = Robot.oi.getRawAnalogStickALX();
-    	double r = Robot.oi.getRawAnalogStickARX();
-    			
-    	//if (Math.abs(x) < 0.1) {
-    	//	y = 0.0;
-    	//}
-    	
-    	Robot.driveTrainSub.holonomicDriveRamp(y, x, r*Math.abs(r));
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.driveTrainSub.holonomicDriveUnramped(0, 0, 0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }

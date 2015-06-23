@@ -1,4 +1,4 @@
-package org.discobots.recyclerush.commands.wings;
+package org.discobots.recyclerush.commands;
 
 import org.discobots.recyclerush.Robot;
 
@@ -7,16 +7,21 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class SetWingCommand extends Command {
-	boolean pos;
-    public SetWingCommand(boolean pos) {
-        requires(Robot.wingSub);
-        this.pos = pos;
+public class ToggleCompressor extends Command {
+
+    public ToggleCompressor() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	requires(Robot.electricalSub);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.wingSub.set(pos);
+    	if(Robot.electricalSub.getCompressorState())
+    		Robot.electricalSub.setCompressor(false);
+    	else
+    		Robot.electricalSub.setCompressor(true);
+    		
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -35,5 +40,6 @@ public class SetWingCommand extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

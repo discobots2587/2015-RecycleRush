@@ -2,6 +2,7 @@ package org.discobots.recyclerush.utils;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class GamePad extends Joystick {
 	
@@ -81,20 +82,21 @@ public class GamePad extends Joystick {
 		}
 
 		public boolean get() {
+
 			if (positive) {
 				if (m_buttonAxis == GamePad.DPAD_X) {
-					return m_gp.getDX() > m_threshold;
+					return m_gp.getPOV() == 90;
 				} else if (m_buttonAxis == GamePad.DPAD_Y) {
-					return m_gp.getDY() > m_threshold;
+					return m_gp.getPOV() == 0;
 				}
 			} else {
 				if (m_buttonAxis == GamePad.DPAD_X) {
-					return m_gp.getDX() < -m_threshold;
+					return m_gp.getPOV() == 270;
 				} else if (m_buttonAxis == GamePad.DPAD_Y) {
-					return m_gp.getDY() < -m_threshold;
+					return m_gp.getPOV() == 180;
 				}
 			}
-			return m_gp.getRawButton(m_buttonAxis);
+			return false;
 		}
 
 	}

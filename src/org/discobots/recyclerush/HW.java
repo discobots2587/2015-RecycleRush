@@ -8,39 +8,32 @@ package org.discobots.recyclerush;
  */
 public class HW {
 	/* CAN */// Check roboRio web interface for these values
-	public final static int motorBackLeft = 10;
-	public final static int motorCenterDropDown = 14;
-	public final static int motorLift1 = 15;
+
+	public final static int motorLift1 = 38;
+	public final static int motorLift2 = 35;
 
 	/* PWM */
-	public final static int motorPlowLeft = 0;
+	public final static int motorBackLeft = 5;
+	public final static int motorPlowLeft = 7;
 	public final static int motorPlowRight = 1;
-	public final static int motorFrontLeft = 2;
+	public final static int motorFrontLeft = 0;
 	public final static int motorBackRight = 3;
 	public final static int motorFrontRight = 4;
 
 	/* Pneumatics */
 	public final static int solenoidIntake = 0;
-	public final static int solenoidFlapLeft = 1;
-	public final static int solenoidFlapRight = 2;
-	public final static int dsolCenterDropdownA = 3; // dsol is double solenoid 
-	public final static int dsolCenterDropdownB = 4;
+	public final static int solenoidClaw = 1;
 
 	/* Relay */
 
 	/* DIO */// 0-9 are on roboRio, 10-25 are on MXP
-	public final static int encoderForwardA = 0;
-	public final static int encoderForwardB = 1;
-	public final static int encoderLiftA = 2;
-	public final static int encoderLiftB = 3;
-	public final static int encoderSidewayA = 4;
-	public final static int encoderSidewayB = 5;
-	public final static int buttonPlowLeftIn = 6;
-	public final static int buttonPlowRightIn = 7;
-	public final static int buttonPlowLeftOut = 8;
-	public final static int buttonPlowRightOut = 9;
-	public final static int buttonLiftTop = 10;
-	public final static int buttonLiftBottom = 11;
+	public final static int encoderForwardA = 11;
+	public final static int encoderForwardB = 12;
+	public final static int encoderSidewayA = 15;
+	public final static int encoderSidewayB = 16;
+	
+	public final static int buttonLiftTop = 0;
+	public final static int buttonLiftBottom = 1;
 
 	public final static int lidarControlDrive = 19;
 	public final static int lidarControlLift = 20;

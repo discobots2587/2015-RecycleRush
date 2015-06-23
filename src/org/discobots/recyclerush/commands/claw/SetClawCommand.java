@@ -1,32 +1,37 @@
-package org.discobots.recyclerush.commands.drive;
+package org.discobots.recyclerush.commands.claw;
 
 import org.discobots.recyclerush.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
-public class StickDriveCommand extends Command {
+/**
+ *
+ */
+public class SetClawCommand extends Command {
+	boolean intakeSPD;
 
-	public StickDriveCommand() {
-		requires(Robot.driveTrainSub);
+	public SetClawCommand(boolean intakeSPD) {
+		requires(Robot.clawSub);
+		this.intakeSPD = intakeSPD;
+
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		Robot.clawSub.setIntake(intakeSPD);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.driveTrainSub.arcadeDriveRamp(Robot.oi.getRawAnalogStickALY(),
-				Robot.oi.getRawAnalogStickARX());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return false;
+		return true;
 	}
 
 	// Called once after isFinished returns true
 	protected void end() {
-		Robot.driveTrainSub.arcadeDriveUnramped(0, 0);
 	}
 
 	// Called when another command which requires one or more of the same

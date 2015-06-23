@@ -1,9 +1,9 @@
 package org.discobots.recyclerush.subsystems;
 
 import org.discobots.recyclerush.HW;
-import org.discobots.recyclerush.commands.drive.ArcadeDriveCommand;
+import org.discobots.recyclerush.commands.drive.AssistedHolonomicDriveCommand;
 import org.discobots.recyclerush.commands.drive.CycleDriveCommand;
-import org.discobots.recyclerush.commands.drive.StickDriveCommand;
+import org.discobots.recyclerush.commands.drive.HolonomicDriveCommand;
 import org.discobots.recyclerush.commands.drive.TankDriveCommand;
 import org.discobots.recyclerush.utils.Lidar;
 
@@ -20,21 +20,17 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveTrainSubsystem extends Subsystem {
-
-	public static final boolean COMPETITION_ROBOT = false;
-	
 	public enum Motor {
-		FRONTLEFT, BACKLEFT, FRONTRIGHT, BACKRIGHT, CENTERDROPDOWN;
+		FRONTLEFT, BACKLEFT, FRONTRIGHT, BACKRIGHT;
 	}
-	CANTalon backLeft, centerDropDown;
-	Talon frontRight, frontLeft ,backRight;
+
+	Talon backLeft;// , centerDropDown;
+	Talon frontRight, frontLeft, backRight;
 	// switch to TalonSRX class if we use pwm instead.
 	// with can the following values are available:
 	// out curr, out volt, in volt, setpoint, temp,
 
 	RobotDrive robotDrive;
-
-	DoubleSolenoid centerDropSolenoid;
 
 	Encoder encoderForward; // sensors
 	Encoder encoderSideway;
@@ -42,22 +38,20 @@ public class DriveTrainSubsystem extends Subsystem {
 	Gyro gyroscope;
 
 	Lidar lidar;
-	
+
 	static final double CONSTANT_RAMP_LIMIT = 0.1; // ramping
 	// 0.05 = 4/10 seconds to full, 0.1 = 2/10 seconds to full
 	boolean allowRamped = false;
-	private double prevLeft  = 0, prevRight = 0;
+	private double prevLeft = 0, prevRight = 0;
 	private double prevY = 0, prevX = 0, prevR;
-	
-	static final double kSpeedScaling = 1.0;
+
+	static double kSpeedScaling = 1.0;
 
 	public DriveTrainSubsystem() {
-		backLeft = new CANTalon(HW.motorBackLeft);
+		backLeft = new Talon(HW.motorBackLeft);
 		frontLeft = new Talon(HW.motorFrontLeft);
 		frontRight = new Talon(HW.motorFrontRight);
 		backRight = new Talon(HW.motorBackRight);
-		centerDropDown = new CANTalon(HW.motorCenterDropDown);
-		
 
 		encoderForward = new Encoder(HW.encoderForwardA, HW.encoderForwardB,
 				false, EncodingType.k4X);
@@ -65,9 +59,6 @@ public class DriveTrainSubsystem extends Subsystem {
 				false, EncodingType.k4X);
 		resetForwardDistance();
 		resetSidewayDistance();
-
-		centerDropSolenoid = new DoubleSolenoid(HW.dsolCenterDropdownA,
-				HW.dsolCenterDropdownB);
 
 		gyroscope = new Gyro(HW.gyroscope);
 
@@ -80,21 +71,21 @@ public class DriveTrainSubsystem extends Subsystem {
 		robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, false);
 		robotDrive.setSafetyEnabled(false);
 	}
-	
+
 	public void setRamped(boolean a) {
 		this.allowRamped = a;
 	}
-	
+
 	public boolean getRamped() {
 		return this.allowRamped;
 	}
-	
+
 	public void tankDriveRamp(double leftStick, double rightStick) {
 		if (!allowRamped) {
 			tankDriveUnramped(leftStick, rightStick);
 			return;
 		}
-		
+
 		double left = leftStick, right = -rightStick;
 
 		if (left - prevLeft > CONSTANT_RAMP_LIMIT) {
@@ -102,7 +93,7 @@ public class DriveTrainSubsystem extends Subsystem {
 		} else if (prevLeft - left > CONSTANT_RAMP_LIMIT) {
 			left = prevLeft - CONSTANT_RAMP_LIMIT;
 		}
-		
+
 		if (right - prevRight > CONSTANT_RAMP_LIMIT) {
 			right = prevRight + CONSTANT_RAMP_LIMIT;
 		} else if (prevRight - right > CONSTANT_RAMP_LIMIT) {
@@ -111,7 +102,7 @@ public class DriveTrainSubsystem extends Subsystem {
 
 		prevLeft = left;
 		prevRight = right;
-		
+
 		robotDrive.tankDrive(left * kSpeedScaling, right * kSpeedScaling);
 	}
 
@@ -121,22 +112,22 @@ public class DriveTrainSubsystem extends Subsystem {
 			return;
 		}
 		double ox = ix, oy = -iy;
-		
+
 		if (oy - prevY > CONSTANT_RAMP_LIMIT) {
 			oy = prevY + CONSTANT_RAMP_LIMIT;
 		} else if (prevY - oy > CONSTANT_RAMP_LIMIT) {
 			oy = prevY - CONSTANT_RAMP_LIMIT;
 		}
-		
+
 		if (ox - prevX > CONSTANT_RAMP_LIMIT) {
 			ox = prevX + CONSTANT_RAMP_LIMIT;
 		} else if (prevX - ox > CONSTANT_RAMP_LIMIT) {
 			ox = prevX - CONSTANT_RAMP_LIMIT;
 		}
-		
+
 		prevX = ox;
 		prevY = oy;
-		robotDrive.arcadeDrive(ox * kSpeedScaling, oy * kSpeedScaling); 
+		robotDrive.arcadeDrive(ox * kSpeedScaling, oy * kSpeedScaling);
 		// robotdrive is dumb arcadeDrive so params are switched
 	}
 
@@ -145,9 +136,15 @@ public class DriveTrainSubsystem extends Subsystem {
 			holonomicDriveUnramped(y, x, r);
 			return;
 		}
-		
-		double ox = x, oy = -y, or = r;
-		
+		// deadband
+		if (Math.abs(y) < 0.1)
+			y = 0;
+		if (Math.abs(x) < 0.1)
+			x = 0;
+		if (Math.abs(r) < 0.1)
+			r = 0;
+		double ox = x, oy = y, or = r;
+
 		if (ox - prevX > CONSTANT_RAMP_LIMIT) {
 			ox = prevX + CONSTANT_RAMP_LIMIT;
 		} else if (prevX - ox > CONSTANT_RAMP_LIMIT) {
@@ -163,14 +160,13 @@ public class DriveTrainSubsystem extends Subsystem {
 		} else if (prevR - or > CONSTANT_RAMP_LIMIT) {
 			or = prevR - CONSTANT_RAMP_LIMIT;
 		}
-		
+
 		prevX = ox;
 		prevY = oy;
 		prevR = or;
-		
-		robotDrive.arcadeDrive(or * kSpeedScaling, oy * kSpeedScaling); 
-		// robotdrive is dumb arcadeDrive so params are switched
-		centerDropDown.set(ox * kSpeedScaling);
+
+		robotDrive.mecanumDrive_Cartesian(ox * kSpeedScaling, oy
+				* kSpeedScaling, or * kSpeedScaling, 0);
 	}
 
 	public void tankDriveUnramped(double leftStick, double rightStick) {
@@ -179,7 +175,8 @@ public class DriveTrainSubsystem extends Subsystem {
 		prevX = 0;
 		prevY = 0;
 		prevR = 0;
-		robotDrive.tankDrive(leftStick * kSpeedScaling, -rightStick * kSpeedScaling);
+		robotDrive.tankDrive(leftStick * kSpeedScaling, -rightStick
+				* kSpeedScaling);
 	}
 
 	public void arcadeDriveUnramped(double y, double x) {
@@ -188,14 +185,25 @@ public class DriveTrainSubsystem extends Subsystem {
 		prevX = 0;
 		prevY = 0;
 		prevR = 0;
-		robotDrive.arcadeDrive(x * kSpeedScaling, -y * kSpeedScaling); 
+		robotDrive.arcadeDrive(x * kSpeedScaling, -y * kSpeedScaling);
 		// robotdrive is dumb arcadeDrive so params are switched
 	}
 
 	public void holonomicDriveUnramped(double y, double x, double r) { // h-drive
-		robotDrive.arcadeDrive(r * kSpeedScaling, -y * kSpeedScaling); 
-		// robotdrive is dumb arcadeDrive so params are switched
-		centerDropDown.set(x * kSpeedScaling);
+		double ox, oy, or;
+		
+		if (Math.abs(y) < 0.1)
+			y = 0;
+		if (Math.abs(x) < 0.1)
+			x = 0;
+		if (Math.abs(r) < 0.1)
+			r = 0;
+		
+		ox = x;
+		oy = -y;
+		or = r;
+		robotDrive.mecanumDrive_Cartesian(ox * kSpeedScaling, oy
+				* kSpeedScaling, or * kSpeedScaling, 0);
 	}
 
 	public double getMotorSetpoint(Motor motor) {
@@ -207,29 +215,14 @@ public class DriveTrainSubsystem extends Subsystem {
 			return this.frontLeft.get();
 		} else if (motor == Motor.FRONTRIGHT) {
 			return this.frontRight.get();
-		} else if (motor == Motor.CENTERDROPDOWN) {
-			return this.centerDropDown.get();
 		} else {
 			return -9001;
 		}
 	}
 
 	public double getMotorCurrent(Motor motor) {
-		/*if (DriveTrainSubsystem.COMPETITION_ROBOT) {
-			if (motor == Motor.BACKLEFT) {
-				return ((CANTalon)this.backLeft).getOutputCurrent();
-			} else if (motor == Motor.BACKRIGHT) {
-				return ((CANTalon)this.backRight).getOutputCurrent();
-			} else if (motor == Motor.FRONTLEFT) {
-				return ((CANTalon)this.frontLeft).getOutputCurrent();
-			} else if (motor == Motor.FRONTRIGHT) {
-			} else if (motor == Motor.CENTERDROPDOWN) {
-				return ((CANTalon)this.centerDropDown).getOutputCurrent();
-			} else {
-				return -9001;
-			}
-		}*/
-		return 0;// ((CANTalon)this.frontRight).getOutputCurrent();
+		// return this.backLeft.getOutputCurrent();
+		return 0;
 	}
 
 	public void resetForwardDistance() {
@@ -261,12 +254,20 @@ public class DriveTrainSubsystem extends Subsystem {
 	public double getAngle() {
 		return gyroscope.getAngle();
 	}
-	
+
 	public void resetAngle() {
 		gyroscope.reset();
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new ArcadeDriveCommand());
+		setDefaultCommand(new HolonomicDriveCommand());
+	}
+
+	public double getSpeedScaling() {
+		return DriveTrainSubsystem.kSpeedScaling;
+	}
+
+	public void setSpeedScaling(double a) {
+		kSpeedScaling = a;
 	}
 }

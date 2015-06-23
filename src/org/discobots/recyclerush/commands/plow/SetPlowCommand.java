@@ -8,23 +8,25 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class SetPlowCommand extends Command {
-	double plowSpeed;
-	
-    public SetPlowCommand(double plowSpeed) {
+
+    double speed;
+
+    public SetPlowCommand(double speed){
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.plowSub);
-    	this.plowSpeed = plowSpeed;
+    	this.speed = speed;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.plowSub.setSpeedLeft(plowSpeed);
-    	Robot.plowSub.setSpeedRight(plowSpeed);
+    	Robot.plowSub.setSpeedLeft(speed);
+    	Robot.plowSub.setSpeedRight(speed);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

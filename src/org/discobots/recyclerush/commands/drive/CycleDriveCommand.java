@@ -12,15 +12,11 @@ public class CycleDriveCommand extends Command {
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		Command driveCmd = Robot.driveTrainSub.getCurrentCommand();
-		if (driveCmd instanceof ArcadeDriveCommand) {
+		if (driveCmd instanceof HolonomicDriveCommand) {
 			new TankDriveCommand().start();
-		} else if (driveCmd instanceof ArcadeDriveCommand) {
-			new StickDriveCommand().start();
-		} else if (driveCmd instanceof StickDriveCommand) {
-			new HolonomicDriveCommand().start();
 		} else {
-			new ArcadeDriveCommand().start();
-		}
+			new HolonomicDriveCommand().start();
+		} 
 	}
 
 	// Called repeatedly when this Command is scheduled to run

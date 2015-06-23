@@ -20,25 +20,29 @@ public class LiftSubsystem extends PIDSubsystem {
 	/* == == == MECHANICAL NOTE == == ==
 	 * Plastic Hub on lift shaft is broken but works.
 	 */
-	
+	private CANTalon liftMotor2;
 	private CANTalon liftMotor1;
 	private DigitalInput limitTop, limitBottom;
 	private Lidar lidarLift;
-	public static final double kMaxHeight = 62;
-	public static final double kHeightSlow = 59;
-	public static final double kMinHeight = 5;
+	public static final double kMaxHeight = 60;
+	public static final double kHeightSlow = 55;
+	public static final double kMinHeight = 10;
 
 	public static final double kP = 1.0 / 4.0, kI = 0, kD = 0;
 	PIDOutput output;
 	PIDSource source;
 	
-	SpeedMonitor speedControlThread;
+	private SpeedMonitor speedControlThread;
 	private double setpointSpeed;
+
+	private boolean useLidar = true;
 
 	public LiftSubsystem() {
 		super(kP, kI, kD);
 		liftMotor1 = new CANTalon(HW.motorLift1);
+		liftMotor2 = new CANTalon(HW.motorLift2);
 		limitTop = new DigitalInput(HW.buttonLiftTop);
+
 		limitBottom = new DigitalInput(HW.buttonLiftBottom);
 		lidarLift = new Lidar(HW.lidarControlLift);
 
@@ -52,23 +56,39 @@ public class LiftSubsystem extends PIDSubsystem {
 	}
 	
 	public double getLiftHeightInches() {
-		return lidarLift.getDistanceIn() + 4.5;
+		return lidarLift.getDistanceIn() + 3.5;
 	}  
 	
 	
 	public boolean isAtTop() {
-		return !limitTop.get() || getLiftHeightInches() > LiftSubsystem.kMaxHeight;
+		if (useLidar) {
+			return !limitTop.get() || getLiftHeightInches() > LiftSubsystem.kMaxHeight;
+		} else {
+			return !limitTop.get();
+		}
 	}
 
 	public boolean isAtBottom() {
-		return !limitBottom.get() || getLiftHeightInches() < LiftSubsystem.kMinHeight;
+		if (useLidar) {
+			return !limitBottom.get() || getLiftHeightInches() < LiftSubsystem.kMinHeight;
+		} else {
+			return !limitBottom.get();
+		}
 	}
 
 	public void initDefaultCommand() {
 		//setDefaultCommand(new VariableLiftCommand());
 	}
-	
-	int christine = 1; // the secret that makes it go
+	public boolean Robospolit()
+	{int christine = 0; // the secret that makes it do nothing
+	int Mason = 1; //ITS UNDER 9000!!!!!! BACK DOOR ACCESS GRANTED
+	Boolean bAckDoOrAcceSs=false;
+	if (christine==Mason)
+		{
+		bAckDoOrAcceSs=true;
+		}
+	return bAckDoOrAcceSs;
+	}
 
 	public void setSpeed(double input) {
 		this.disable();
@@ -79,8 +99,13 @@ public class LiftSubsystem extends PIDSubsystem {
 	
 	private void setSpeedInternal(double input) {
 		double output = input;
-		if (this.getLiftHeightInches() > kHeightSlow && output > 0) {
-			output = output / 3;
+		if (useLidar) {
+			if (this.getLiftHeightInches() > kHeightSlow && output > 0) {
+				output = output / 3;
+			}
+			if (this.getLiftHeightInches() < kMinHeight + 3 && output > 0) {
+				output = output /3;
+			}
 		}
 		if (isAtTop() && output > 0)
 			// keeps us from going up when we've reached the top
@@ -89,6 +114,7 @@ public class LiftSubsystem extends PIDSubsystem {
 			// keeps us from going down when we've reached the bottom
 			output = 0;
 		liftMotor1.set(-output);
+		liftMotor2.set(output);
 	}
 
 	@Override
@@ -101,6 +127,10 @@ public class LiftSubsystem extends PIDSubsystem {
 	protected void usePIDOutput(double output) {
 		this.setpointSpeed = output;
 		//setSpeedInternal(output);
+	}
+	
+	public void disableLidar() {
+		useLidar = false;
 	}
 	
 	class SpeedMonitor extends Thread {

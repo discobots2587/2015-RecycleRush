@@ -1,19 +1,26 @@
-package org.discobots.recyclerush.commands.drive.pid;
+package org.discobots.recyclerush.commands.drive;
+
+import org.discobots.recyclerush.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class AssistedHolonomicDriveCommand extends Command {
+public class SetScalingCommand extends Command {
 
-    public AssistedHolonomicDriveCommand() {
+    public SetScalingCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	if (Robot.driveTrainSub.getSpeedScaling() > 0.95) {
+    		Robot.driveTrainSub.setSpeedScaling(0.5);
+    	} else {
+    		Robot.driveTrainSub.setSpeedScaling(1.0);
+    	}
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -22,7 +29,7 @@ public class AssistedHolonomicDriveCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

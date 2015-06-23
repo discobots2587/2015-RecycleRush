@@ -1,4 +1,4 @@
-package org.discobots.recyclerush.commands.drive;
+package org.discobots.recyclerush.commands.lift;
 
 import org.discobots.recyclerush.Robot;
 
@@ -7,37 +7,40 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class HolonomicDriveCommand extends Command {
+public class RaiseLiftCommand extends Command {
 
-    public HolonomicDriveCommand() {
-        requires(Robot.driveTrainSub);
+	double liftSpd;
+	long time;
+	long duration;
+	
+    public RaiseLiftCommand(double liftSpd, long duration) {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	requires(Robot.liftSub);
+    	this.liftSpd=liftSpd;
+    	this.duration=duration;
+    	
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	time = System.currentTimeMillis();
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double y = Robot.oi.getRawAnalogStickALY();
-    	double x = Robot.oi.getRawAnalogStickALX();
-    	double r = Robot.oi.getRawAnalogStickARX();
-    			
-    	//if (Math.abs(x) < 0.1) {
-    	//	y = 0.0;
-    	//}
-    	
-    	Robot.driveTrainSub.holonomicDriveRamp(y, x, r*Math.abs(r));
+    	Robot.liftSub.setSpeed(liftSpd);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return System.currentTimeMillis() - time >= duration;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.driveTrainSub.holonomicDriveUnramped(0, 0, 0);
+    	Robot.liftSub.setSpeed(0);
     }
 
     // Called when another command which requires one or more of the same
