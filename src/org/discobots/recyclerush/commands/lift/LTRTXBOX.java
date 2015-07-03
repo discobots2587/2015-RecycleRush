@@ -12,6 +12,7 @@ double Liftspeed;
     public LTRTXBOX() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires(Robot.liftSub);
     }
 
     // Called just before this Command runs the first time
