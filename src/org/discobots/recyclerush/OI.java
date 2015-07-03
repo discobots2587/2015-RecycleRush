@@ -110,10 +110,10 @@ public class OI {
 		while(b_triggerL>0.2)
 			new SetLiftCommand(-b_triggerL);			
 			
-		b_bumpR.whenPressed(new SetLiftCommand(0.5));
+		b_bumpR.whileHeld(new SetLiftCommand(0.5));
 		b_bumpR.whenReleased(new SetLiftCommand(0));
 
-		b_bumpL.whenPressed(new SetLiftCommand(-0.5));
+		b_bumpL.whileHeld(new SetLiftCommand(-0.5));
 		b_bumpL.whenReleased(new SetLiftCommand(0));
 
 	//	b_btnA.whenPressed(new ToggleIntakeCommand());
