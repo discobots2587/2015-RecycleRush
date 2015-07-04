@@ -1,5 +1,7 @@
 package org.discobots.recyclerush;
 
+import java.util.concurrent.TimeUnit;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -104,6 +106,9 @@ public class Robot extends IterativeRobot {
 		//else
 		//	wingSub.set(-1);
 		wingSub.isFirstTime = false;
+	      for (long stop=System.nanoTime()+TimeUnit.SECONDS.toNanos(1);stop>System.nanoTime();) { //rumbles upon disable for 1 second
+				oi.setRumble(1);
+	          }
 	}
 
 	/**

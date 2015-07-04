@@ -1,5 +1,6 @@
 package org.discobots.recyclerush.commands.drive;
 
+import org.discobots.recyclerush.OI.Hand;
 import org.discobots.recyclerush.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -23,6 +24,14 @@ public class HolonomicDriveCommand extends Command {
     	double x = Robot.oi.getRawAnalogStickALX();
     	double r = Robot.oi.getRawAnalogStickARX();
     	
+    	if (y<=-0.1)
+    	Robot.oi.setRumble(Hand.LEFT, y);
+    	else
+    		Robot.oi.setRumble(Hand.LEFT, 0);
+    	if (y>=0.1)
+    		Robot.oi.setRumble(Hand.RIGHT, y);
+    	else
+    		Robot.oi.setRumble(Hand.RIGHT,0);
     	//if (Math.abs(y) < 0.1)
     	//	y = 0;
     	//if (Math.abs(x) < 0.1)

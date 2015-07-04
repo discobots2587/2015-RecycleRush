@@ -20,6 +20,7 @@ import org.discobots.recyclerush.utils.GamePad;
 import org.discobots.recyclerush.utils.GamePad.DPadButton;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Joystick.RumbleType;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -144,8 +145,13 @@ public class OI {
 		if(gp1.getLX()>0.1||gp1.getLX()<=-0.1)
 			return gp1.getLX();
 		else
+		{
 			return (xbox.getRawAxis(0));// left stick y-axis	}
+		}
 	}
+	
+
+	
 	public double getRawAnalogStickALY() {
 		if(gp1.getLY()>0.1||gp1.getLY()<=-0.1)
 		return gp1.getLY();
@@ -159,9 +165,28 @@ public class OI {
 		return gp1.getRX();
 		else
 		return (xbox.getRawAxis(4));// left stick x-axis
-
-		
 	}
+
+	public static enum Hand { 
+        LEFT, RIGHT 
+} 
+	
+	public void setRumble(Hand hand, double intensity) { //set for single side of controller
+		  	final float amount = new Float(intensity); 
+		  	        
+			   if (hand == Hand.LEFT) { 
+		  	            xbox.setRumble(RumbleType.kLeftRumble, amount); 
+		 	        } else { 
+		 	             xbox.setRumble(RumbleType.kRightRumble, amount); 
+		  	        } 
+			     } 
+	     public void setRumble(double intensity) { //set rumble for both hands
+		         final float amount = new Float(intensity); 
+		          
+		         xbox.setRumble(RumbleType.kLeftRumble, amount); 
+		         xbox.setRumble(RumbleType.kRightRumble, amount); 
+		     } 
+
 
 	public double getRawAnalogStickARY() {
 		if(gp1.getRY()>=0.1||gp1.getRY()<=-0.1)
