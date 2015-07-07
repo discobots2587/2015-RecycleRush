@@ -70,16 +70,16 @@ public class OI {
 	public OI() {
 		// first gamepad
 		// drive commands control analog sticks on joy 1
-		b2_trigR.whenPressed(new SetLiftCommand(1));
+		b2_trigR.whileHeld(new SetLiftCommand(1));
 		b2_trigR.whenReleased(new SetLiftCommand(0));
 
-		b2_trigL.whenPressed(new SetLiftCommand(-1));
+		b2_trigL.whileHeld(new SetLiftCommand(-1));
 		b2_trigL.whenReleased(new SetLiftCommand(0));
 
-		b2_bumpR.whenPressed(new SetLiftCommand(0.5));
+		b2_bumpR.whileHeld(new SetLiftCommand(0.5));
 		b2_bumpR.whenReleased(new SetLiftCommand(0));
 
-		b2_bumpL.whenPressed(new SetLiftCommand(-0.5));
+		b2_bumpL.whileHeld(new SetLiftCommand(-0.5));
 		b2_bumpL.whenReleased(new SetLiftCommand(0));
 
 		b2_btnA.whenPressed(new ToggleIntakeCommand());
