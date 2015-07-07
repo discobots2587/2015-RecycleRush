@@ -176,7 +176,9 @@ public class OI {
 		  	        
 			   if (hand == Hand.LEFT) { 
 		  	            xbox.setRumble(RumbleType.kLeftRumble, amount); 
-		 	        } else { 
+		 	        } 
+			   if (hand==Hand.RIGHT)
+		 	        { 
 		 	             xbox.setRumble(RumbleType.kRightRumble, amount); 
 		  	        } 
 			     } 
