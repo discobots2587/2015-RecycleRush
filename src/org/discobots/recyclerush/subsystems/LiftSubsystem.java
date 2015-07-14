@@ -118,6 +118,8 @@ public class LiftSubsystem extends PIDSubsystem {
 			output = 0;
 		liftMotorLeft.set(output);
 		liftMotorRight.set(output);
+		
+	
 	}
 
 	@Override

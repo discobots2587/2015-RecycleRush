@@ -39,6 +39,10 @@ public class Dashboard {
 		} else if (driveCounter % 5 == 1) {
 			SmartDashboard.putNumber("Lift Lidar Distance (in)",
 					Robot.liftSub.getLiftHeightInches());
+			SmartDashboard.putBoolean("Lift Top", Robot.liftSub.isAtTop());
+			SmartDashboard
+					.putBoolean("Lift Bottom", Robot.liftSub.isAtBottom());
+
 			SmartDashboard.putNumber("Gyroscope",
 					Robot.driveTrainSub.getAngle());
 			SmartDashboard.putBoolean("Pressure Full",
@@ -46,11 +50,7 @@ public class Dashboard {
 			SmartDashboard.putNumber("Pressure",
 					Robot.electricalSub.getPressure());
 			SmartDashboard.putNumber("Wings", Robot.wingSub.get());
-			
-			SmartDashboard.putBoolean("Lift Top", Robot.liftSub.isAtTop());
-			SmartDashboard
-					.putBoolean("Lift Bottom", Robot.liftSub.isAtBottom());
-
+		
 			SmartDashboard.putData(Robot.driveTrainSub);
 			SmartDashboard.putData(Robot.liftSub);
 			SmartDashboard.putNumber("Wings Down", Robot.wingSub.get());
