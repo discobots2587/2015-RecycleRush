@@ -44,8 +44,6 @@ public class Dashboard {
 					.putBoolean("Lift Bottom", Robot.liftSub.isAtBottom());
 				SmartDashboard.putBoolean("is Lidar Running?", Robot.liftSub.isLidarRunning());
 				SmartDashboard.putNumber("Raw Imput Lift SPD", Robot.liftSub.getRawLiftSpeed());
-				SmartDashboard.putNumber("Left Lift Motor Speed", Robot.liftSub.getleftLiftMotorSpeed());
-				SmartDashboard.putNumber("Right Lift Motor SPeed", Robot.liftSub.getRightLiftMotorSpeed());
 			SmartDashboard.putNumber("Gyroscope",
 					Robot.driveTrainSub.getAngle());
 			SmartDashboard.putBoolean("Pressure Full",

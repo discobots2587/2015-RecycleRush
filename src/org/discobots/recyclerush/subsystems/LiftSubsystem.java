@@ -68,16 +68,6 @@ public class LiftSubsystem extends PIDSubsystem {
 		return lidarLift.getDistanceIn() + 4.5;
 	}  
 	
-	public double getleftLiftMotorSpeed()
-	{
-		return liftMotorLeft.getSpeed();
-	}
-	
-	public double getRightLiftMotorSpeed()
-	{
-		return liftMotorRight.getSpeed();
-	}
-	
 	public double getRawLiftSpeed(){
 		return this.setpointSpeed;
 	}
