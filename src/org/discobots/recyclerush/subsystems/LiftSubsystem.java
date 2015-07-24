@@ -45,7 +45,6 @@ public class LiftSubsystem extends PIDSubsystem {
 		limitTop = new DigitalInput(HW.buttonLiftTop);
 		limitBottom = new DigitalInput(HW.buttonLiftBottom);
 		lidarLift = new Lidar(HW.lidarControlLift);
-
 		setpointSpeed=0;
 		speedControlThread = new SpeedMonitor();
 		speedControlThread.setName("D.SpeedControl");
@@ -69,6 +68,19 @@ public class LiftSubsystem extends PIDSubsystem {
 		return lidarLift.getDistanceIn() + 4.5;
 	}  
 	
+	public double getleftLiftMotorSpeed()
+	{
+		return liftMotorLeft.getSpeed();
+	}
+	
+	public double getRightLiftMotorSpeed()
+	{
+		return liftMotorRight.getSpeed();
+	}
+	
+	public double getRawLiftSpeed(){
+		return this.setpointSpeed;
+	}
 	
 	public boolean isAtTop() {
 		if (useLidar) {
@@ -76,6 +88,10 @@ public class LiftSubsystem extends PIDSubsystem {
 		} else {
 			return !limitTop.get();
 		}
+	}
+	public boolean isLidarRunning()
+	{
+		return useLidar;
 	}
 
 	public boolean isAtBottom() {
@@ -118,8 +134,6 @@ public class LiftSubsystem extends PIDSubsystem {
 			output = 0;
 		liftMotorLeft.set(output);
 		liftMotorRight.set(output);
-		
-	
 	}
 
 	@Override
