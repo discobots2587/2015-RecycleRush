@@ -1,6 +1,7 @@
 
 package org.discobots.recyclerush.commands;
 
+import org.discobots.recyclerush.Robot;
 import org.discobots.recyclerush.commands.auton.AutonomousArcadeDriveCommand;
 import org.discobots.recyclerush.commands.auton.AutonomousArcadeDriveRampCommand;
 import org.discobots.recyclerush.commands.auton.MoveForwardHoloCommand;
@@ -9,6 +10,7 @@ import org.discobots.recyclerush.commands.intake.SetActiveIntakeCommand;
 import org.discobots.recyclerush.commands.intake.ToggleIntakeCommand;
 import org.discobots.recyclerush.commands.intake.ToggleIntakeSolenoids;
 import org.discobots.recyclerush.commands.lift.RaiseLiftCommand;
+import org.discobots.recyclerush.commands.lift.SetLiftCommand;
 import org.discobots.recyclerush.commands.wings.SetWingCommand;
 import org.discobots.recyclerush.commands.wings.ToggleWingCommand;
 
@@ -30,6 +32,9 @@ public class AutonomousCommand extends CommandGroup {
     		break;
     	case 4:
     		autonomousMode4Init();
+    		break;
+     	case 5:
+    		autonomousMode5Init();
     		break;
     	default:
     		autonomousMode0Init();
@@ -110,6 +115,21 @@ public class AutonomousCommand extends CommandGroup {
     addSequential(new ToggleWingCommand());
     
 
+    }
+    private void autonomousMode5Init(){
+    	double x = Robot.liftSub.getLiftHeightInches();
+    	if(x>=6)
+    	{
+    		while(x>4.9)
+    		addSequential(new SetLiftCommand(-0.5)); //make sure intake is down
+    	}
+    	addSequential(new WaitCommand(.5));
+    	addSequential(new MoveForwardHoloCommand(500, .5)); //move forwards a bit
+    	addSequential(new ToggleIntakeCommand());
+    	addSequential(new WaitCommand(.5));
+    	addSequential(new RaiseLiftCommand(2, 1)); //raises recycle bin or tote
+    	addSequential(new WaitCommand(.5));
+    	addSequential(new MoveForwardHoloCommand(2, .5)); //move to loading station
     }
     }
 
