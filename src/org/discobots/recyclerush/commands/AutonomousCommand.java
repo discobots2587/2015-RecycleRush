@@ -117,19 +117,16 @@ public class AutonomousCommand extends CommandGroup {
 
     }
     private void autonomousMode5Init(){
-    	double x = Robot.liftSub.getLiftHeightInches();
-    	if(x>=6)
-    	{
-    		while(x>4.9)
+    		while(Robot.liftSub.getLiftHeightInches()>4.9)
     		addSequential(new SetLiftCommand(-0.5)); //make sure intake is down
-    	}
+    	
     	addSequential(new WaitCommand(.5));
     	addSequential(new MoveForwardHoloCommand(500, .5)); //move forwards a bit
     	addSequential(new ToggleIntakeCommand());
     	addSequential(new WaitCommand(.5));
     	addSequential(new RaiseLiftCommand(2, 1)); //raises recycle bin or tote
     	addSequential(new WaitCommand(.5));
-    	addSequential(new MoveForwardHoloCommand(2, .5)); //move to loading station
+    	addSequential(new MoveForwardHoloCommand(2000, .5)); //move to loading station
     }
     }
 
