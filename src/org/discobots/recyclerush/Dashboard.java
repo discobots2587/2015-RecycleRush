@@ -37,6 +37,7 @@ public class Dashboard {
 		//	SmartDashboard.putNumber("Motor Lift Right Current",
 		//			Robot.liftSub.getCurrent(LiftSubsystem.kMotorLiftRight));
 		} else if (driveCounter % 5 == 1) {
+			SmartDashboard.putNumber("AUTON MODE:", Robot.auton);
 			SmartDashboard.putNumber("Lift Lidar Distance (in)",
 					Robot.liftSub.getLiftHeightInches());
 			SmartDashboard.putBoolean("Lift Top", Robot.liftSub.isAtTop());
@@ -51,7 +52,6 @@ public class Dashboard {
 			SmartDashboard.putNumber("Pressure",
 					Robot.electricalSub.getPressure());
 			SmartDashboard.putNumber("Wings", Robot.wingSub.get());
-		
 			SmartDashboard.putData(Robot.driveTrainSub);
 			SmartDashboard.putData(Robot.liftSub);
 			SmartDashboard.putNumber("Wings Down", Robot.wingSub.get());
