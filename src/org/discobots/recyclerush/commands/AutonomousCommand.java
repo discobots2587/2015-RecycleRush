@@ -95,7 +95,7 @@ public class AutonomousCommand extends CommandGroup {
     	addSequential(new AutonomousArcadeDriveCommand(.6, 0, 250));
     	addSequential(new WaitCommand(.5));
     	addSequential(new SetWingCommand(1));*/
-		while(Robot.liftSub.getLiftHeightInches()>5.0)
+		while(Robot.liftSub.getLiftHeightInches()>5.0 && Robot.liftSub.isAtBottom()==false)
 		addSequential(new SetLiftCommand(-0.5)); //make sure intake is down and ready
     }
     private void autonomousMode3Init() {
