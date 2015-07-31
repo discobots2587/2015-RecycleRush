@@ -43,6 +43,9 @@ public class AutonomousCommand extends CommandGroup {
     }
     
     private void autonomousMode0Init() {
+		while(Robot.liftSub.getLiftHeightInches()>5.0 && Robot.liftSub.isAtBottom()==false)
+		addSequential(new SetLiftCommand(-0.5)); //make sure intake is down
+		
     	// Do Nothing
     }
     
