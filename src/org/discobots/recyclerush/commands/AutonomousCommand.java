@@ -142,9 +142,9 @@ public class AutonomousCommand extends CommandGroup {
     	addSequential(new MoveForwardHoloCommand(500, .5)); //move forwards a bit
     	addSequential(new ToggleIntakeCommand());
     	addSequential(new WaitCommand(.5));
-    	addSequential(new RaiseLiftCommand(2, 1)); //raises recycle bin or tote
+    	addSequential(new RaiseLiftCommand(1, 1000)); //raises recycle bin or tote
     	addSequential(new WaitCommand(.5));
-    	addSequential(new MoveForwardHoloCommand(2000, .5)); //move to loading station
+    	addSequential(new MoveForwardHoloCommand(1500, .5)); //move to loading station
     }
     }
 
