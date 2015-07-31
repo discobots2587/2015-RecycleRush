@@ -24,17 +24,17 @@ public class WingSubsystem extends Subsystem {
 		if (pos==-1)
 		{
 	//		left.set(DoubleSolenoid.Value.kReverse);
-			right.set(DoubleSolenoid.Value.kReverse);
+			right.set(DoubleSolenoid.Value.kReverse); //wings come up
 		}
 		if (pos==0)
 		{
 	//		left.set(DoubleSolenoid.Value.kOff);
-			right.set(DoubleSolenoid.Value.kOff);
+			right.set(DoubleSolenoid.Value.kOff); 
 		}
 		if (pos==1)
 		{
 //			left.set(DoubleSolenoid.Value.kForward);
-			right.set(DoubleSolenoid.Value.kForward);
+			right.set(DoubleSolenoid.Value.kForward); //wings go down
 		}	
 	}
 	

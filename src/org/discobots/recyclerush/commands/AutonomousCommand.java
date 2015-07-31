@@ -71,7 +71,10 @@ public class AutonomousCommand extends CommandGroup {
     	//addSequential(new SetWingCommand(-1)); // both wings down
     	//addSequential(new WaitCommand(3));
     	//addSequential(new CheckWingStateCommand());
+    	if (Robot.wingSub.get()==-1 || Robot.wingSub.get()==0)
+    	{
     	addSequential(new SetWingCommand(1)); // wings come down
+    	}
     	addSequential(new WaitCommand(0.5)); // wait to lower
 
     	addSequential(new AutonomousArcadeDriveCommand(-.75,0,100));
@@ -92,6 +95,8 @@ public class AutonomousCommand extends CommandGroup {
     	addSequential(new AutonomousArcadeDriveCommand(.6, 0, 250));
     	addSequential(new WaitCommand(.5));
     	addSequential(new SetWingCommand(1));*/
+		while(Robot.liftSub.getLiftHeightInches()>5.0)
+		addSequential(new SetLiftCommand(-0.5)); //make sure intake is down and ready
     }
     private void autonomousMode3Init() {
     	addSequential(new ToggleIntakeCommand());
