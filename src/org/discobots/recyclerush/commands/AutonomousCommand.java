@@ -36,13 +36,12 @@ public class AutonomousCommand extends CommandGroup {
      	case 5:
     		autonomousMode5Init();
     		break;
+    	case 6:
+    		autonomousMode6Init();
+    		break;
     	default:
     		autonomousMode0Init();
-    		break;
-    	case 6:
-    		autonomousMode0Init();
-    		break;
-    	}
+      	}
     	
     }
     
@@ -51,9 +50,9 @@ public class AutonomousCommand extends CommandGroup {
     }
     
     private void autonomousMode6Init(){	
-    	while(Robot.liftSub.getLiftHeightInches()>5.0 && Robot.liftSub.isAtBottom()==false)
-    		{addSequential(new RaiseLiftCommand(-1, 100)); //make sure intake is down	
-    		addSequential(new WaitCommand(.1));
+    	if(Robot.liftSub.getLiftHeightInches()>5.0 && Robot.liftSub.isAtBottom()==false)
+    	{
+    		addSequential(new RaiseLiftCommand(-1, 2000)); //make sure intake is down	
     }}
     
     private void autonomousMode1Init() { 
@@ -105,8 +104,10 @@ public class AutonomousCommand extends CommandGroup {
     	addSequential(new AutonomousArcadeDriveCommand(.6, 0, 250));
     	addSequential(new WaitCommand(.5));
     	addSequential(new SetWingCommand(1));*/
-		while(Robot.liftSub.getLiftHeightInches()>5.0 && Robot.liftSub.isAtBottom()==false)
-		addSequential(new SetLiftCommand(-0.5)); //make sure intake is down and ready
+    	if(Robot.liftSub.getLiftHeightInches()>5.0 && Robot.liftSub.isAtBottom()==false)
+    	{
+    		addSequential(new RaiseLiftCommand(-1, 2000)); //make sure intake is down	
+    }
     }
     private void autonomousMode3Init() {
     	addSequential(new ToggleIntakeCommand());
@@ -132,8 +133,10 @@ public class AutonomousCommand extends CommandGroup {
 
     }
     private void autonomousMode5Init(){
-    		while(Robot.liftSub.getLiftHeightInches()>5.0 && Robot.liftSub.isAtBottom()==false)
-    		addSequential(new SetLiftCommand(-0.5)); //make sure intake is down
+    	if(Robot.liftSub.getLiftHeightInches()>5.0 && Robot.liftSub.isAtBottom()==false)
+    	{
+    		addSequential(new RaiseLiftCommand(-1, 2000)); //make sure intake is down	
+    }
     	
     	addSequential(new WaitCommand(.5));
     	addSequential(new MoveForwardHoloCommand(500, .5)); //move forwards a bit
