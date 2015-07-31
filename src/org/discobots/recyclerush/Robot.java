@@ -53,7 +53,8 @@ public class Robot extends IterativeRobot {
 		// gamepad code
 		oi = new OI();
 		// autonomous command
-		autonomousCommand = new AutonomousCommand(2); //two does rc bins from step; 5 does preload rc bin
+		autonomousCommand = new AutonomousCommand(6);
+				//two does rc bins from step; 5 does preload rc bin; default makes sure lift is down
 
 		// dashboard init
 		Dashboard.init();

@@ -38,16 +38,23 @@ public class AutonomousCommand extends CommandGroup {
     		break;
     	default:
     		autonomousMode0Init();
+    		break;
+    	case 6:
+    		autonomousMode0Init();
+    		break;
     	}
     	
     }
     
     private void autonomousMode0Init() {
-		while(Robot.liftSub.getLiftHeightInches()>5.0 && Robot.liftSub.isAtBottom()==false)
-		addSequential(new SetLiftCommand(-0.5)); //make sure intake is down
-		
     	// Do Nothing
     }
+    
+    private void autonomousMode6Init(){	
+    	while(Robot.liftSub.getLiftHeightInches()>5.0 && Robot.liftSub.isAtBottom()==false)
+    		{addSequential(new RaiseLiftCommand(-1, 100)); //make sure intake is down	
+    		addSequential(new WaitCommand(.1));
+    }}
     
     private void autonomousMode1Init() { 
     	addSequential(new ToggleIntakeCommand());
