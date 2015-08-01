@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.discobots.recyclerush.commands.AutonomousCommand;
@@ -37,6 +38,7 @@ public class Robot extends IterativeRobot {
 	public static long TeleopStartTime;
 	public static long loopExecutionTime = 0;
 	AutonomousCommand autonomousCommand;
+	SendableChooser autoChooser = new SendableChooser();
 
 	/**
 	 * This function is run when the robot is first started up and should be
