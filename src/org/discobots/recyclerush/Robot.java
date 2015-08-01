@@ -140,7 +140,7 @@ public class Robot extends IterativeRobot {
 		Dashboard.update();
 		long end = System.currentTimeMillis();
 		loopExecutionTime = end - start;
-		totalTime = (double) (System.currentTimeMillis() - TeleopStartTime)/1000;
+		totalTime = (double) ((System.currentTimeMillis() - TeleopStartTime)/1000);
 		
 	}
 }
