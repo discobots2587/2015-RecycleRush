@@ -33,7 +33,8 @@ public class Robot extends IterativeRobot {
 	public static ClawSubsystem clawSub;
 	public static int auton;
 	public static OI oi;
-	
+	public static double totalTime;
+	public static long TeleopStartTime;
 	public static long loopExecutionTime = 0;
 	AutonomousCommand autonomousCommand;
 
@@ -73,6 +74,7 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		if (autonomousCommand != null)
 			autonomousCommand.start();
+	
 	}
 
 	/**
@@ -95,6 +97,7 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.cancel();
 		for (long stop=System.nanoTime()+TimeUnit.SECONDS.toNanos(1);stop>System.nanoTime();) { //rumbles upon disable for 1 second
 			oi.setRumble(1);
+			TeleopStartTime = System.currentTimeMillis();
           }
 	}
 
@@ -137,5 +140,7 @@ public class Robot extends IterativeRobot {
 		Dashboard.update();
 		long end = System.currentTimeMillis();
 		loopExecutionTime = end - start;
+		totalTime = (double) (System.currentTimeMillis() - TeleopStartTime)/1000;
+		
 	}
 }
