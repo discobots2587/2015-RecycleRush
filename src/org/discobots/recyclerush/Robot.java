@@ -31,7 +31,7 @@ public class Robot extends IterativeRobot {
 	public static WingSubsystem wingSub;
 	public static PlowSubsystem plowSub;
 	public static ClawSubsystem clawSub;
-	public static int auton;
+	public static int auton = 2;
 	public static OI oi;
 	public static double totalTime;
 	public static long TeleopStartTime;
@@ -54,7 +54,7 @@ public class Robot extends IterativeRobot {
 		// gamepad code
 		oi = new OI();
 		// autonomous command
-		auton = 2;//set auton command
+		//set auton command
 		autonomousCommand = new AutonomousCommand(auton);
 				//two does rc bins from step; 5 does preload rc bin; default makes sure lift is down
 
