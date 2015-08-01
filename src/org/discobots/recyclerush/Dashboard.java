@@ -1,5 +1,6 @@
 package org.discobots.recyclerush;
 
+import org.discobots.recyclerush.commands.AutonomousCommand;
 import org.discobots.recyclerush.subsystems.DriveTrainSubsystem.Motor;
 import org.discobots.recyclerush.subsystems.LiftSubsystem;
 
@@ -7,7 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Dashboard {
-	private static SendableChooser autonChooser;
+	public SendableChooser autonChooser= new SendableChooser();;
 	
 	private static int driveCounter = 0;
 
@@ -39,13 +40,13 @@ public class Dashboard {
 		//	SmartDashboard.putNumber("Motor Lift Right Current",
 		//			Robot.liftSub.getCurrent(LiftSubsystem.kMotorLiftRight));
 		} else if (driveCounter % 5 == 1) {
-			autonChooser = new SendableChooser();
-			autonChooser.addDefault("RC FROM STEP auton", Robot.auton = 2);
-			autonChooser.addObject("RC FROM PRELOAD auton", Robot.auton = 5);
-			autonChooser.addObject("JUST LOWER LIFT auton", Robot.auton = 6);
+
+			autonChooser.addDefault("RC FROM STEP auton", new AutonomousCommand(2));
+			autonChooser.addObject("RC FROM PRELOAD auton", new AutonomousCommand(5));
+			autonChooser.addObject("JUST LOWER LIFT auton", new AutonomousCommand(6));
 			SmartDashboard.putData("Auton Mode: ", autonChooser);
 			SmartDashboard.putNumber("AUTON MODE (debug):", Robot.auton);
-			SmartDashboard.putNumber("Time", Robot.totalTime);
+			//SmartDashboard.putNumber("Time", Robot.totalTime);
 			
 			SmartDashboard.putNumber("Lift Lidar Distance (in)",
 					Robot.liftSub.getLiftHeightInches());
