@@ -3,10 +3,12 @@ package org.discobots.recyclerush;
 import org.discobots.recyclerush.subsystems.DriveTrainSubsystem.Motor;
 import org.discobots.recyclerush.subsystems.LiftSubsystem;
 
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Dashboard {
-
+	private static SendableChooser autonChooser;
+	
 	private static int driveCounter = 0;
 
 	public static void init() {
@@ -37,7 +39,14 @@ public class Dashboard {
 		//	SmartDashboard.putNumber("Motor Lift Right Current",
 		//			Robot.liftSub.getCurrent(LiftSubsystem.kMotorLiftRight));
 		} else if (driveCounter % 5 == 1) {
-			SmartDashboard.putNumber("AUTON MODE:", Robot.auton);
+			autonChooser = new SendableChooser();
+			autonChooser.addDefault("RC FROM STEP auton", Robot.auton = 2);
+			autonChooser.addObject("RC FROM PRELOAD auton", Robot.auton = 5);
+			autonChooser.addObject("JUST LOWER LIFT auton", Robot.auton = 6);
+			SmartDashboard.putData("Auton Mode: ", autonChooser);
+			SmartDashboard.putNumber("AUTON MODE (debug):", Robot.auton);
+			
+			
 			SmartDashboard.putNumber("Lift Lidar Distance (in)",
 					Robot.liftSub.getLiftHeightInches());
 			SmartDashboard.putBoolean("Lift Top", Robot.liftSub.isAtTop());
