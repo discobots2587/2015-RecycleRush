@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class AutonomousCommand extends CommandGroup {
 
     public AutonomousCommand(int mode) {
+    	
     	switch(mode) {
     	case 3:
     		autonomousMode3Init();
@@ -41,8 +42,8 @@ public class AutonomousCommand extends CommandGroup {
     		break;
     	default:
     		autonomousMode0Init();
-      	}
-    	
+      	
+    	}
     }
     
     private void autonomousMode0Init() {

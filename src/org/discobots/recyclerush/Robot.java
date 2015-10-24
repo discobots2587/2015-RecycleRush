@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.discobots.recyclerush.commands.AutonomousCommand;
+import org.discobots.recyclerush.commands.ChooseAutonCommand;
 import org.discobots.recyclerush.subsystems.ClawSubsystem;
 import org.discobots.recyclerush.subsystems.DriveTrainSubsystem;
 import org.discobots.recyclerush.subsystems.ElectricalSubsystem;
@@ -49,9 +50,9 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		// subsystem code
 		autonChooser = new SendableChooser();
-		autonChooser.addDefault("RC FROM STEP auton", new AutonomousCommand(2));
-		autonChooser.addObject("RC FROM PRELOAD auton", new AutonomousCommand(5));
-		autonChooser.addObject("JUST LOWER LIFT auton", new AutonomousCommand(6));
+		autonChooser.addDefault("RC FROM STEP auton", new ChooseAutonCommand(2));
+		autonChooser.addObject("RC FROM PRELOAD auton", new ChooseAutonCommand(5));
+		autonChooser.addObject("JUST LOWER LIFT auton", new ChooseAutonCommand(6));
 		SmartDashboard.putData("Autonomous Slection", autonChooser);
 
 		electricalSub = new ElectricalSubsystem();
@@ -78,13 +79,12 @@ public class Robot extends IterativeRobot {
 		long start = System.currentTimeMillis();
 		Scheduler.getInstance().run();
 		Dashboard.update();
-		SmartDashboard.putData("Autonomous Slection", autonChooser);
 		long end = System.currentTimeMillis();
 		loopExecutionTime = end - start;
 	}
 
 	public void autonomousInit() {
-		autonomousCommand = (Command)autonChooser.getSelected();
+		autonomousCommand = new AutonomousCommand(auton);
 		autonomousCommand.start();
 	
 	}
