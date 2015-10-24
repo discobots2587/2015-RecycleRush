@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class AutonomousCommand extends CommandGroup {
+public int debugAuton;
     public AutonomousCommand(int mode) {
     	switch(mode) {
     	case 3:
