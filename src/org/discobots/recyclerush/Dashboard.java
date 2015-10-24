@@ -43,6 +43,7 @@ public class Dashboard {
 		//			Robot.liftSub.getCurrent(LiftSubsystem.kMotorLiftRight));
 		} else if (driveCounter % 5 == 1) {
 			
+			SmartDashboard.putNumber("AUTON MODE (debug):", Robot.auton);
 			SmartDashboard.putNumber("Time", Robot.totalTime);
 			
 			SmartDashboard.putNumber("Lift Lidar Distance (in)",

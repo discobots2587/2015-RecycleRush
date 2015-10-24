@@ -52,7 +52,8 @@ public class Robot extends IterativeRobot {
 		autonChooser.addDefault("RC FROM STEP auton", new AutonomousCommand(2));
 		autonChooser.addObject("RC FROM PRELOAD auton", new AutonomousCommand(5));
 		autonChooser.addObject("JUST LOWER LIFT auton", new AutonomousCommand(6));
-		autonChooser.addDefault("DO NOTHING auton", new AutonomousCommand(0));
+		SmartDashboard.putData("Autonomous Slection", autonChooser);
+
 		electricalSub = new ElectricalSubsystem();
 		driveTrainSub = new DriveTrainSubsystem();
 		liftSub	= new LiftSubsystem();
