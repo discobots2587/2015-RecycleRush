@@ -3,6 +3,7 @@ package org.discobots.recyclerush.commands;
 import org.discobots.recyclerush.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -13,7 +14,8 @@ int auton;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	this.auton=auton;
-    	
+    	Robot.auton = this.auton;
+    	SmartDashboard.putNumber("Setting Auton To:", this.auton);
     }
 
 
@@ -21,16 +23,17 @@ int auton;
 	// Called just before this Command runs the first time
     protected void initialize() {
     	Robot.auton = this.auton;
-    	end();
+
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	end();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

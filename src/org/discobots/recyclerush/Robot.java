@@ -35,14 +35,14 @@ public class Robot extends IterativeRobot {
 	public static WingSubsystem wingSub;
 	public static PlowSubsystem plowSub;
 	public static ClawSubsystem clawSub;
-	public static int auton = 2;
+	public static int auton;
 	public static OI oi;
 	public static double totalTime;
 	public static long TeleopStartTime;
 	public static long loopExecutionTime = 0;
 	SendableChooser autonChooser;
 	Command autonomousCommand;
-
+	Command setAuton;
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -50,11 +50,9 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		// subsystem code
 		autonChooser = new SendableChooser();
-		autonChooser.addDefault("RC FROM STEP auton", new ChooseAutonCommand(2));
 		autonChooser.addObject("RC FROM PRELOAD auton", new ChooseAutonCommand(5));
 		autonChooser.addObject("JUST LOWER LIFT auton", new ChooseAutonCommand(6));
-		SmartDashboard.putData("Autonomous Slection", autonChooser);
-
+		autonChooser.addObject("RC FROM STEP auton", new ChooseAutonCommand(2));
 		electricalSub = new ElectricalSubsystem();
 		driveTrainSub = new DriveTrainSubsystem();
 		liftSub	= new LiftSubsystem();
@@ -70,13 +68,15 @@ public class Robot extends IterativeRobot {
 
 		// dashboard init
 		Dashboard.init();
-		
+		SmartDashboard.putData("Autonomous Slection", autonChooser);
 		Dashboard.update();
+		
 		
 			}
 
 	public void disabledPeriodic() {
 		long start = System.currentTimeMillis();
+		SmartDashboard.putData("Autonomous Slection", autonChooser);
 		Scheduler.getInstance().run();
 		Dashboard.update();
 		long end = System.currentTimeMillis();
@@ -84,6 +84,8 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void autonomousInit() {
+		setAuton = (Command) autonChooser.getSelected();
+		setAuton.start();
 		autonomousCommand = new AutonomousCommand(auton);
 		autonomousCommand.start();
 	
@@ -93,6 +95,7 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during autonomous
 	 */
 	public void autonomousPeriodic() {
+		SmartDashboard.putData("Autonomous Slection", autonChooser);
 		long start = System.currentTimeMillis();
 		Scheduler.getInstance().run();
 		Dashboard.update();
