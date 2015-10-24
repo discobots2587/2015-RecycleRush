@@ -39,8 +39,8 @@ public class Robot extends IterativeRobot {
 	public static double totalTime;
 	public static long TeleopStartTime;
 	public static long loopExecutionTime = 0;
-	public Command autonomousCommand;
-	public SendableChooser autonChooser;
+	SendableChooser autonChooser;
+	Command autonomousCommand;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -71,8 +71,6 @@ public class Robot extends IterativeRobot {
 		Dashboard.init();
 		
 		Dashboard.update();
-		autonomousCommand = (Command)autonChooser.getSelected();
-
 		
 			}
 
@@ -86,10 +84,8 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void autonomousInit() {
-		SmartDashboard.putData("Autonomous Slection", autonChooser);
-
-		if (autonomousCommand != null)
-			autonomousCommand.start();
+		autonomousCommand = (Command)autonChooser.getSelected();
+		autonomousCommand.start();
 	
 	}
 
