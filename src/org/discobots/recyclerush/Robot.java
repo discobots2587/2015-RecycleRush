@@ -40,7 +40,7 @@ public class Robot extends IterativeRobot {
 	public static long TeleopStartTime;
 	public static long loopExecutionTime = 0;
 	public Command autonomousCommand;
-	SendableChooser autonChooser;
+	public SendableChooser autonChooser;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -48,11 +48,11 @@ public class Robot extends IterativeRobot {
 	 */
 	public void robotInit() {
 		// subsystem code
+		autonChooser = new SendableChooser();
 		autonChooser.addDefault("RC FROM STEP auton", new AutonomousCommand(2));
 		autonChooser.addObject("RC FROM PRELOAD auton", new AutonomousCommand(5));
 		autonChooser.addObject("JUST LOWER LIFT auton", new AutonomousCommand(6));
 		autonChooser.addDefault("DO NOTHING auton", new AutonomousCommand(0));
-		SmartDashboard.putData("Autonomous Slection", autonChooser);
 		electricalSub = new ElectricalSubsystem();
 		driveTrainSub = new DriveTrainSubsystem();
 		liftSub	= new LiftSubsystem();
@@ -64,12 +64,14 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		// autonomous command
 		//set auton command
-		autonomousCommand = (Command)autonChooser.getSelected();
 		//two does rc bins from step; 5 does preload rc bin; default makes sure lift is down
 
 		// dashboard init
 		Dashboard.init();
+		
 		Dashboard.update();
+		autonomousCommand = (Command)autonChooser.getSelected();
+
 		
 			}
 
@@ -77,11 +79,14 @@ public class Robot extends IterativeRobot {
 		long start = System.currentTimeMillis();
 		Scheduler.getInstance().run();
 		Dashboard.update();
+		SmartDashboard.putData("Autonomous Slection", autonChooser);
 		long end = System.currentTimeMillis();
 		loopExecutionTime = end - start;
 	}
 
 	public void autonomousInit() {
+		SmartDashboard.putData("Autonomous Slection", autonChooser);
+
 		if (autonomousCommand != null)
 			autonomousCommand.start();
 	
