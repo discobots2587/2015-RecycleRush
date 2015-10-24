@@ -3,6 +3,8 @@ package org.discobots.recyclerush;
 import java.util.concurrent.TimeUnit;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Sendable;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -37,8 +39,8 @@ public class Robot extends IterativeRobot {
 	public static double totalTime;
 	public static long TeleopStartTime;
 	public static long loopExecutionTime = 0;
-	AutonomousCommand autonomousCommand;
-	SendableChooser autoChooser = new SendableChooser();
+	public Command autonomousCommand;
+	SendableChooser autonChooser;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -46,6 +48,10 @@ public class Robot extends IterativeRobot {
 	 */
 	public void robotInit() {
 		// subsystem code
+		autonChooser.addDefault("RC FROM STEP auton", new AutonomousCommand(2));
+		autonChooser.addObject("RC FROM PRELOAD auton", new AutonomousCommand(5));
+		autonChooser.addObject("JUST LOWER LIFT auton", new AutonomousCommand(6));
+		SmartDashboard.putData("Autonomous Slection", autonChooser);
 		electricalSub = new ElectricalSubsystem();
 		driveTrainSub = new DriveTrainSubsystem();
 		liftSub	= new LiftSubsystem();
@@ -57,12 +63,13 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		// autonomous command
 		//set auton command
-		autonomousCommand = new AutonomousCommand(auton);
-				//two does rc bins from step; 5 does preload rc bin; default makes sure lift is down
+		autonomousCommand = (Command)autonChooser.getSelected();
+		//two does rc bins from step; 5 does preload rc bin; default makes sure lift is down
 
 		// dashboard init
 		Dashboard.init();
 		Dashboard.update();
+		
 			}
 
 	public void disabledPeriodic() {

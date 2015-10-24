@@ -1,9 +1,7 @@
 package org.discobots.recyclerush;
 
-import org.discobots.recyclerush.commands.AutonomousCommand;
 import org.discobots.recyclerush.subsystems.DriveTrainSubsystem.Motor;
 import org.discobots.recyclerush.subsystems.LiftSubsystem;
-
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -22,13 +20,8 @@ public class Dashboard {
 			driveCounter = 0;
 			
 		}
-		//SendableChooser autonChooser;
-	//	autonChooser = new SendableChooser();
-	//	autonChooser.addDefault("RC FROM STEP auton", new AutonomousCommand(2)  );
-	//	autonChooser.addObject("RC FROM PRELOAD auton", new AutonomousCommand(5) );
-		//autonChooser.addObject("JUST LOWER LIFT auton", new  AutonomousCommand(6));
 		
-	//	SetAuton = (Command)autonChooser.getSelected();
+		
 		if (driveCounter % 5 == 0) { // 100ms
 			SmartDashboard.putNumber("Robot Loop Execution Time",
 					Robot.loopExecutionTime);
@@ -50,7 +43,6 @@ public class Dashboard {
 		//			Robot.liftSub.getCurrent(LiftSubsystem.kMotorLiftRight));
 		} else if (driveCounter % 5 == 1) {
 			
-		//	SmartDashboard.putData("Auton Mode: ", autonChooser);
 			SmartDashboard.putNumber("AUTON MODE (debug):", Robot.auton);
 			SmartDashboard.putNumber("Time", Robot.totalTime);
 			
@@ -73,6 +65,8 @@ public class Dashboard {
 			SmartDashboard.putNumber("Wings Down", Robot.wingSub.get());
 
 		}
+
 	}
+
 
 }
